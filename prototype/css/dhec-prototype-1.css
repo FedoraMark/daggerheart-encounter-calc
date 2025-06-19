@@ -35,7 +35,10 @@ header {
   outline-color: #f26d3d; }
 
 .calc hr {
-  margin: 1.5rem 0; }
+  margin: 1.5rem 0;
+  border-style: solid;
+  border-color: #f29d52;
+  opacity: 0.5; }
 
 .calc_upper {
   display: flex;
@@ -118,10 +121,11 @@ header {
   .calc_lower_left h3, .calc_lower_right h3 {
     margin: 0 0 1rem;
     font-weight: 600;
-    font-size: 1.75rem; }
+    font-size: 1.75rem;
+    text-align: center; }
   .calc_lower_left_list {
     padding: 0;
-    margin: 0 0 0 1.5rem;
+    margin: 0;
     list-style: none; }
     .calc_lower_left_list_adversary {
       margin-bottom: 0.5rem;

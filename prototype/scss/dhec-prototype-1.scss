@@ -102,6 +102,11 @@ header {
 
     hr {
         margin: 1.5rem 0;
+
+        border-style: solid;
+        border-color: $color-orange-mid;
+
+        opacity: 0.5;
     }
 
     &_upper {
@@ -216,11 +221,12 @@ header {
 
                 font-weight: 600;
                 font-size: 1.75rem;
+                text-align: center;
             }
         }
 
         &_left_list {
-            @include cleanList($margin: 0 0 0 1.5rem);
+            @include cleanList;
 
             &_adversary {
                 margin-bottom: 0.5rem;
