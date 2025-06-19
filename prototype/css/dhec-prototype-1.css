@@ -152,7 +152,7 @@ header {
   flex-flow: row-reverse wrap;
   gap: 1rem 7rem; }
   .calc_lower_left h3, .calc_lower_right h3 {
-    margin: 0 0 1rem;
+    margin: 0 0 0.75rem;
     font-weight: 600;
     font-size: 1.75rem;
     text-align: center; }
@@ -209,49 +209,60 @@ header {
       .calc_lower_left_list_adversary input {
         width: 3rem;
         padding: 6px 5px 2px; }
-  .calc_lower_right_list {
+  .calc_lower_right_formula:not(:last-of-type), .calc_lower_right_adjustments:not(:last-of-type), .calc_lower_right_options:not(:last-of-type) {
+    margin-bottom: 3rem; }
+  .calc_lower_right_formula_list, .calc_lower_right_adjustments_list, .calc_lower_right_options_list {
     font-size: 1.25rem;
     padding: 0;
     margin: 0;
     list-style: none;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     flex-flow: column nowrap;
-    gap: 0.5rem; }
-    .calc_lower_right_list {
+    gap: 1rem; }
+    .calc_lower_right_formula_list, .calc_lower_right_adjustments_list, .calc_lower_right_options_list {
       --adjustment-color: #f26d3d; }
-    .calc_lower_right_list li {
+    .calc_lower_right_formula_list li, .calc_lower_right_adjustments_list li, .calc_lower_right_options_list li {
       position: relative;
       width: auto;
+      line-height: 1.1;
+      text-align: center;
       opacity: var(--opacity-off);
       --opacity-off: 0.25; }
-      .calc_lower_right_list li .adjustment-text {
+      .calc_lower_right_formula_list li .adjustment-text, .calc_lower_right_adjustments_list li .adjustment-text, .calc_lower_right_options_list li .adjustment-text {
         position: absolute;
         left: calc(100% + 0.75rem);
-        color: var(--adjustment-color);
-        font-weight: 700;
-        white-space: nowrap;
         opacity: 0; }
-      .calc_lower_right_list li[data-is-active="true"],
-      .calc_lower_right_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_list li[data-is-always-active],
-      .calc_lower_right_list li[data-is-always-active] .adjustment-text {
+        .calc_lower_right_formula_list li .adjustment-text, .calc_lower_right_formula_list li .adjustment-text-static, .calc_lower_right_adjustments_list li .adjustment-text, .calc_lower_right_adjustments_list li .adjustment-text-static, .calc_lower_right_options_list li .adjustment-text, .calc_lower_right_options_list li .adjustment-text-static {
+          color: var(--adjustment-color);
+          font-weight: 700;
+          white-space: nowrap; }
+      .calc_lower_right_formula_list li[data-is-active="true"],
+      .calc_lower_right_formula_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_formula_list li[data-is-always-active],
+      .calc_lower_right_formula_list li[data-is-always-active] .adjustment-text, .calc_lower_right_adjustments_list li[data-is-active="true"],
+      .calc_lower_right_adjustments_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_adjustments_list li[data-is-always-active],
+      .calc_lower_right_adjustments_list li[data-is-always-active] .adjustment-text, .calc_lower_right_options_list li[data-is-active="true"],
+      .calc_lower_right_options_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_options_list li[data-is-always-active],
+      .calc_lower_right_options_list li[data-is-always-active] .adjustment-text {
         opacity: 1; }
-      .calc_lower_right_list li#adj-formula #adj-pcs {
+      .calc_lower_right_formula_list li#frm-formula #frm-pcs, .calc_lower_right_adjustments_list li#frm-formula #frm-pcs, .calc_lower_right_options_list li#frm-formula #frm-pcs {
         display: inline-block;
         min-width: 0.8rem;
         color: var(--adjustment-color);
         font-weight: 600; }
-      .calc_lower_right_list li:not(#adj-formula) {
+      .calc_lower_right_formula_list li:not(#frm-formula), .calc_lower_right_adjustments_list li:not(#frm-formula), .calc_lower_right_options_list li:not(#frm-formula) {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         flex-flow: row nowrap;
         gap: normal; }
-      .calc_lower_right_list li#adj-difficulty {
+      .calc_lower_right_formula_list li#adj-difficulty, .calc_lower_right_adjustments_list li#adj-difficulty, .calc_lower_right_options_list li#adj-difficulty {
         opacity: 1; }
-        .calc_lower_right_list li#adj-difficulty[data-current-difficulty="default"] {
+        .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="default"], .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="default"], .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="default"] {
           opacity: var(--opacity-off); }
-        .calc_lower_right_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
-        .calc_lower_right_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard {
+        .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+        .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard, .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+        .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard, .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+        .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard {
           opacity: 1; }

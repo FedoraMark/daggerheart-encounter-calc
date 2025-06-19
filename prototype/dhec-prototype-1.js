@@ -45,7 +45,11 @@ $(function() {
     const $TotalBPs = $('#totalBPs');
     const $BattlePointsTicks = $('#BattlePointsTicks');
     const $MonsterList = $('#MonsterList');
-    const $AdjustmentList = $('#AdjustmentList');
+
+    const $calcLowerRight = $('.calc_lower_right');
+    const $FormulaList = $calcLowerRight.find('#FormulaList');
+    const $AdjustmentList = $calcLowerRight.find('#AdjustmentList');
+    const $OptionsList = $calcLowerRight.find('#OptionsList');
 
     // -- variables
     let totalPlayers = 0;
@@ -68,7 +72,7 @@ $(function() {
 
     const adjustSign = (number) => { return new Intl.NumberFormat("en-US", { signDisplay: "exceptZero" }).format(number).replace('-', '&minus;').replace('+', '&plus;') }; // en dash
 
-    const paintAdjustmentText = (adjustmentValue, otherClasses) => { return `<span class="adjustment-text ${otherClasses}" data-adjustment-value="${adjustmentValue}">${adjustSign(adjustmentValue)}</span>` };
+    const paintAdjustmentText = (adjustmentValue, otherClasses = '') => { return `<span class="adjustment-text ${otherClasses}" data-adjustment-value="${adjustmentValue}">${adjustSign(adjustmentValue)}</span>` };
 
     const containsAny = (arr1, arr2) => { return arr1.some(item => arr2.includes(item)) };
 
@@ -96,7 +100,7 @@ $(function() {
         totalPlayers = newTotal
         $NumberOfPlayers.val(totalPlayers);
 
-        updateAdjustments();
+        updateFormulaAndAdjustmentsAndOptions();
         updateBattlePointTotals();
     }
 
@@ -132,7 +136,7 @@ $(function() {
             }
         });
 
-        updateAdjustments();
+        updateFormulaAndAdjustmentsAndOptions();
         updateBattlePointTotals();
     }
 
@@ -162,24 +166,28 @@ $(function() {
         updateSpentNumber();
     }
 
-    function updateAdjustments(totalSpentBPs) {
-        // formula
-        $AdjustmentList.find('#adj-formula #adj-pcs').html(getNumberOfPlayers());
+    function updateFormulaAndAdjustmentsAndOptions(totalSpentBPs) {
+        // FORMULA
+        // -- formula
+        $FormulaList.find('#frm-formula #frm-pcs').html(totalPlayers);
+        $FormulaList.find('#frm-formula #frm-total').html(calculateDefaultBattlePoints());
 
-        // difficulty +/-
+        // ADJUSTMENTS
+        // -- difficulty +/-
         $AdjustmentList.find('#adj-difficulty').attr('data-current-difficulty', currentDifficulty);
 
-        // multiple solos
+        // -- multiple solos
         $AdjustmentList.find('#adj-multiSolo').attr('data-is-active', purchasedAdversaryArray.filter(((adv) => adv === "solo")).length > 1);
 
-        // no B, H, L, S
+        // -- no B, H, L, S
         $AdjustmentList.find('#adj-lackingBHLS').attr('data-is-active', !containsAny(purchasedAdversaryArray, BHLS_LIST));
 
-        // add damage
-        $AdjustmentList.find('#adj-addedDmg'); // TODO: toggle
+        // OPTIONS
+        // -- add damage
+        $OptionsList.find('#adj-addedDmg'); // TODO: toggle
 
-        // lower tier
-        $AdjustmentList.find('#adj-lowerTier'); // TODO: toggle
+        // -- lower tier
+        $OptionsList.find('#adj-lowerTier'); // TODO: toggle
 
         // CALCULATE ADJUSTMENTS
         adjustmentTotal = 0; // reset
@@ -212,17 +220,21 @@ $(function() {
     }
 
     function createAdjustmentText() {
+        // $FormulaList.find('#frm-formula')
+        //     .append(paintAdjustmentText(calculateDefaultBattlePoints(), "frm-total"));
+
         $AdjustmentList.find('#adj-difficulty')
             .append(paintAdjustmentText(EASIER_OR_SHORTER, 'adj-easy'))
             .append(paintAdjustmentText(HARDER_OR_LONGER, 'adj-hard'));
         $AdjustmentList.find('#adj-multiSolo')
             .append(paintAdjustmentText(MULTIPLE_SOLOS));
-        $AdjustmentList.find('#adj-addedDmg')
-            .append(paintAdjustmentText(ADDED_1D4_DAMAGE));
-        $AdjustmentList.find('#adj-lowerTier')
-            .append(paintAdjustmentText(CONTAINS_LOWER_TIER));
         $AdjustmentList.find('#adj-lackingBHLS')
             .append(paintAdjustmentText(NO_BRUISERS_HORDES_LEADERS_SOLOS));
+
+        $OptionsList.find('#opt-addedDmg')
+            .append(paintAdjustmentText(ADDED_1D4_DAMAGE));
+        $OptionsList.find('#opt-lowerTier')
+            .append(paintAdjustmentText(CONTAINS_LOWER_TIER));
     }
 
     // -- listeners

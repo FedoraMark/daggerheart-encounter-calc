@@ -307,7 +307,7 @@ header {
         &_left,
         &_right {
             h3 {
-                margin: 0 0 1rem;
+                margin: 0 0 0.75rem;
 
                 font-weight: 600;
                 font-size: 1.75rem;
@@ -315,150 +315,168 @@ header {
             }
         }
 
-        &_left_list {
-            @include cleanList;
+        &_left {
+            &_list {
+                @include cleanList;
 
-            &_adversary {
-                margin-bottom: 0.5rem;
+                &_adversary {
+                    margin-bottom: 0.5rem;
 
-                @include flex(center, flex-start, 1rem);
+                    @include flex(center, flex-start, 1rem);
 
-                label,
-                input {
-                    font-size: 1.5rem;
-                }
-
-                label {
-                    position: relative;
-
-                    width: 11rem;
-                    padding-top: 3px;
-
-                    font-weight: 400;
-                    text-transform: capitalize;
-
-                    @include flex(center, flex-start, 0.5rem);
-
-                    .adv-name {
-                        flex-grow: 1;
+                    label,
+                    input {
+                        font-size: 1.5rem;
                     }
 
-                    .adv-bp {
-                        width: 2rem;
+                    label {
+                        position: relative;
 
-                        font-weight: 400;
-                        font-size: 0.75rem;
-                        white-space: nowrap;
-
-                        &,
-                        * {
-                            color: $color-orange-dark;
-                        }
-
-                        strong {
-                            font-weight: 800;
-                        }
-                    }
-
-                    &::after {
-                        content: "\00D7"; // ×
-
-                        height: 100%;
+                        width: 11rem;
                         padding-top: 3px;
 
-                        color: $color-purple-dark;
-                    }
+                        font-weight: 400;
+                        text-transform: capitalize;
 
-                    &[for="adversary_minions"] {
-                        &::before {
-                            content: "group up to # of PCs";
+                        @include flex(center, flex-start, 0.5rem);
 
-                            position: absolute;
-                            bottom: -0.55rem;
-                            left: 1.25rem;
+                        .adv-name {
+                            flex-grow: 1;
+                        }
 
+                        .adv-bp {
+                            width: 2rem;
+
+                            font-weight: 400;
                             font-size: 0.75rem;
-                            text-transform: none;
+                            white-space: nowrap;
 
-                            opacity: 0.5;
+                            &,
+                            * {
+                                color: $color-orange-dark;
+                            }
+
+                            strong {
+                                font-weight: 800;
+                            }
+                        }
+
+                        &::after {
+                            content: "\00D7"; // ×
+
+                            height: 100%;
+                            padding-top: 3px;
+
+                            color: $color-purple-dark;
+                        }
+
+                        &[for="adversary_minions"] {
+                            &::before {
+                                content: "group up to # of PCs";
+
+                                position: absolute;
+                                bottom: -0.55rem;
+                                left: 1.25rem;
+
+                                font-size: 0.75rem;
+                                text-transform: none;
+
+                                opacity: 0.5;
+                            }
                         }
                     }
-                }
 
-                input {
-                    width: 3rem;
-                    padding: 6px 5px 2px;
+                    input {
+                        width: 3rem;
+                        padding: 6px 5px 2px;
+                    }
                 }
             }
         }
 
-        &_right_list {
-            font-size: 1.25rem;
-
-            @include cleanList;
-            @include flex(flex-start, flex-start, 0.5rem, column nowrap);
-
-            & {
-                --adjustment-color: #{$color-orange-dark}; //#{$color-purple-mid};
-
-            }
-
-            li {
-                position: relative;
-
-                width: auto;
-
-                opacity: var(--opacity-off);
-
-                --opacity-off: 0.25;
-
-                .adjustment-text {
-                    position: absolute;
-                    left: calc(100% + 0.75rem);
-
-                    color: var(--adjustment-color);
-                    font-weight: 700;
-                    white-space: nowrap;
-
-                    opacity: 0;
+        &_right {
+            &_formula,
+            &_adjustments,
+            &_options {
+                &:not(:last-of-type) {
+                    margin-bottom: 3rem;
                 }
 
-                &[data-is-active="true"],
-                &[data-is-always-active] {
-                    &,
-                    .adjustment-text {
-                        opacity: 1;
+                &_list {
+                    font-size: 1.25rem;
+
+                    @include cleanList;
+                    @include flex(center, flex-start, 1rem, column nowrap);
+
+                    & {
+                        --adjustment-color: #{$color-orange-dark}; //#{$color-purple-mid};
+
                     }
-                }
 
-                &#adj-formula {
-                    #adj-pcs {
-                        display: inline-block;
+                    li {
+                        position: relative;
 
-                        min-width: 0.8rem;
+                        width: auto;
 
-                        color: var(--adjustment-color);
-                        font-weight: 600;
-                    }
-                }
-
-                &:not(#adj-formula) {
-                    @include flex(center, flex-start);
-                }
-
-                &#adj-difficulty {
-                    opacity: 1;
-
-                    &[data-current-difficulty="#{$DEFAULT}"] {
+                        line-height: 1.1;
+                        text-align: center;
 
                         opacity: var(--opacity-off);
-                    }
 
-                    &[data-current-difficulty="#{$EASY}"] .adjustment-text.adj-easy,
+                        --opacity-off: 0.25;
 
-                    &[data-current-difficulty="#{$HARD}"] .adjustment-text.adj-hard {
+                        .adjustment-text {
+                            position: absolute;
+                            left: calc(100% + 0.75rem);
 
-                        opacity: 1;
+                            opacity: 0;
+
+                            &,
+                            &-static {
+                                color: var(--adjustment-color);
+                                font-weight: 700;
+                                white-space: nowrap;
+                            }
+                        }
+
+                        &[data-is-active="true"],
+                        &[data-is-always-active] {
+                            &,
+                            .adjustment-text {
+                                opacity: 1;
+                            }
+                        }
+
+                        &#frm-formula {
+                            #frm-pcs {
+                                display: inline-block;
+
+                                min-width: 0.8rem;
+
+                                color: var(--adjustment-color);
+                                font-weight: 600;
+                            }
+                        }
+
+                        &:not(#frm-formula) {
+                            @include flex(center, flex-start);
+                        }
+
+                        &#adj-difficulty {
+                            opacity: 1;
+
+                            &[data-current-difficulty="#{$DEFAULT}"] {
+
+                                opacity: var(--opacity-off);
+                            }
+
+                            &[data-current-difficulty="#{$EASY}"] .adjustment-text.adj-easy,
+
+                            &[data-current-difficulty="#{$HARD}"] .adjustment-text.adj-hard {
+
+                                opacity: 1;
+                            }
+                        }
                     }
                 }
             }

@@ -59,15 +59,33 @@
 
         <div class="calc_lower">
             <div class="calc_lower_right">
-                <h3>Adjustments</h3>
-                <ul id="AdjustmentList" class="calc_lower_right_list">
-                    <li id="adj-formula" data-is-always-active>(3 &#215; <span id="adj-pcs">0</span> PCs) + 2 BPs</li>
-                    <li id="adj-difficulty">Difficulty change</li>
-                    <li id="adj-multiSolo">Multiple Solo adversaries</li>
-                    <li id="adj-lackingBHLS">No Bruisers, Hoardes,<br />&nbsp;&nbsp;&nbsp;Leaders, or Solos</li>
-                    <li id="adj-addedDmg">Added Damage</li>
-                    <li id="adj-lowerTier">Has Lower Tier</li>
-                </ul>
+                <div class="calc_lower_right_formula">
+                    <h3>Formula</h3>
+                    <ul id="FormulaList" class="calc_lower_right_formula_list">
+                        <li id="frm-formula" data-is-always-active>(3 &#215; <span id="frm-pcs">0</span> PCs) + 2 BPs = <span id="frm-total" class="adjustment-text-static">0</span></li>
+                    </ul>
+                </div>
+
+                <div class="calc_lower_right_adjustments">
+                    <h3>Adjustments</h3>
+                    <ul id="AdjustmentList" class="calc_lower_right_adjustments_list">
+                        <li id="adj-difficulty">Difficulty change</li>
+                        <li id="adj-multiSolo">Multiple Solo adversaries</li>
+                        <li id="adj-lackingBHLS">No Bruisers, Hoardes,<br />Leaders, or Solos</li>
+                    </ul>
+                </div>
+
+                <div class="calc_lower_right_options">
+                    <h3>Options</h3>
+                    <ul id="OptionsList" class="calc_lower_right_options_list">
+                        <li id="opt-addedDmg">
+                            <label for="toggleDamage">Add +1d4 (or static +2) to all<br />adversaries' damage rolls</label>
+                        </li>
+                        <li id="opt-lowerTier">
+                            <label for="toggleLowerTier">Choose at least one adversary<br />from a lower tier</label>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="calc_lower_left">
