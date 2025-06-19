@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap");
 
 // VARS
 $font-overpass: "Overpass",
@@ -18,7 +18,10 @@ $color-overage-black-fill: #2f3542;
 //
 $color-bg: #fff;
 $color-diags: rgba($color-yellow-mid, 0.5);
-
+//
+$EASY: "easy";
+$DEFAULT: "default";
+$HARD: "hard";
 
 // MIXINS
 @mixin flex($align: center, $justify: center, $gap: normal, $flow: row nowrap, $display: flex) {
@@ -26,6 +29,12 @@ $color-diags: rgba($color-yellow-mid, 0.5);
     align-items: $align;
     justify-content: $justify;
     flex-flow: $flow;
+    gap: $gap;
+}
+
+@mixin grid($gap: 0, $grid: auto / auto, $display: grid) {
+    display: $display;
+    grid: $grid;
     gap: $gap;
 }
 
@@ -61,6 +70,10 @@ html {
 
         * {
             @extend %font-family-overpass;
+        }
+
+        section *:not(:is(input, select)) {
+            color: $color-purple-dark;
         }
     }
 }
@@ -140,26 +153,89 @@ header {
                 font-weight: 600;
                 font-size: 1.5rem;
             }
+        }
 
-            span:not(.upper-label) {
-                width: 45px;
-                margin-top: 6px;
+        &_total {
+            &_text {
+                @include flex($gap: 0.6rem);
 
-                font-size: 2rem;
+                &_slash {
+                    margin-top: 2px;
+
+                    font-size: 2rem;
+                }
+
+                &_number {
+                    min-width: 2.6rem;
+                    margin-top: 6px;
+                    overflow: hidden;
+
+                    font-size: 2rem;
+                    text-overflow: ellipsis;
+
+                    &:first-of-type {
+                        font-weight: 700;
+                        text-align: right;
+                    }
+
+                    &:last-of-type {
+                        font-weight: 600;
+                        text-align: left;
+                    }
+                }
+
+                #spentBPs {
+                    color: var(--current-difficulty-color);
+
+
+                    & {
+                        --current-difficulty-color: #{$color-purple-mid};
+
+                    }
+
+                    &[data-spent-total-compare^="-"] {
+                        --current-difficulty-color: #{$color-red-hard-line};
+
+                    }
+
+                    &[data-spent-total-compare="0"] {
+                        &[data-current-difficulty="#{$EASY}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-yellow-mid};
+
+                        }
+
+                        &[data-current-difficulty="#{$DEFAULT}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-mid};
+
+                        }
+
+                        &[data-current-difficulty="#{$HARD}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-dark};
+
+                        }
+                    }
+                }
+
+                // #totalBPs {}
             }
         }
     }
 
     &_bp-info {
         &_list {
+            --tick-width: 5rem;
+            //
             @include cleanList;
-            @include flex(center, center, 0.7rem, row wrap);
+            @include grid(0.7rem, auto-flow 1fr / repeat(auto-fit, minmax(var(--tick-width), 1fr)));
 
             &_tick {
-                width: 2rem;
-                height: 1rem;
+                height: 1.25rem;
+                min-width: var(--tick-width);
 
-                border: 2px solid $color-purple-dark;
+                border: 3px solid currentColor;
                 border-radius: 4px;
 
                 background-color: #fff;
@@ -168,8 +244,6 @@ header {
                     &-tick {
                         color: $color-purple-mid;
 
-                        border-color: currentColor;
-
                         &[data-is-ticked="true"] {
                             border-color: transparent;
 
@@ -177,34 +251,50 @@ header {
                         }
                     }
 
-                    &-level {
-                        border-width: 3px;
-
-                        &[data-is-ticked="true"] {
-                            margin: 1px;
-
-                            border-width: 2px;
-                        }
-                    }
+                    // &-level {
+                    //     border-width: 3px;
+                    //
+                    //     &[data-is-ticked="true"] {
+                    //         margin: 1px;
+                    //         border-width: 2px;
+                    //     }
+                    // }
 
                     &-easy {
-                        color: $color-yellow-mid;
+                        color: $color-orange-dark; //$color-yellow-mid;
                     }
 
                     &-default {
-                        color: $color-orange-mid;
+                        color: $color-orange-dark; //$color-orange-mid;
                     }
 
                     &-hard {
-                        color: $color-orange-dark;
+                        color: $color-orange-dark; //$color-orange-dark;
                     }
 
                     &-overage {
-                        color: $color-red-hard-line; // $color-overage-black-fill;
+                        position: relative;
 
-                        border-radius: 50%;
+                        color: transparent;
 
-                        @include squareSize(0.8rem);
+                        background-color: transparent;
+
+                        @include flex;
+
+                        &[data-is-ticked="true"] {
+                            border-color: $color-red-hard-line;
+
+                            opacity: 0.8;
+                            background: repeating-linear-gradient(-45deg, $color-red-hard-line, $color-red-hard-line 5px, $color-red-hard-fill 5px, $color-red-hard-fill 15px);
+                            background-color: $color-red-hard-fill;
+                        }
+
+                        // &::after {
+                        //     content: "";
+                        //     border-radius: 50%;
+                        //     background-color: $color-red-hard-line;
+                        //     @include squareSize(1rem);
+                        // }
                     }
                 }
             }
@@ -241,23 +331,57 @@ header {
                 label {
                     position: relative;
 
-                    width: 8rem;
+                    width: 11rem;
                     padding-top: 3px;
 
                     font-weight: 400;
                     text-transform: capitalize;
 
+                    @include flex(center, flex-start, 0.5rem);
+
+                    .adv-name {
+                        flex-grow: 1;
+                    }
+
+                    .adv-bp {
+                        width: 2rem;
+
+                        font-weight: 400;
+                        font-size: 0.75rem;
+                        white-space: nowrap;
+
+                        &,
+                        * {
+                            color: $color-orange-dark;
+                        }
+
+                        strong {
+                            font-weight: 800;
+                        }
+                    }
+
                     &::after {
                         content: "\00D7"; // ×
-
-                        position: absolute;
-                        top: 0;
-                        right: 0;
 
                         height: 100%;
                         padding-top: 3px;
 
-                        color: $color-purple-mid;
+                        color: $color-purple-dark;
+                    }
+
+                    &[for="adversary_minions"] {
+                        &::before {
+                            content: "group up to # of PCs";
+
+                            position: absolute;
+                            bottom: -0.55rem;
+                            left: 1.25rem;
+
+                            font-size: 0.75rem;
+                            text-transform: none;
+
+                            opacity: 0.5;
+                        }
                     }
                 }
 
@@ -269,7 +393,75 @@ header {
         }
 
         &_right_list {
-            //
+            font-size: 1.25rem;
+
+            @include cleanList;
+            @include flex(flex-start, flex-start, 0.5rem, column nowrap);
+
+            & {
+                --adjustment-color: #{$color-orange-dark}; //#{$color-purple-mid};
+
+            }
+
+            li {
+                position: relative;
+
+                width: auto;
+
+                opacity: var(--opacity-off);
+
+                --opacity-off: 0.25;
+
+                .adjustment-text {
+                    position: absolute;
+                    left: calc(100% + 0.75rem);
+
+                    color: var(--adjustment-color);
+                    font-weight: 700;
+                    white-space: nowrap;
+
+                    opacity: 0;
+                }
+
+                &[data-is-active="true"],
+                &[data-is-always-active] {
+                    &,
+                    .adjustment-text {
+                        opacity: 1;
+                    }
+                }
+
+                &#adj-formula {
+                    #adj-pcs {
+                        display: inline-block;
+
+                        min-width: 0.8rem;
+
+                        color: var(--adjustment-color);
+                        font-weight: 600;
+                    }
+                }
+
+                &:not(#adj-formula) {
+                    @include flex(center, flex-start);
+                }
+
+                &#adj-difficulty {
+                    opacity: 1;
+
+                    &[data-current-difficulty="#{$DEFAULT}"] {
+
+                        opacity: var(--opacity-off);
+                    }
+
+                    &[data-current-difficulty="#{$EASY}"] .adjustment-text.adj-easy,
+
+                    &[data-current-difficulty="#{$HARD}"] .adjustment-text.adj-hard {
+
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
 }

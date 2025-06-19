@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap");
 html body * {
   font-family: "Overpass", sans-serif; }
 
@@ -12,6 +12,8 @@ html {
   html body {
     padding: 0;
     margin: 0; }
+    html body section *:not(:is(input, select)) {
+      color: #261859; }
 
 header {
   padding: 2rem 2rem 4rem;
@@ -69,48 +71,79 @@ header {
       padding: 6px 3px 3px;
       font-weight: 600;
       font-size: 1.5rem; }
-    .calc_upper_player-info span:not(.upper-label), .calc_upper_difficulty span:not(.upper-label), .calc_upper_total span:not(.upper-label) {
-      width: 45px;
-      margin-top: 6px;
+  .calc_upper_total_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+    gap: 0.6rem; }
+    .calc_upper_total_text_slash {
+      margin-top: 2px;
       font-size: 2rem; }
+    .calc_upper_total_text_number {
+      min-width: 2.6rem;
+      margin-top: 6px;
+      overflow: hidden;
+      font-size: 2rem;
+      text-overflow: ellipsis; }
+      .calc_upper_total_text_number:first-of-type {
+        font-weight: 700;
+        text-align: right; }
+      .calc_upper_total_text_number:last-of-type {
+        font-weight: 600;
+        text-align: left; }
+    .calc_upper_total_text #spentBPs {
+      color: var(--current-difficulty-color); }
+      .calc_upper_total_text #spentBPs {
+        --current-difficulty-color: #674ebf; }
+      .calc_upper_total_text #spentBPs[data-spent-total-compare^="-"] {
+        --current-difficulty-color: #e74c3c; }
+      .calc_upper_total_text #spentBPs[data-spent-total-compare="0"][data-current-difficulty="easy"] {
+        --current-difficulty-color: #f26d3d; }
+      .calc_upper_total_text #spentBPs[data-spent-total-compare="0"][data-current-difficulty="default"] {
+        --current-difficulty-color: #f26d3d; }
+      .calc_upper_total_text #spentBPs[data-spent-total-compare="0"][data-current-difficulty="hard"] {
+        --current-difficulty-color: #f26d3d; }
 
 .calc_bp-info_list {
+  --tick-width: 5rem;
   padding: 0;
   margin: 0;
   list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: row wrap;
+  display: grid;
+  grid: auto-flow 1fr/repeat(auto-fit, minmax(var(--tick-width), 1fr));
   gap: 0.7rem; }
   .calc_bp-info_list_tick {
-    width: 2rem;
-    height: 1rem;
-    border: 2px solid #261859;
+    height: 1.25rem;
+    min-width: var(--tick-width);
+    border: 3px solid currentColor;
     border-radius: 4px;
     background-color: #fff; }
     .calc_bp-info_list_tick.bp-tick {
-      color: #674ebf;
-      border-color: currentColor; }
+      color: #674ebf; }
       .calc_bp-info_list_tick.bp-tick[data-is-ticked="true"] {
         border-color: transparent;
         background-color: currentColor; }
-    .calc_bp-info_list_tick.bp-level {
-      border-width: 3px; }
-      .calc_bp-info_list_tick.bp-level[data-is-ticked="true"] {
-        margin: 1px;
-        border-width: 2px; }
     .calc_bp-info_list_tick.bp-easy {
-      color: #f2bf5e; }
+      color: #f26d3d; }
     .calc_bp-info_list_tick.bp-default {
-      color: #f29d52; }
+      color: #f26d3d; }
     .calc_bp-info_list_tick.bp-hard {
       color: #f26d3d; }
     .calc_bp-info_list_tick.bp-overage {
-      color: #e74c3c;
-      border-radius: 50%;
-      width: 0.8rem;
-      height: 0.8rem; }
+      position: relative;
+      color: transparent;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: row nowrap;
+      gap: normal; }
+      .calc_bp-info_list_tick.bp-overage[data-is-ticked="true"] {
+        border-color: #e74c3c;
+        opacity: 0.8;
+        background: repeating-linear-gradient(-45deg, #e74c3c, #e74c3c 5px, #ff7979 5px, #ff7979 15px);
+        background-color: #ff7979; }
 
 .calc_lower {
   display: flex;
@@ -139,18 +172,86 @@ header {
         font-size: 1.5rem; }
       .calc_lower_left_list_adversary label {
         position: relative;
-        width: 8rem;
+        width: 11rem;
         padding-top: 3px;
         font-weight: 400;
-        text-transform: capitalize; }
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-flow: row nowrap;
+        gap: 0.5rem; }
+        .calc_lower_left_list_adversary label .adv-name {
+          flex-grow: 1; }
+        .calc_lower_left_list_adversary label .adv-bp {
+          width: 2rem;
+          font-weight: 400;
+          font-size: 0.75rem;
+          white-space: nowrap; }
+          .calc_lower_left_list_adversary label .adv-bp,
+          .calc_lower_left_list_adversary label .adv-bp * {
+            color: #f26d3d; }
+          .calc_lower_left_list_adversary label .adv-bp strong {
+            font-weight: 800; }
         .calc_lower_left_list_adversary label::after {
           content: "\00D7";
-          position: absolute;
-          top: 0;
-          right: 0;
           height: 100%;
           padding-top: 3px;
-          color: #674ebf; }
+          color: #261859; }
+        .calc_lower_left_list_adversary label[for="adversary_minions"]::before {
+          content: "group up to # of PCs";
+          position: absolute;
+          bottom: -0.55rem;
+          left: 1.25rem;
+          font-size: 0.75rem;
+          text-transform: none;
+          opacity: 0.5; }
       .calc_lower_left_list_adversary input {
         width: 3rem;
         padding: 6px 5px 2px; }
+  .calc_lower_right_list {
+    font-size: 1.25rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-flow: column nowrap;
+    gap: 0.5rem; }
+    .calc_lower_right_list {
+      --adjustment-color: #f26d3d; }
+    .calc_lower_right_list li {
+      position: relative;
+      width: auto;
+      opacity: var(--opacity-off);
+      --opacity-off: 0.25; }
+      .calc_lower_right_list li .adjustment-text {
+        position: absolute;
+        left: calc(100% + 0.75rem);
+        color: var(--adjustment-color);
+        font-weight: 700;
+        white-space: nowrap;
+        opacity: 0; }
+      .calc_lower_right_list li[data-is-active="true"],
+      .calc_lower_right_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_list li[data-is-always-active],
+      .calc_lower_right_list li[data-is-always-active] .adjustment-text {
+        opacity: 1; }
+      .calc_lower_right_list li#adj-formula #adj-pcs {
+        display: inline-block;
+        min-width: 0.8rem;
+        color: var(--adjustment-color);
+        font-weight: 600; }
+      .calc_lower_right_list li:not(#adj-formula) {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-flow: row nowrap;
+        gap: normal; }
+      .calc_lower_right_list li#adj-difficulty {
+        opacity: 1; }
+        .calc_lower_right_list li#adj-difficulty[data-current-difficulty="default"] {
+          opacity: var(--opacity-off); }
+        .calc_lower_right_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+        .calc_lower_right_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard {
+          opacity: 1; }

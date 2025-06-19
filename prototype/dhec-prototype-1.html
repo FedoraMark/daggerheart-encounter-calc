@@ -21,7 +21,7 @@
         <div class="calc_upper">
             <div class="calc_upper_player-info">
                 <label for="number-of-players">Number of PCs:</label>
-                <input value="4" type="number" name="number-of-players" id="number-of-players" min="1" max="10">
+                <input value="4" type="number" name="number-of-players" id="number-of-players" min="1" max="9">
             </div>
 
             <div class="calc_upper_difficulty">
@@ -35,8 +35,15 @@
 
             <div class="calc_upper_total">
                 <span class="upper-label">Total Battle Points:</span>
-                <span id="totalBPs">
-                    <!-- filled with JS --></span>
+                <span class="calc_upper_total_text">
+                    <span id="spentBPs" class="calc_upper_total_text_number" data-current-difficulty="default" data-spent-total-compare="0">
+                        <!-- filled with js -->
+                    </span>
+                    <span class="calc_upper_total_text_slash">/</span>
+                    <span id="totalBPs" class="calc_upper_total_text_number">
+                        <!-- filled with JS -->
+                    </span>
+                </span>
             </div>
         </div>
 
@@ -53,13 +60,13 @@
         <div class="calc_lower">
             <div class="calc_lower_right">
                 <h3>Adjustments</h3>
-                <ul class="calc_lower_right_list">
-                    <li>(initial formula)</li>
-                    <li>Difficulty change (+/-)</li>
-                    <li>Multiple Solos</li>
-                    <li>Added Damage</li>
-                    <li>Lower Tier</li>
-                    <li>No, B, H, L, S</li>
+                <ul id="AdjustmentList" class="calc_lower_right_list">
+                    <li id="adj-formula" data-is-always-active>(3 &#215; <span id="adj-pcs">0</span> PCs) + 2 BPs</li>
+                    <li id="adj-difficulty">Difficulty change</li>
+                    <li id="adj-multiSolo">Multiple Solo adversaries</li>
+                    <li id="adj-lackingBHLS">No Bruisers, Hoardes,<br />&nbsp;&nbsp;&nbsp;Leaders, or Solos</li>
+                    <li id="adj-addedDmg">Added Damage</li>
+                    <li id="adj-lowerTier">Has Lower Tier</li>
                 </ul>
             </div>
 
