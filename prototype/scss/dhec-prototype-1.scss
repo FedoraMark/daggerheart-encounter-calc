@@ -1,0 +1,269 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap");
+
+// VARS
+$font-overpass: "Overpass",
+sans-serif;
+//
+$color-purple-dark: #261859;
+$color-purple-mid: #674ebf;
+$color-yellow-mid: #f2bf5e;
+$color-orange-mid: #f29d52;
+$color-orange-dark: #f26d3d;
+//
+$color-green-easy-line: #6ab04c;
+$color-green-easy-fill: #badc58;
+$color-red-hard-line: #e74c3c;
+$color-red-hard-fill: #ff7979;
+$color-overage-black-fill: #2f3542;
+//
+$color-bg: #fff;
+$color-diags: rgba($color-yellow-mid, 0.5);
+
+
+// MIXINS
+@mixin flex($align: center, $justify: center, $gap: normal, $flow: row nowrap, $display: flex) {
+    display: $display;
+    align-items: $align;
+    justify-content: $justify;
+    flex-flow: $flow;
+    gap: $gap;
+}
+
+@mixin cleanList($padding: 0, $margin: 0, $listStyle: none) {
+    padding: $padding;
+    margin: $margin;
+    list-style: $listStyle;
+}
+
+@mixin squareSize($length: auto) {
+    width: $length;
+    height: $length;
+}
+
+// PLACEHOLDERS
+%font-family-overpass {
+    font-family: $font-overpass;
+}
+
+// MARKUP
+:root {
+    font-size: 20px;
+}
+
+html {
+    background-color: $color-bg;
+    background-image: repeating-linear-gradient(45deg, $color-diags 0, $color-diags 0.5px, $color-bg 0, $color-bg 50%);
+    background-size: 16px 16px;
+
+    body {
+        padding: 0;
+        margin: 0;
+
+        * {
+            @extend %font-family-overpass;
+        }
+    }
+}
+
+header {
+    padding: 2rem 2rem 4rem;
+
+    border-bottom: 0.5rem $color-orange-mid solid;
+
+    background-color: $color-purple-dark;
+
+    & > * {
+        color: #fff;
+    }
+
+    h1 {
+        margin: 0 0 0.25rem;
+
+        font-weight: 800;
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        margin: 0;
+
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+}
+
+#CalculatorSection {
+    padding: 2rem;
+}
+
+.calc {
+    * {
+        outline-color: $color-orange-dark;
+    }
+
+    hr {
+        margin: 1.5rem 0;
+    }
+
+    &_upper {
+        @include flex(center, center, 1rem 2rem, row wrap);
+
+        &_player-info,
+        &_difficulty,
+        &_total {
+            @include flex(center, flex-start, 0.75rem);
+
+            label,
+            .upper-label {
+                margin-top: 5px;
+
+                font-weight: 600;
+                font-size: 1.25rem;
+                white-space: nowrap;
+            }
+
+            input {
+                padding: 6px 3px 3px;
+
+                font-weight: 700;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            select {
+                padding: 6px 3px 3px;
+
+                font-weight: 600;
+                font-size: 1.5rem;
+            }
+
+            span:not(.upper-label) {
+                width: 45px;
+                margin-top: 6px;
+
+                font-size: 2rem;
+            }
+        }
+    }
+
+    &_bp-info {
+        &_list {
+            @include cleanList;
+            @include flex(center, center, 0.7rem, row wrap);
+
+            &_tick {
+                width: 2rem;
+                height: 1rem;
+
+                border: 2px solid $color-purple-dark;
+                border-radius: 4px;
+
+                background-color: #fff;
+
+                &.bp {
+                    &-tick {
+                        color: $color-purple-mid;
+
+                        border-color: currentColor;
+
+                        &[data-is-ticked="true"] {
+                            border-color: transparent;
+
+                            background-color: currentColor;
+                        }
+                    }
+
+                    &-level {
+                        border-width: 3px;
+
+                        &[data-is-ticked="true"] {
+                            margin: 1px;
+
+                            border-width: 2px;
+                        }
+                    }
+
+                    &-easy {
+                        color: $color-yellow-mid;
+                    }
+
+                    &-default {
+                        color: $color-orange-mid;
+                    }
+
+                    &-hard {
+                        color: $color-orange-dark;
+                    }
+
+                    &-overage {
+                        color: $color-red-hard-line; // $color-overage-black-fill;
+
+                        border-radius: 50%;
+
+                        @include squareSize(0.8rem);
+                    }
+                }
+            }
+        }
+    }
+
+    &_lower {
+        @include flex(flex-start, center, 1rem 7rem, row-reverse wrap);
+
+        &_left,
+        &_right {
+            h3 {
+                margin: 0 0 1rem;
+
+                font-weight: 600;
+                font-size: 1.75rem;
+            }
+        }
+
+        &_left_list {
+            @include cleanList($margin: 0 0 0 1.5rem);
+
+            &_adversary {
+                margin-bottom: 0.5rem;
+
+                @include flex(center, flex-start, 1rem);
+
+                label,
+                input {
+                    font-size: 1.5rem;
+                }
+
+                label {
+                    position: relative;
+
+                    width: 8rem;
+                    padding-top: 3px;
+
+                    font-weight: 400;
+                    text-transform: capitalize;
+
+                    &::after {
+                        content: "\00D7"; // ×
+
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+
+                        height: 100%;
+                        padding-top: 3px;
+
+                        color: $color-purple-mid;
+                    }
+                }
+
+                input {
+                    width: 3rem;
+                    padding: 6px 5px 2px;
+                }
+            }
+        }
+
+        &_right_list {
+            //
+        }
+    }
+}

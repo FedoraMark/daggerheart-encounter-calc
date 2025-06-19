@@ -1,0 +1,21 @@
+{
+  "name": "daggerheart-encounter-calculator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss-pt:delete": "rm -r ./prototype/css/*",
+    "scss-pt": "npm run scss-pt:delete; node-sass ./prototype/scss -o ./prototype/css;",
+    "scss-pt:watch": "npm run scss-pt:delete; npm run scss-pt; node-sass --watch ./prototype/scss -o ./prototype/css;"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FedoraMark/daggerheart-encounter-calc.git"
+  },
+  "author": "Mark J Schneider",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^9.0.0"
+  }
+}

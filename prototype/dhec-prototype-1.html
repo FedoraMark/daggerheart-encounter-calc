@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Daggerheart Encounter Calculator - prototype v1</title>
+    <!--  -->
+    <link rel="stylesheet" href="css/dhec-prototype-1.css">
+    <!--  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="dhec-prototype-1.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Daggerheart Encounter Calculator</h1>
+        <h2>Prototype - v1</h2>
+    </header>
+
+    <section id="CalculatorSection" class="calc">
+        <div class="calc_upper">
+            <div class="calc_upper_player-info">
+                <label for="number-of-players">Number of PCs:</label>
+                <input value="4" type="number" name="number-of-players" id="number-of-players" min="1" max="10">
+            </div>
+
+            <div class="calc_upper_difficulty">
+                <label for="difficulty-adjustment">Difficulty:</label>
+                <select name="difficulty-adjustment" id="difficulty-adjustment">
+                    <option value="easy">Easy/Short (-1)</option>
+                    <option value="default" selected>Normal</option>
+                    <option value="hard">Hard/Long (+2)</option>
+                </select>
+            </div>
+
+            <div class="calc_upper_total">
+                <span class="upper-label">Total Battle Points:</span>
+                <span id="totalBPs">
+                    <!-- filled with JS --></span>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="calc_bp-info">
+            <ul id="BattlePointsTicks" class="calc_bp-info_list" data-difficulty="default">
+                <!-- filled with JS -->
+            </ul>
+        </div>
+
+        <hr />
+
+        <div class="calc_lower">
+            <div class="calc_lower_right">
+                <h3>Adjustments</h3>
+                <ul class="calc_lower_right_list">
+                    <li>Difficulty change (+/-)</li>
+                    <li>Muliple Solos</li>
+                    <li>Added Damage</li>
+                    <li>Lower Tier</li>
+                    <li>No, B, H, L, S</li>
+                </ul>
+            </div>
+
+            <div class="calc_lower_left">
+                <h3>Adversaries</h3>
+                <ul id="MonsterList" class="calc_lower_left_list">
+                    <!-- filled with JS -->
+                </ul>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
