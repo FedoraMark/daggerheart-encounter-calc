@@ -105,7 +105,9 @@ header {
 }
 
 #CalculatorSection {
+    max-width: 60rem;
     padding: 2rem;
+    margin: 0 auto;
 }
 
 .calc {
@@ -302,7 +304,9 @@ header {
     }
 
     &_lower {
-        @include flex(flex-start, center, 1rem 7rem, row-reverse wrap);
+        --gap-margin: 3rem;
+        //
+        @include flex(flex-start, center, var(--gap-margin) 7rem, row-reverse wrap);
 
         &_left,
         &_right {
@@ -399,7 +403,7 @@ header {
             &_adjustments,
             &_options {
                 &:not(:last-of-type) {
-                    margin-bottom: 3rem;
+                    margin-bottom: var(--gap-margin);
                 }
 
                 &_list {

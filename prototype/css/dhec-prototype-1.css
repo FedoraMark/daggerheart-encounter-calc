@@ -31,7 +31,9 @@ header {
     font-size: 1.25rem; }
 
 #CalculatorSection {
-  padding: 2rem; }
+  max-width: 60rem;
+  padding: 2rem;
+  margin: 0 auto; }
 
 .calc * {
   outline-color: #f26d3d; }
@@ -146,11 +148,12 @@ header {
         background-color: #ff7979; }
 
 .calc_lower {
+  --gap-margin: 3rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-flow: row-reverse wrap;
-  gap: 1rem 7rem; }
+  gap: var(--gap-margin) 7rem; }
   .calc_lower_left h3, .calc_lower_right h3 {
     margin: 0 0 0.75rem;
     font-weight: 600;
@@ -210,7 +213,7 @@ header {
         width: 3rem;
         padding: 6px 5px 2px; }
   .calc_lower_right_formula:not(:last-of-type), .calc_lower_right_adjustments:not(:last-of-type), .calc_lower_right_options:not(:last-of-type) {
-    margin-bottom: 3rem; }
+    margin-bottom: var(--gap-margin); }
   .calc_lower_right_formula_list, .calc_lower_right_adjustments_list, .calc_lower_right_options_list {
     font-size: 1.25rem;
     padding: 0;

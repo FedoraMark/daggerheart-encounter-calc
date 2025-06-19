@@ -36,7 +36,7 @@ $(function() {
         solo: 5
     };
 
-    const BHLS_LIST = ['bruiser', 'hoarde', 'leader', 'solo'];
+    const BHLS_LIST = ['bruiser', 'horde', 'leader', 'solo'];
 
     // -- page elements
     const $NumberOfPlayers = $('#number-of-players');
