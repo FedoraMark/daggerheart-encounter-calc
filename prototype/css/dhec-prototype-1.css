@@ -16,14 +16,14 @@ html {
       color: #261859; }
 
 header {
-  padding: 2rem 2rem 4rem;
+  padding: 2rem;
   border-bottom: 0.5rem #f29d52 solid;
   background-color: #261859; }
   header > * {
     color: #fff; }
   header h1 {
     margin: 0 0 0.25rem;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 2.5rem; }
   header h2 {
     margin: 0;
@@ -42,7 +42,7 @@ header {
   margin: 1.5rem 0;
   border-style: solid;
   border-color: #f29d52;
-  opacity: 0.5; }
+  opacity: 0; }
 
 .calc_upper {
   display: flex;
@@ -99,7 +99,7 @@ header {
       .calc_upper_total_text #spentBPs {
         --current-difficulty-color: #674ebf; }
       .calc_upper_total_text #spentBPs[data-spent-total-compare^="-"] {
-        --current-difficulty-color: #e74c3c; }
+        --current-difficulty-color: #ea2027; }
       .calc_upper_total_text #spentBPs[data-spent-total-compare="0"][data-current-difficulty="easy"] {
         --current-difficulty-color: #f26d3d; }
       .calc_upper_total_text #spentBPs[data-spent-total-compare="0"][data-current-difficulty="default"] {
@@ -142,10 +142,10 @@ header {
       flex-flow: row nowrap;
       gap: normal; }
       .calc_bp-info_list_tick.bp-overage[data-is-ticked="true"] {
-        border-color: #e74c3c;
+        border-color: #ea2027;
         opacity: 0.8;
-        background: repeating-linear-gradient(-45deg, #e74c3c, #e74c3c 5px, #ff7979 5px, #ff7979 15px);
-        background-color: #ff7979; }
+        background: repeating-linear-gradient(-45deg, #ff5e57, #ff5e57 5px, #ea2027 5px, #ea2027 15px);
+        background-color: #ea2027; }
 
 .calc_lower {
   --gap-margin: 3rem;
@@ -212,60 +212,106 @@ header {
       .calc_lower_left_list_adversary input {
         width: 3rem;
         padding: 6px 5px 2px; }
-  .calc_lower_right_formula:not(:last-of-type), .calc_lower_right_adjustments:not(:last-of-type), .calc_lower_right_options:not(:last-of-type) {
-    margin-bottom: var(--gap-margin); }
-  .calc_lower_right_formula_list, .calc_lower_right_adjustments_list, .calc_lower_right_options_list {
-    font-size: 1.25rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-flow: column nowrap;
-    gap: 1rem; }
+  .calc_lower_right {
+    --opacity-off: 0.25; }
+    .calc_lower_right_formula li,
+    .calc_lower_right_adjustments li,
+    .calc_lower_right_options li label {
+      opacity: var(--opacity-off); }
+    .calc_lower_right_formula:not(:last-of-type), .calc_lower_right_adjustments:not(:last-of-type), .calc_lower_right_options:not(:last-of-type) {
+      margin-bottom: var(--gap-margin); }
     .calc_lower_right_formula_list, .calc_lower_right_adjustments_list, .calc_lower_right_options_list {
-      --adjustment-color: #f26d3d; }
-    .calc_lower_right_formula_list li, .calc_lower_right_adjustments_list li, .calc_lower_right_options_list li {
-      position: relative;
-      width: auto;
-      line-height: 1.1;
-      text-align: center;
-      opacity: var(--opacity-off);
-      --opacity-off: 0.25; }
-      .calc_lower_right_formula_list li .adjustment-text, .calc_lower_right_adjustments_list li .adjustment-text, .calc_lower_right_options_list li .adjustment-text {
-        position: absolute;
-        left: calc(100% + 0.75rem);
-        opacity: 0; }
-        .calc_lower_right_formula_list li .adjustment-text, .calc_lower_right_formula_list li .adjustment-text-static, .calc_lower_right_adjustments_list li .adjustment-text, .calc_lower_right_adjustments_list li .adjustment-text-static, .calc_lower_right_options_list li .adjustment-text, .calc_lower_right_options_list li .adjustment-text-static {
-          color: var(--adjustment-color);
-          font-weight: 700;
-          white-space: nowrap; }
-      .calc_lower_right_formula_list li[data-is-active="true"],
-      .calc_lower_right_formula_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_formula_list li[data-is-always-active],
-      .calc_lower_right_formula_list li[data-is-always-active] .adjustment-text, .calc_lower_right_adjustments_list li[data-is-active="true"],
-      .calc_lower_right_adjustments_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_adjustments_list li[data-is-always-active],
-      .calc_lower_right_adjustments_list li[data-is-always-active] .adjustment-text, .calc_lower_right_options_list li[data-is-active="true"],
-      .calc_lower_right_options_list li[data-is-active="true"] .adjustment-text, .calc_lower_right_options_list li[data-is-always-active],
-      .calc_lower_right_options_list li[data-is-always-active] .adjustment-text {
-        opacity: 1; }
-      .calc_lower_right_formula_list li#frm-formula #frm-pcs, .calc_lower_right_adjustments_list li#frm-formula #frm-pcs, .calc_lower_right_options_list li#frm-formula #frm-pcs {
-        display: inline-block;
-        min-width: 0.8rem;
-        color: var(--adjustment-color);
-        font-weight: 600; }
-      .calc_lower_right_formula_list li:not(#frm-formula), .calc_lower_right_adjustments_list li:not(#frm-formula), .calc_lower_right_options_list li:not(#frm-formula) {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-flow: row nowrap;
-        gap: normal; }
-      .calc_lower_right_formula_list li#adj-difficulty, .calc_lower_right_adjustments_list li#adj-difficulty, .calc_lower_right_options_list li#adj-difficulty {
-        opacity: 1; }
-        .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="default"], .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="default"], .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="default"] {
-          opacity: var(--opacity-off); }
-        .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
-        .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard, .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
-        .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard, .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
-        .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard {
+      font-size: 1.25rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-flow: column nowrap;
+      gap: 1rem; }
+      .calc_lower_right_formula_list, .calc_lower_right_adjustments_list, .calc_lower_right_options_list {
+        --adjustment-color: #f26d3d; }
+      .calc_lower_right_formula_list li, .calc_lower_right_adjustments_list li, .calc_lower_right_options_list li {
+        position: relative;
+        width: auto;
+        line-height: 1.1;
+        text-align: center; }
+        .calc_lower_right_formula_list li .adjustment-text, .calc_lower_right_adjustments_list li .adjustment-text, .calc_lower_right_options_list li .adjustment-text {
+          position: absolute;
+          left: calc(100% + 0.75rem);
+          opacity: 0; }
+          .calc_lower_right_formula_list li .adjustment-text, .calc_lower_right_formula_list li .adjustment-text-static, .calc_lower_right_adjustments_list li .adjustment-text, .calc_lower_right_adjustments_list li .adjustment-text-static, .calc_lower_right_options_list li .adjustment-text, .calc_lower_right_options_list li .adjustment-text-static {
+            color: var(--adjustment-color);
+            font-weight: 700;
+            white-space: nowrap; }
+        .calc_lower_right_formula_list li[data-is-active="true"],
+        .calc_lower_right_formula_list li[data-is-active="true"] .adjustment-text,
+        .calc_lower_right_formula_list li[data-is-active="true"] label, .calc_lower_right_formula_list li[data-is-always-active],
+        .calc_lower_right_formula_list li[data-is-always-active] .adjustment-text,
+        .calc_lower_right_formula_list li[data-is-always-active] label, .calc_lower_right_adjustments_list li[data-is-active="true"],
+        .calc_lower_right_adjustments_list li[data-is-active="true"] .adjustment-text,
+        .calc_lower_right_adjustments_list li[data-is-active="true"] label, .calc_lower_right_adjustments_list li[data-is-always-active],
+        .calc_lower_right_adjustments_list li[data-is-always-active] .adjustment-text,
+        .calc_lower_right_adjustments_list li[data-is-always-active] label, .calc_lower_right_options_list li[data-is-active="true"],
+        .calc_lower_right_options_list li[data-is-active="true"] .adjustment-text,
+        .calc_lower_right_options_list li[data-is-active="true"] label, .calc_lower_right_options_list li[data-is-always-active],
+        .calc_lower_right_options_list li[data-is-always-active] .adjustment-text,
+        .calc_lower_right_options_list li[data-is-always-active] label {
           opacity: 1; }
+        .calc_lower_right_formula_list li#frm-formula #frm-pcs, .calc_lower_right_adjustments_list li#frm-formula #frm-pcs, .calc_lower_right_options_list li#frm-formula #frm-pcs {
+          display: inline-block;
+          min-width: 0.8rem;
+          color: var(--adjustment-color);
+          font-weight: 600; }
+        .calc_lower_right_formula_list li:not(#frm-formula), .calc_lower_right_adjustments_list li:not(#frm-formula), .calc_lower_right_options_list li:not(#frm-formula) {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-flow: row nowrap;
+          gap: normal; }
+        .calc_lower_right_formula_list li#adj-difficulty, .calc_lower_right_adjustments_list li#adj-difficulty, .calc_lower_right_options_list li#adj-difficulty {
+          opacity: 1; }
+          .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="default"], .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="default"], .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="default"] {
+            opacity: var(--opacity-off); }
+          .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+          .calc_lower_right_formula_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard, .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+          .calc_lower_right_adjustments_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard, .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="easy"] .adjustment-text.adj-easy,
+          .calc_lower_right_options_list li#adj-difficulty[data-current-difficulty="hard"] .adjustment-text.adj-hard {
+            opacity: 1; }
+        .calc_lower_right_formula_list li :is(label, input.option-checkbox), .calc_lower_right_adjustments_list li :is(label, input.option-checkbox), .calc_lower_right_options_list li :is(label, input.option-checkbox) {
+          cursor: pointer; }
+        .calc_lower_right_formula_list li .option-checkbox, .calc_lower_right_adjustments_list li .option-checkbox, .calc_lower_right_options_list li .option-checkbox {
+          -webkit-appearance: none;
+          appearance: none;
+          position: absolute;
+          right: calc(100% + 1.25rem);
+          margin: 0;
+          background-color: #fff;
+          --check-color: #f2bf5e;
+          --checkbox-color: #f2bf5e;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-flow: row nowrap;
+          gap: normal; }
+          .calc_lower_right_formula_list li .option-checkbox::before, .calc_lower_right_formula_list li .option-checkbox::after, .calc_lower_right_adjustments_list li .option-checkbox::before, .calc_lower_right_adjustments_list li .option-checkbox::after, .calc_lower_right_options_list li .option-checkbox::before, .calc_lower_right_options_list li .option-checkbox::after {
+            position: absolute;
+            display: block;
+            width: 1rem;
+            height: 1rem; }
+          .calc_lower_right_formula_list li .option-checkbox::before, .calc_lower_right_adjustments_list li .option-checkbox::before, .calc_lower_right_options_list li .option-checkbox::before {
+            content: "";
+            border: 2px solid var(--checkbox-color);
+            background: #fff; }
+          .calc_lower_right_formula_list li .option-checkbox::after, .calc_lower_right_adjustments_list li .option-checkbox::after, .calc_lower_right_options_list li .option-checkbox::after {
+            transform: scale(0.7);
+            background-color: var(--check-color); }
+          .calc_lower_right_formula_list li .option-checkbox:checked, .calc_lower_right_adjustments_list li .option-checkbox:checked, .calc_lower_right_options_list li .option-checkbox:checked {
+            --check-color: #f29d52;
+            --checkbox-color: #f29d52; }
+          .calc_lower_right_formula_list li .option-checkbox:checked::after, .calc_lower_right_adjustments_list li .option-checkbox:checked::after, .calc_lower_right_options_list li .option-checkbox:checked::after {
+            content: ""; }
+          .calc_lower_right_formula_list li .option-checkbox:is(:hover, :focus-visible), .calc_lower_right_adjustments_list li .option-checkbox:is(:hover, :focus-visible), .calc_lower_right_options_list li .option-checkbox:is(:hover, :focus-visible) {
+            --check-color: #f26d3d;
+            --checkbox-color: #f26d3d; }

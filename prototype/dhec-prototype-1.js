@@ -38,6 +38,8 @@ $(function() {
 
     const BHLS_LIST = ['bruiser', 'horde', 'leader', 'solo'];
 
+    const DATA_IS_ACTIVE = 'data-is-active';
+
     // -- page elements
     const $NumberOfPlayers = $('#number-of-players');
     const $DifficultyAdjustment = $('#difficulty-adjustment');
@@ -73,6 +75,8 @@ $(function() {
     const adjustSign = (number) => { return new Intl.NumberFormat("en-US", { signDisplay: "exceptZero" }).format(number).replace('-', '&minus;').replace('+', '&plus;') }; // en dash
 
     const paintAdjustmentText = (adjustmentValue, otherClasses = '') => { return `<span class="adjustment-text ${otherClasses}" data-adjustment-value="${adjustmentValue}">${adjustSign(adjustmentValue)}</span>` };
+
+    const paintOptionCheckbox = (checkboxIdName) => {return `<input type="checkbox" class="option-checkbox" id="${checkboxIdName}" name="${checkboxIdName}">` };
 
     const containsAny = (arr1, arr2) => { return arr1.some(item => arr2.includes(item)) };
 
@@ -177,21 +181,23 @@ $(function() {
         $AdjustmentList.find('#adj-difficulty').attr('data-current-difficulty', currentDifficulty);
 
         // -- multiple solos
-        $AdjustmentList.find('#adj-multiSolo').attr('data-is-active', purchasedAdversaryArray.filter(((adv) => adv === "solo")).length > 1);
+        $AdjustmentList.find('#adj-multiSolo').attr(DATA_IS_ACTIVE, purchasedAdversaryArray.filter(((adv) => adv === "solo")).length > 1);
 
         // -- no B, H, L, S
-        $AdjustmentList.find('#adj-lackingBHLS').attr('data-is-active', !containsAny(purchasedAdversaryArray, BHLS_LIST));
+        $AdjustmentList.find('#adj-lackingBHLS').attr(DATA_IS_ACTIVE, !containsAny(purchasedAdversaryArray, BHLS_LIST));
 
         // OPTIONS
         // -- add damage
-        $OptionsList.find('#adj-addedDmg'); // TODO: toggle
+        let $addedDamageCheckbox = $OptionsList.find('#opt-addedDmg .option-checkbox');
+        $OptionsList.find('#opt-addedDmg').attr(DATA_IS_ACTIVE, $addedDamageCheckbox.is(":checked"));
 
         // -- lower tier
-        $OptionsList.find('#adj-lowerTier'); // TODO: toggle
+        let $lowerTierCheckbox = $OptionsList.find('#opt-lowerTier .option-checkbox');
+        $OptionsList.find('#opt-lowerTier').attr(DATA_IS_ACTIVE, $lowerTierCheckbox.is(":checked"));
 
         // CALCULATE ADJUSTMENTS
         adjustmentTotal = 0; // reset
-        const $activeAdjustmentList = $AdjustmentList.find('[data-is-active="true"]');
+        const $activeAdjustmentList = $.merge($AdjustmentList, $OptionsList).find(`[${DATA_IS_ACTIVE}="true"]`);
         $activeAdjustmentList.each(function(aalIndex, aalElement) {
             adjustmentTotal += $(aalElement).find('.adjustment-text').data("adjustment-value");
         });
@@ -215,8 +221,6 @@ $(function() {
                 </li>
             `);
         }
-
-        $MonsterList.find('li').on('change', function(event) { calculateSpentBattlePoints() });
     }
 
     function createAdjustmentText() {
@@ -232,19 +236,25 @@ $(function() {
             .append(paintAdjustmentText(NO_BRUISERS_HORDES_LEADERS_SOLOS));
 
         $OptionsList.find('#opt-addedDmg')
+            .prepend(paintOptionCheckbox("toggle-addedDmg"))
             .append(paintAdjustmentText(ADDED_1D4_DAMAGE));
         $OptionsList.find('#opt-lowerTier')
+            .prepend(paintOptionCheckbox("toggle-lowerTier"))
             .append(paintAdjustmentText(CONTAINS_LOWER_TIER));
     }
-
-    // -- listeners
-    $NumberOfPlayers.on('change', function(event) { updateNumberOfPlayers(); });
-    $DifficultyAdjustment.on('change', function(event) { updateNumberOfPlayers(); });
 
     // TODO: Reset / clear
 
     // INIT
     createAdversaryOptions();
-    createAdjustmentText()
+    createAdjustmentText();
+
+    // -- listeners
+    $NumberOfPlayers.on('change', function(event) { updateNumberOfPlayers(); });
+    $DifficultyAdjustment.on('change', function(event) { updateNumberOfPlayers(); });
+    $MonsterList.find('li').on('change', function(event) { calculateSpentBattlePoints(); });
+    $OptionsList.find('input[type="checkbox"]').on('change', function(event) { updateNumberOfPlayers(); });
+
+    // -- initial
     updateNumberOfPlayers();
 });

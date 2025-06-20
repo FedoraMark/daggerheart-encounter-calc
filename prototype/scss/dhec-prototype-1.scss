@@ -12,8 +12,8 @@ $color-orange-dark: #f26d3d;
 //
 $color-green-easy-line: #6ab04c;
 $color-green-easy-fill: #badc58;
-$color-red-hard-line: #e74c3c;
-$color-red-hard-fill: #ff7979;
+$color-red-hard-line: #ea2027;
+$color-red-hard-fill: #ff5e57;
 $color-overage-black-fill: #2f3542;
 //
 $color-bg: #fff;
@@ -79,7 +79,7 @@ html {
 }
 
 header {
-    padding: 2rem 2rem 4rem;
+    padding: 2rem;
 
     border-bottom: 0.5rem $color-orange-mid solid;
 
@@ -92,7 +92,7 @@ header {
     h1 {
         margin: 0 0 0.25rem;
 
-        font-weight: 800;
+        font-weight: 700;
         font-size: 2.5rem;
     }
 
@@ -121,7 +121,7 @@ header {
         border-style: solid;
         border-color: $color-orange-mid;
 
-        opacity: 0.5;
+        opacity: 0;
     }
 
     &_upper {
@@ -287,16 +287,9 @@ header {
                             border-color: $color-red-hard-line;
 
                             opacity: 0.8;
-                            background: repeating-linear-gradient(-45deg, $color-red-hard-line, $color-red-hard-line 5px, $color-red-hard-fill 5px, $color-red-hard-fill 15px);
-                            background-color: $color-red-hard-fill;
+                            background: repeating-linear-gradient(-45deg, $color-red-hard-fill, $color-red-hard-fill 5px, $color-red-hard-line 5px, $color-red-hard-line 15px);
+                            background-color: $color-red-hard-line;
                         }
-
-                        // &::after {
-                        //     content: "";
-                        //     border-radius: 50%;
-                        //     background-color: $color-red-hard-line;
-                        //     @include squareSize(1rem);
-                        // }
                     }
                 }
             }
@@ -399,6 +392,14 @@ header {
         }
 
         &_right {
+            --opacity-off: 0.25;
+
+            &_formula li,
+            &_adjustments li,
+            &_options li label {
+                opacity: var(--opacity-off);
+            }
+
             &_formula,
             &_adjustments,
             &_options {
@@ -417,6 +418,7 @@ header {
 
                     }
 
+
                     li {
                         position: relative;
 
@@ -424,10 +426,6 @@ header {
 
                         line-height: 1.1;
                         text-align: center;
-
-                        opacity: var(--opacity-off);
-
-                        --opacity-off: 0.25;
 
                         .adjustment-text {
                             position: absolute;
@@ -446,7 +444,8 @@ header {
                         &[data-is-active="true"],
                         &[data-is-always-active] {
                             &,
-                            .adjustment-text {
+                            .adjustment-text,
+                            label {
                                 opacity: 1;
                             }
                         }
@@ -479,6 +478,72 @@ header {
                             &[data-current-difficulty="#{$HARD}"] .adjustment-text.adj-hard {
 
                                 opacity: 1;
+                            }
+                        }
+
+                        :is(label, input.option-checkbox) {
+                            cursor: pointer;
+                        }
+
+                        .option-checkbox {
+                            -webkit-appearance: none;
+                                    appearance: none;
+
+                            position: absolute;
+                            right: calc(100% + 1.25rem);
+
+                            margin: 0;
+                            // outline: none;
+
+                            background-color: #fff;
+
+                            --check-color: #{$color-yellow-mid};
+
+                            --checkbox-color: #{$color-yellow-mid};
+
+                            @include flex;
+
+                            &::before,
+                            &::after {
+                                position: absolute;
+
+                                display: block;
+
+                                @include squareSize(1rem);
+                            }
+
+                            &::before {
+                                content: "";
+
+                                border: 2px solid var(--checkbox-color);
+
+                                background: #fff;
+                            }
+
+                            &::after {
+                                transform: scale(0.7);
+
+                                background-color: var(--check-color);
+                            }
+
+                            &:checked {
+                                & {
+                                    --check-color: #{$color-orange-mid};
+
+                                    --checkbox-color: #{$color-orange-mid};
+
+                                }
+
+                                &::after {
+                                    content: "";
+                                }
+                            }
+
+                            &:is(:hover, :focus-visible) {
+                                --check-color: #{$color-orange-dark};
+
+                                --checkbox-color: #{$color-orange-dark};
+
                             }
                         }
                     }
