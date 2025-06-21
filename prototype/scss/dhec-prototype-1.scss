@@ -54,6 +54,14 @@ $HARD: "hard";
     font-family: $font-overpass;
 }
 
+%label-common {
+    margin-top: 5px;
+
+    font-weight: 600;
+    font-size: 1.25rem;
+    white-space: nowrap;
+}
+
 // MARKUP
 :root {
     font-size: 20px;
@@ -105,7 +113,7 @@ header {
 }
 
 #CalculatorSection {
-    max-width: 60rem;
+    max-width: 39rem;
     padding: 2rem;
     margin: 0 auto;
 }
@@ -128,17 +136,11 @@ header {
         @include flex(center, center, 1rem 2rem, row wrap);
 
         &_player-info,
-        &_difficulty,
-        &_total {
+        &_difficulty {
             @include flex(center, flex-start, 0.75rem);
 
-            label,
-            .upper-label {
-                margin-top: 5px;
-
-                font-weight: 600;
-                font-size: 1.25rem;
-                white-space: nowrap;
+            label {
+                @extend %label-common;
             }
 
             input {
@@ -156,79 +158,11 @@ header {
                 font-size: 1.5rem;
             }
         }
-
-        &_total {
-            &_text {
-                @include flex($gap: 0.6rem);
-
-                &_slash {
-                    margin-top: 2px;
-
-                    font-size: 2rem;
-                }
-
-                &_number {
-                    min-width: 2.6rem;
-                    margin-top: 6px;
-                    overflow: hidden;
-
-                    font-size: 2rem;
-                    text-overflow: ellipsis;
-
-                    &:first-of-type {
-                        font-weight: 700;
-                        text-align: right;
-                    }
-
-                    &:last-of-type {
-                        font-weight: 600;
-                        text-align: left;
-                    }
-                }
-
-                #spentBPs {
-                    color: var(--current-difficulty-color);
-
-
-                    & {
-                        --current-difficulty-color: #{$color-purple-mid};
-
-                    }
-
-                    &[data-spent-total-compare^="-"] {
-                        --current-difficulty-color: #{$color-red-hard-line};
-
-                    }
-
-                    &[data-spent-total-compare="0"] {
-                        &[data-current-difficulty="#{$EASY}"] {
-
-                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-yellow-mid};
-
-                        }
-
-                        &[data-current-difficulty="#{$DEFAULT}"] {
-
-                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-mid};
-
-                        }
-
-                        &[data-current-difficulty="#{$HARD}"] {
-
-                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-dark};
-
-                        }
-                    }
-                }
-
-                // #totalBPs {}
-            }
-        }
     }
 
     &_bp-info {
         &_list {
-            --tick-width: 5rem;
+            --tick-width: 4rem;
             //
             @include cleanList;
             @include grid(0.7rem, auto-flow 1fr / repeat(auto-fit, minmax(var(--tick-width), 1fr)));
@@ -294,12 +228,91 @@ header {
                 }
             }
         }
+
+        &_total {
+            margin-top: 1.25rem;
+
+            @include flex(center, center, 0.5rem);
+
+            .span-label {
+                @extend %label-common;
+            }
+
+            &_text {
+                @include flex($gap: 0.6rem);
+
+                &_slash {
+                    margin-top: 2px;
+
+                    font-size: 2rem;
+                }
+
+                &_number {
+                    min-width: 2.6rem;
+                    margin-top: 6px;
+                    overflow: hidden;
+
+                    font-size: 2rem;
+                    text-overflow: ellipsis;
+
+                    &:first-of-type {
+                        font-weight: 700;
+                        text-align: right;
+                    }
+
+                    &:last-of-type {
+                        font-weight: 600;
+                        text-align: left;
+                    }
+                }
+
+                #spentBPs {
+                    color: var(--current-difficulty-color);
+
+
+                    & {
+                        --current-difficulty-color: #{$color-purple-mid};
+
+                    }
+
+                    &[data-spent-total-compare^="-"] {
+                        --current-difficulty-color: #{$color-red-hard-line};
+
+                    }
+
+                    &[data-spent-total-compare="0"] {
+                        &[data-current-difficulty="#{$EASY}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-yellow-mid};
+
+                        }
+
+                        &[data-current-difficulty="#{$DEFAULT}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-mid};
+
+                        }
+
+                        &[data-current-difficulty="#{$HARD}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-dark};
+
+                        }
+                    }
+                }
+
+                #totalBPs {
+                    color: #{$color-orange-dark};
+
+                }
+            }
+        }
     }
 
     &_lower {
         --gap-margin: 3rem;
         //
-        @include flex(flex-start, center, var(--gap-margin) 7rem, row-reverse wrap);
+        @include flex(flex-start, center, var(--gap-margin) 5rem, row-reverse wrap);
 
         &_left,
         &_right {
