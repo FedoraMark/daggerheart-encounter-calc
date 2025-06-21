@@ -402,6 +402,31 @@ header {
                     }
                 }
             }
+
+            #ClearAdversaries {
+                cursor: pointer;
+
+                display: block;
+
+                padding: calc(0.25rem + 3px) 1rem 0.25rem;
+                margin: 1.5rem auto 0;
+
+                color: $color-purple-dark;
+                font-weight: 500;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+
+                border: 1px solid $color-purple-dark;
+                border-radius: 4px;
+
+                background: #fff;
+
+                &:is(:hover, :focus-visible) {
+                    border-color: $color-orange-dark;
+
+                    background-color: #eee;
+                }
+            }
         }
 
         &_right {

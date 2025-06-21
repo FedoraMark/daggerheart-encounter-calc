@@ -47,11 +47,11 @@ $(function() {
     const $TotalBPs = $('#totalBPs');
     const $BattlePointsTicks = $('#BattlePointsTicks');
     const $MonsterList = $('#MonsterList');
-
     const $calcLowerRight = $('.calc_lower_right');
     const $FormulaList = $calcLowerRight.find('#FormulaList');
     const $AdjustmentList = $calcLowerRight.find('#AdjustmentList');
     const $OptionsList = $calcLowerRight.find('#OptionsList');
+    const $ClearAdversaries = $('#ClearAdversaries');
 
     // -- variables
     let totalPlayers = 0;
@@ -210,6 +210,11 @@ $(function() {
             .attr('data-spent-total-compare', (totalAvailableBPs - totalTickedBPs));
     }
 
+    function resetAdversaries() {
+        $MonsterList.find('input').val("0");
+        calculateSpentBattlePoints();
+    }
+
     // -- create items
     function createAdversaryOptions() {
         for (adversary in ADVERSARY_COSTS) {
@@ -243,8 +248,6 @@ $(function() {
             .append(paintAdjustmentText(CONTAINS_LOWER_TIER));
     }
 
-    // TODO: Reset / clear
-
     // INIT
     createAdversaryOptions();
     createAdjustmentText();
@@ -254,6 +257,7 @@ $(function() {
     $DifficultyAdjustment.on('change', function(event) { updateNumberOfPlayers(); });
     $MonsterList.find('li').on('change', function(event) { calculateSpentBattlePoints(); });
     $OptionsList.find('input[type="checkbox"]').on('change', function(event) { updateNumberOfPlayers(); });
+    $ClearAdversaries.on('click', function(event) { resetAdversaries(); });
 
     // -- initial
     updateNumberOfPlayers();

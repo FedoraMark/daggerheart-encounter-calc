@@ -220,6 +220,21 @@ header {
       .calc_lower_left_list_adversary input {
         width: 3rem;
         padding: 6px 5px 2px; }
+  .calc_lower_left #ClearAdversaries {
+    cursor: pointer;
+    display: block;
+    padding: calc(0.25rem + 3px) 1rem 0.25rem;
+    margin: 1.5rem auto 0;
+    color: #261859;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border: 1px solid #261859;
+    border-radius: 4px;
+    background: #fff; }
+    .calc_lower_left #ClearAdversaries:is(:hover, :focus-visible) {
+      border-color: #f26d3d;
+      background-color: #eee; }
   .calc_lower_right {
     --opacity-off: 0.25; }
     .calc_lower_right_formula li,
