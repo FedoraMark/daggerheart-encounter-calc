@@ -52,6 +52,13 @@ $HARD: "hard";
     height: $length;
 }
 
+// RESPONSIVE
+@mixin respond-to-mobile {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
 // PLACEHOLDERS
 %font-family-overpass {
     font-family: $font-overpass;
@@ -133,24 +140,50 @@ footer {
     --footer-gap: 0.75rem;
     --footer-padding-offset: 3px;
     --footer-underline-offset: 2px;
-    --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));;
+    --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));
+    //
+    @include respond-to-mobile {
+        padding-top: calc(1rem + var(--footer-padding-offset));
+    };
+
+
+
 
     .footer-list {
         font-size: 0.9rem;
 
         @include cleanList;
         @include flex($gap: var(--footer-gap));
+        //
+        @include respond-to-mobile {
+            align-items: center;
+            justify-content: flex-start;
+            flex-flow: column nowrap;
+            gap: 0.25rem;
+        }
 
         li {
             padding-top: var(--footer-padding-offset);
 
+            white-space: nowrap;
+
             @include flex;
+            //
+            @include respond-to-mobile {
+                &:nth-of-type(2) {
+                    margin-top: var(--footer-padding-offset);
+                }
+            }
 
             & + li {
                 &::before {
                     content: "\2022"; // •
 
                     margin-right: var(--footer-gap);
+
+                    @include respond-to-mobile {
+                        content: none;
+                    }
                 }
             }
 
@@ -204,6 +237,10 @@ footer {
     margin: 0 auto;
 
     @include flex(stretch, flex-start, 0, column nowrap);
+    //
+    @include respond-to-mobile {
+        padding: 2rem 1rem;
+    }
 }
 
 .calc {
@@ -401,6 +438,10 @@ footer {
         --gap-margin: 3rem;
         //
         @include flex(flex-start, center, var(--gap-margin) 5rem, row-reverse wrap);
+        //
+        @include respond-to-mobile {
+            @include flex(center, flex-start, var(--gap-margin), column nowrap);
+        }
 
         &_left,
         &_right {

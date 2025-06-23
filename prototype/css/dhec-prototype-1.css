@@ -56,6 +56,9 @@ footer {
   --footer-padding-offset: 3px;
   --footer-underline-offset: 2px;
   --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset)); }
+  @media only screen and (max-width: 600px) {
+    footer {
+      padding-top: calc(1rem + var(--footer-padding-offset)); } }
   footer .footer-list {
     font-size: 0.9rem;
     padding: 0;
@@ -66,16 +69,29 @@ footer {
     justify-content: center;
     flex-flow: row nowrap;
     gap: var(--footer-gap); }
+    @media only screen and (max-width: 600px) {
+      footer .footer-list {
+        align-items: center;
+        justify-content: flex-start;
+        flex-flow: column nowrap;
+        gap: 0.25rem; } }
     footer .footer-list li {
       padding-top: var(--footer-padding-offset);
+      white-space: nowrap;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-flow: row nowrap;
       gap: normal; }
+      @media only screen and (max-width: 600px) {
+        footer .footer-list li:nth-of-type(2) {
+          margin-top: var(--footer-padding-offset); } }
       footer .footer-list li + li::before {
         content: "\2022";
         margin-right: var(--footer-gap); }
+        @media only screen and (max-width: 600px) {
+          footer .footer-list li + li::before {
+            content: none; } }
       footer .footer-list li a {
         color: inherit;
         text-decoration: underline;
@@ -105,6 +121,9 @@ footer {
   justify-content: flex-start;
   flex-flow: column nowrap;
   gap: 0; }
+  @media only screen and (max-width: 600px) {
+    #CalculatorSection {
+      padding: 2rem 1rem; } }
 
 .calc * {
   outline-color: #f26d3d; }
@@ -227,6 +246,13 @@ footer {
   justify-content: center;
   flex-flow: row-reverse wrap;
   gap: var(--gap-margin) 5rem; }
+  @media only screen and (max-width: 600px) {
+    .calc_lower {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-flow: column nowrap;
+      gap: var(--gap-margin); } }
   .calc_lower_left h3, .calc_lower_right h3 {
     margin: 0 0 0.75rem;
     font-weight: 600;
