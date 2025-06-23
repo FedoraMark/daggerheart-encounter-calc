@@ -1,8 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap");
 
 // VARS
-$font-overpass: "Overpass",
-sans-serif;
+$font-overpass: "Overpass", sans-serif;
 //
 $color-purple-dark: #261859;
 $color-purple-mid: #674ebf;
@@ -149,11 +148,7 @@ footer {
     //
     @include respond-to-mobile {
         padding-top: calc(1rem + var(--footer-padding-offset));
-    };
-
-
-
-
+    }
 
     .footer-list {
         font-size: 0.9rem;
