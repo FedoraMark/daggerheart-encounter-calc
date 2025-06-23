@@ -19,6 +19,9 @@ $color-overage-black-fill: #2f3542;
 $color-bg: #fff;
 $color-diags: rgba($color-yellow-mid, 0.5);
 //
+$theme-color-primary: $color-purple-dark;
+$theme-color-secondary: $color-orange-mid;
+//
 $EASY: "easy";
 $DEFAULT: "default";
 $HARD: "hard";
@@ -73,8 +76,12 @@ html {
     background-size: 16px 16px;
 
     body {
+        width: 100%;
+        min-height: 100vh;
         padding: 0;
         margin: 0;
+
+        @include flex(stretch, flex-start, 0, column nowrap);
 
         * {
             @extend %font-family-overpass;
@@ -86,16 +93,21 @@ html {
     }
 }
 
-header {
-    padding: 2rem;
+header,
+footer {
+    border: $theme-color-secondary solid;
 
-    border-bottom: 0.5rem $color-orange-mid solid;
-
-    background-color: $color-purple-dark;
+    background-color: $theme-color-primary;
 
     & > * {
         color: #fff;
     }
+}
+
+header {
+    padding: 2rem;
+
+    border-width: 0 0 0.5rem;
 
     h1 {
         margin: 0 0 0.25rem;
@@ -112,10 +124,86 @@ header {
     }
 }
 
+footer {
+    padding: 1rem 3rem;
+
+    border-width: 0.5rem 0 0;
+
+    --footer-fmtext-offset: 2px;
+    --footer-gap: 0.75rem;
+    --footer-padding-offset: 3px;
+    --footer-underline-offset: 2px;
+    --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));;
+
+    .footer-list {
+        font-size: 0.9rem;
+
+        @include cleanList;
+        @include flex($gap: var(--footer-gap));
+
+        li {
+            padding-top: var(--footer-padding-offset);
+
+            @include flex;
+
+            & + li {
+                &::before {
+                    content: "\2022"; // •
+
+                    margin-right: var(--footer-gap);
+                }
+            }
+
+            a {
+                color: inherit;
+                text-decoration: underline;
+                text-underline-offset: var(--footer-underline-offset);
+
+                &:is(:hover, :focus) {
+                    text-decoration: none;
+                }
+
+                &.fm-text {
+                    span {
+                        display: inline-block;
+
+                        text-decoration: underline;
+                        text-underline-offset: var(--footer-underline-offset-adjust);
+
+                        transform: translateY(calc(-1 * var(--footer-underline-offset)));
+                    }
+
+                    &:is(:hover, :focus) {
+                        &,
+                        span {
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                &.kofi-text {
+                    //
+                }
+            }
+
+            img {
+                width: auto;
+                height: 1.5rem;
+
+                transform: translateY(calc(-1 * var(--footer-padding-offset)));
+            }
+        }
+    }
+}
+
 #CalculatorSection {
+    flex-grow: 1;
+
     max-width: 39rem;
     padding: 2rem;
     margin: 0 auto;
+
+    @include flex(stretch, flex-start, 0, column nowrap);
 }
 
 .calc {
@@ -585,6 +673,35 @@ header {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    #Attribution {
+        flex-grow: 1;
+
+        font-weight: 300;
+        font-size: 0.85rem;
+
+        @include flex(flex-start, flex-end, 0, column);
+
+        &,
+        p {
+            width: 100%;
+        }
+
+        p {
+            padding: 3rem 0 0;
+            margin: 0;
+
+            opacity: 0.75;
+
+            a {
+                text-decoration: underline;
+
+                &:is(:hover, :focus) {
+                    text-decoration: none;
                 }
             }
         }

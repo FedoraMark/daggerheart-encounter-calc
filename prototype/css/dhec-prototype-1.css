@@ -16,17 +16,29 @@ html {
   background-image: repeating-linear-gradient(45deg, rgba(242, 191, 94, 0.5) 0, rgba(242, 191, 94, 0.5) 0.5px, #fff 0, #fff 50%);
   background-size: 16px 16px; }
   html body {
+    width: 100%;
+    min-height: 100vh;
     padding: 0;
-    margin: 0; }
+    margin: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-flow: column nowrap;
+    gap: 0; }
     html body section *:not(:is(input, select)) {
       color: #261859; }
 
+header,
+footer {
+  border: #f29d52 solid;
+  background-color: #261859; }
+  header > *,
+  footer > * {
+    color: #fff; }
+
 header {
   padding: 2rem;
-  border-bottom: 0.5rem #f29d52 solid;
-  background-color: #261859; }
-  header > * {
-    color: #fff; }
+  border-width: 0 0 0.5rem; }
   header h1 {
     margin: 0 0 0.25rem;
     font-weight: 700;
@@ -36,10 +48,63 @@ header {
     font-weight: 500;
     font-size: 1.25rem; }
 
+footer {
+  padding: 1rem 3rem;
+  border-width: 0.5rem 0 0;
+  --footer-fmtext-offset: 2px;
+  --footer-gap: 0.75rem;
+  --footer-padding-offset: 3px;
+  --footer-underline-offset: 2px;
+  --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset)); }
+  footer .footer-list {
+    font-size: 0.9rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row nowrap;
+    gap: var(--footer-gap); }
+    footer .footer-list li {
+      padding-top: var(--footer-padding-offset);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: row nowrap;
+      gap: normal; }
+      footer .footer-list li + li::before {
+        content: "\2022";
+        margin-right: var(--footer-gap); }
+      footer .footer-list li a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: var(--footer-underline-offset); }
+        footer .footer-list li a:is(:hover, :focus) {
+          text-decoration: none; }
+        footer .footer-list li a.fm-text span {
+          display: inline-block;
+          text-decoration: underline;
+          text-underline-offset: var(--footer-underline-offset-adjust);
+          transform: translateY(calc(-1 * var(--footer-underline-offset))); }
+        footer .footer-list li a.fm-text:is(:hover, :focus),
+        footer .footer-list li a.fm-text:is(:hover, :focus) span {
+          text-decoration: none; }
+      footer .footer-list li img {
+        width: auto;
+        height: 1.5rem;
+        transform: translateY(calc(-1 * var(--footer-padding-offset))); }
+
 #CalculatorSection {
+  flex-grow: 1;
   max-width: 39rem;
   padding: 2rem;
-  margin: 0 auto; }
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-flow: column nowrap;
+  gap: 0; }
 
 .calc * {
   outline-color: #f26d3d; }
@@ -338,3 +403,24 @@ header {
           .calc_lower_right_formula_list li .option-checkbox:is(:hover, :focus-visible), .calc_lower_right_adjustments_list li .option-checkbox:is(:hover, :focus-visible), .calc_lower_right_options_list li .option-checkbox:is(:hover, :focus-visible) {
             --check-color: #f26d3d;
             --checkbox-color: #f26d3d; }
+
+.calc #Attribution {
+  flex-grow: 1;
+  font-weight: 300;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-flow: column;
+  gap: 0; }
+  .calc #Attribution,
+  .calc #Attribution p {
+    width: 100%; }
+  .calc #Attribution p {
+    padding: 3rem 0 0;
+    margin: 0;
+    opacity: 0.75; }
+    .calc #Attribution p a {
+      text-decoration: underline; }
+      .calc #Attribution p a:is(:hover, :focus) {
+        text-decoration: none; }
