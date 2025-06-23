@@ -116,6 +116,11 @@ header {
 
     border-width: 0 0 0.5rem;
 
+    h1,
+    h2 {
+        text-align: center;
+    }
+
     h1 {
         margin: 0 0 0.25rem;
 
@@ -145,6 +150,7 @@ footer {
     @include respond-to-mobile {
         padding-top: calc(1rem + var(--footer-padding-offset));
     };
+
 
 
 

@@ -39,6 +39,9 @@ footer {
 header {
   padding: 2rem;
   border-width: 0 0 0.5rem; }
+  header h1,
+  header h2 {
+    text-align: center; }
   header h1 {
     margin: 0 0 0.25rem;
     font-weight: 700;
