@@ -1,24 +1,49 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import PageHeader from './components/PageHeader.vue'
+import PageCalculator from './components/PageCalculator.vue'
+import PageFooter from './components/PageFooter.vue'
 </script>
 
 <template>
-  <header>
-    <h1>Daggerheart Encounter Calculator</h1>
-    <h2>Prototype v2</h2>
-  </header>
-
-  <footer>
-      <ul class="footer-list">
-          <li>Created by&nbsp;<a class="fm-text" href="https://github.com/FedoraMark"><strong>Fedora<span>Mark</span></strong></a></li>
-          <li>Spare some&nbsp;<a class="kofi-text" href="https://ko-fi.com/fedoramark"><strong>coin?</strong></a></li>
-          <li><img src="./assets/images/compatible_with_DH_logos-07.png">&nbsp;<a href="https://www.daggerheart.com"><strong>Daggerheart</strong></a>&nbsp;compatible</li>
-      </ul>
-  </footer>
-
+  <PageHeader />
+  <PageCalculator />
+  <PageFooter />
 </template>
 
-<style scoped>
+<style lang="scss">
+  @use "./assets/tools/utilities.scss" as utils;
 
+  @import url("https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap");
+
+  :root {
+    font-size: 20px;
+  }
+
+  html {
+    background-color: utils.$color-bg;
+    background-image: repeating-linear-gradient(45deg, utils.$color-diags 0, utils.$color-diags 0.5px, utils.$color-bg 0, utils.$color-bg 50%);
+    background-size: 16px 16px;
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+
+      #app {
+        width: 100%;
+        min-height: 100vh;
+
+        @include utils.flex(stretch, flex-start, 0, column nowrap);
+      }
+
+      * {
+          font-family: utils.$font-overpass;
+      }
+
+      section *:not(:is(input, select)) {
+          color: utils.$color-purple-dark;
+      }
+    }
+  }
 </style>

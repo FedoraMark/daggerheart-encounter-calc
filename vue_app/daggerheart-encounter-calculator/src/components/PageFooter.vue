@@ -1,0 +1,112 @@
+<script setup>
+
+</script>
+
+<template>
+    <footer>
+        <ul class="footer-list">
+            <li>Created by&nbsp;<a class="fm-text" href="https://github.com/FedoraMark"><strong>Fedora<span>Mark</span></strong></a></li>
+            <li>Spare some&nbsp;<a class="kofi-text" href="https://ko-fi.com/fedoramark"><strong>coin?</strong></a></li>
+            <li><img src="../assets/images/compatible_with_DH_logos-07.png">&nbsp;<a href="https://www.daggerheart.com"><strong>Daggerheart</strong></a>&nbsp;compatible</li>
+        </ul>
+    </footer>
+</template>
+
+<style lang="scss" scoped>
+    @use "../assets/tools/utilities.scss" as utils;
+
+    footer {
+        padding: 1rem 3rem;
+
+        border-width: 0.5rem 0 0;
+
+        --footer-fmtext-offset: 2px;
+        --footer-gap: 0.75rem;
+        --footer-padding-offset: 3px;
+        --footer-underline-offset: 2px;
+        --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));
+        
+        @extend %header-footer-common;
+        
+        @include utils.respond-to-mobile {
+            padding-top: calc(1rem + var(--footer-padding-offset));
+        }
+
+        .footer-list {
+            font-size: 0.9rem;
+
+            @include utils.cleanList;
+            @include utils.flex($gap: var(--footer-gap));
+            //
+            @include utils.respond-to-mobile {
+                align-items: center;
+                justify-content: flex-start;
+                flex-flow: column nowrap;
+                gap: 0.25rem;
+            }
+
+            li {
+                padding-top: var(--footer-padding-offset);
+
+                white-space: nowrap;
+
+                @include utils.flex;
+                //
+                @include utils.respond-to-mobile {
+                    &:nth-of-type(2) {
+                        margin-top: var(--footer-padding-offset);
+                    }
+                }
+
+                & + li {
+                    &::before {
+                        content: "\2022"; // •
+
+                        margin-right: var(--footer-gap);
+
+                        @include utils.respond-to-mobile {
+                            content: none;
+                        }
+                    }
+                }
+
+                a {
+                    color: inherit;
+                    text-decoration: underline;
+                    text-underline-offset: var(--footer-underline-offset);
+
+                    &:is(:hover, :focus) {
+                        text-decoration: none;
+                    }
+
+                    &.fm-text {
+                        span {
+                            display: inline-block;
+
+                            text-decoration: underline;
+                            text-underline-offset: var(--footer-underline-offset-adjust);
+
+                            transform: translateY(calc(-1 * var(--footer-underline-offset)));
+                        }
+
+                        &:is(:hover, :focus) {
+                            &,
+                            span {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+
+                    // &.kofi-text {}
+                }
+
+                img {
+                    width: auto;
+                    height: 1.5rem;
+
+                    transform: translateY(calc(-1 * var(--footer-padding-offset)));
+                }
+            }
+        }
+    }
+</style>
