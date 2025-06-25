@@ -1,0 +1,751 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap");
+
+// VARS
+$font-overpass: "Overpass", sans-serif;
+//
+$color-purple-dark: #261859;
+$color-purple-mid: #674ebf;
+$color-yellow-mid: #f2bf5e;
+$color-orange-mid: #f29d52;
+$color-orange-dark: #f26d3d;
+//
+$color-green-easy-line: #6ab04c;
+$color-green-easy-fill: #badc58;
+$color-red-hard-line: #ea2027;
+$color-red-hard-fill: #ff5e57;
+$color-overage-black-fill: #2f3542;
+//
+$color-bg: #fff;
+$color-diags: rgba($color-yellow-mid, 0.5);
+//
+$theme-color-primary: $color-purple-dark;
+$theme-color-secondary: $color-orange-mid;
+//
+$EASY: "easy";
+$DEFAULT: "default";
+$HARD: "hard";
+
+// MIXINS
+@mixin flex($align: center, $justify: center, $gap: normal, $flow: row nowrap, $display: flex) {
+    display: $display;
+    align-items: $align;
+    justify-content: $justify;
+    flex-flow: $flow;
+    gap: $gap;
+}
+
+@mixin grid($gap: 0, $grid: auto / auto, $display: grid) {
+    display: $display;
+    grid: $grid;
+    gap: $gap;
+}
+
+@mixin cleanList($padding: 0, $margin: 0, $listStyle: none) {
+    padding: $padding;
+    margin: $margin;
+    list-style: $listStyle;
+}
+
+@mixin squareSize($length: auto) {
+    width: $length;
+    height: $length;
+}
+
+// RESPONSIVE
+@mixin respond-to-mobile {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+// PLACEHOLDERS
+%font-family-overpass {
+    font-family: $font-overpass;
+}
+
+%label-common {
+    margin-top: 5px;
+
+    font-weight: 600;
+    font-size: 1.25rem;
+    white-space: nowrap;
+}
+
+// MARKUP
+:root {
+    font-size: 20px;
+}
+
+html {
+    background-color: $color-bg;
+    background-image: repeating-linear-gradient(45deg, $color-diags 0, $color-diags 0.5px, $color-bg 0, $color-bg 50%);
+    background-size: 16px 16px;
+
+    body {
+        width: 100%;
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+
+        @include flex(stretch, flex-start, 0, column nowrap);
+
+        * {
+            @extend %font-family-overpass;
+        }
+
+        section *:not(:is(input, select)) {
+            color: $color-purple-dark;
+        }
+    }
+}
+
+header,
+footer {
+    border: $theme-color-secondary solid;
+
+    background-color: $theme-color-primary;
+
+    & > * {
+        color: #fff;
+    }
+}
+
+header {
+    padding: 2rem;
+
+    border-width: 0 0 0.5rem;
+
+    h1,
+    h2 {
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0 0 0.25rem;
+
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        margin: 0;
+
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+}
+
+footer {
+    padding: 1rem 3rem;
+
+    border-width: 0.5rem 0 0;
+
+    --footer-fmtext-offset: 2px;
+    --footer-gap: 0.75rem;
+    --footer-padding-offset: 3px;
+    --footer-underline-offset: 2px;
+    --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));
+    //
+    @include respond-to-mobile {
+        padding-top: calc(1rem + var(--footer-padding-offset));
+    }
+
+    .footer-list {
+        font-size: 0.9rem;
+
+        @include cleanList;
+        @include flex($gap: var(--footer-gap));
+        //
+        @include respond-to-mobile {
+            align-items: center;
+            justify-content: flex-start;
+            flex-flow: column nowrap;
+            gap: 0.25rem;
+        }
+
+        li {
+            padding-top: var(--footer-padding-offset);
+
+            white-space: nowrap;
+
+            @include flex;
+            //
+            @include respond-to-mobile {
+                &:nth-of-type(2) {
+                    margin-top: var(--footer-padding-offset);
+                }
+            }
+
+            & + li {
+                &::before {
+                    content: "\2022"; // •
+
+                    margin-right: var(--footer-gap);
+
+                    @include respond-to-mobile {
+                        content: none;
+                    }
+                }
+            }
+
+            a {
+                color: inherit;
+                text-decoration: underline;
+                text-underline-offset: var(--footer-underline-offset);
+
+                &:is(:hover, :focus) {
+                    text-decoration: none;
+                }
+
+                &.fm-text {
+                    span {
+                        display: inline-block;
+
+                        text-decoration: underline;
+                        text-underline-offset: var(--footer-underline-offset-adjust);
+
+                        transform: translateY(calc(-1 * var(--footer-underline-offset)));
+                    }
+
+                    &:is(:hover, :focus) {
+                        &,
+                        span {
+                            text-decoration: none;
+                        }
+                    }
+                }
+
+                &.kofi-text {
+                    //
+                }
+            }
+
+            img {
+                width: auto;
+                height: 1.5rem;
+
+                transform: translateY(calc(-1 * var(--footer-padding-offset)));
+            }
+        }
+    }
+}
+
+#CalculatorSection {
+    flex-grow: 1;
+
+    max-width: 39rem;
+    padding: 2rem;
+    margin: 0 auto;
+
+    @include flex(stretch, flex-start, 0, column nowrap);
+    //
+    @include respond-to-mobile {
+        padding: 2rem 1rem;
+    }
+}
+
+.calc {
+    * {
+        outline-color: $color-orange-dark;
+    }
+
+    hr {
+        margin: 1.5rem 0;
+
+        border-style: solid;
+        border-color: $color-orange-mid;
+
+        opacity: 0;
+    }
+
+    &_upper {
+        @include flex(center, center, 1rem 2rem, row wrap);
+
+        &_player-info,
+        &_difficulty {
+            @include flex(center, flex-start, 0.75rem);
+
+            label {
+                @extend %label-common;
+            }
+
+            input {
+                padding: 6px 3px 3px;
+
+                font-weight: 700;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
+            select {
+                padding: 6px 3px 3px;
+
+                font-weight: 600;
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    &_bp-info {
+        &_list {
+            --tick-width: 4rem;
+            //
+            @include cleanList;
+            @include grid(0.7rem, auto-flow 1fr / repeat(auto-fit, minmax(var(--tick-width), 1fr)));
+
+            &_tick {
+                height: 1.25rem;
+                min-width: var(--tick-width);
+
+                border: 3px solid currentColor;
+                border-radius: 4px;
+
+                background-color: #fff;
+
+                &.bp {
+                    &-tick {
+                        color: $color-purple-mid;
+
+                        &[data-is-ticked="true"] {
+                            border-color: transparent;
+
+                            background-color: currentColor;
+                        }
+                    }
+
+                    // &-level {
+                    //     border-width: 3px;
+                    //
+                    //     &[data-is-ticked="true"] {
+                    //         margin: 1px;
+                    //         border-width: 2px;
+                    //     }
+                    // }
+
+                    &-easy {
+                        color: $color-orange-dark; //$color-yellow-mid;
+                    }
+
+                    &-default {
+                        color: $color-orange-dark; //$color-orange-mid;
+                    }
+
+                    &-hard {
+                        color: $color-orange-dark; //$color-orange-dark;
+                    }
+
+                    &-overage {
+                        position: relative;
+
+                        color: transparent;
+
+                        background-color: transparent;
+
+                        @include flex;
+
+                        &[data-is-ticked="true"] {
+                            border-color: $color-red-hard-line;
+
+                            opacity: 0.8;
+                            background: repeating-linear-gradient(-45deg, $color-red-hard-fill, $color-red-hard-fill 5px, $color-red-hard-line 5px, $color-red-hard-line 15px);
+                            background-color: $color-red-hard-line;
+                        }
+                    }
+                }
+            }
+        }
+
+        &_total {
+            margin-top: 1.25rem;
+
+            @include flex(center, center, 0.5rem);
+
+            .span-label {
+                @extend %label-common;
+            }
+
+            &_text {
+                @include flex($gap: 0.6rem);
+
+                &_slash {
+                    margin-top: 2px;
+
+                    font-size: 2rem;
+                }
+
+                &_number {
+                    min-width: 2.6rem;
+                    margin-top: 6px;
+                    overflow: hidden;
+
+                    font-size: 2rem;
+                    text-overflow: ellipsis;
+
+                    &:first-of-type {
+                        font-weight: 700;
+                        text-align: right;
+                    }
+
+                    &:last-of-type {
+                        font-weight: 600;
+                        text-align: left;
+                    }
+                }
+
+                #spentBPs {
+                    color: var(--current-difficulty-color);
+
+
+                    & {
+                        --current-difficulty-color: #{$color-purple-mid};
+
+                    }
+
+                    &[data-spent-total-compare^="-"] {
+                        --current-difficulty-color: #{$color-red-hard-line};
+
+                    }
+
+                    &[data-spent-total-compare="0"] {
+                        &[data-current-difficulty="#{$EASY}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-yellow-mid};
+
+                        }
+
+                        &[data-current-difficulty="#{$DEFAULT}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-mid};
+
+                        }
+
+                        &[data-current-difficulty="#{$HARD}"] {
+
+                            --current-difficulty-color: #{$color-orange-dark}; //#{$color-orange-dark};
+
+                        }
+                    }
+                }
+
+                #totalBPs {
+                    color: #{$color-orange-dark};
+
+                }
+            }
+        }
+    }
+
+    &_lower {
+        --gap-margin: 3rem;
+        //
+        @include flex(flex-start, center, var(--gap-margin) 5rem, row-reverse wrap);
+        //
+        @include respond-to-mobile {
+            @include flex(center, flex-start, var(--gap-margin), column nowrap);
+        }
+
+        &_left,
+        &_right {
+            h3 {
+                margin: 0 0 0.75rem;
+
+                font-weight: 600;
+                font-size: 1.75rem;
+                text-align: center;
+            }
+        }
+
+        &_left {
+            &_list {
+                @include cleanList;
+
+                &_adversary {
+                    margin-bottom: 0.5rem;
+
+                    @include flex(center, flex-start, 1rem);
+
+                    label,
+                    input {
+                        font-size: 1.5rem;
+                    }
+
+                    label {
+                        position: relative;
+
+                        width: 11rem;
+                        padding-top: 3px;
+
+                        font-weight: 400;
+                        text-transform: capitalize;
+
+                        @include flex(center, flex-start, 0.5rem);
+
+                        .adv-name {
+                            flex-grow: 1;
+                        }
+
+                        .adv-bp {
+                            width: 2rem;
+
+                            font-weight: 400;
+                            font-size: 0.75rem;
+                            white-space: nowrap;
+
+                            &,
+                            * {
+                                color: $color-orange-dark;
+                            }
+
+                            strong {
+                                font-weight: 800;
+                            }
+                        }
+
+                        &::after {
+                            content: "\00D7"; // ×
+
+                            height: 100%;
+                            padding-top: 3px;
+
+                            color: $color-purple-dark;
+                        }
+
+                        &[for="adversary_minions"] {
+                            &::before {
+                                content: "group up to # of PCs";
+
+                                position: absolute;
+                                bottom: -0.55rem;
+                                left: 1.25rem;
+
+                                font-size: 0.75rem;
+                                text-transform: none;
+
+                                opacity: 0.5;
+                            }
+                        }
+                    }
+
+                    input {
+                        width: 3rem;
+                        padding: 6px 5px 2px;
+                    }
+                }
+            }
+
+            #ClearAdversaries {
+                cursor: pointer;
+
+                display: block;
+
+                padding: calc(0.25rem + 3px) 1rem 0.25rem;
+                margin: 1.5rem auto 0;
+
+                color: $color-purple-dark;
+                font-weight: 500;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+
+                border: 1px solid $color-purple-dark;
+                border-radius: 4px;
+
+                background: #fff;
+
+                &:is(:hover, :focus-visible) {
+                    border-color: $color-orange-dark;
+
+                    background-color: #eee;
+                }
+            }
+        }
+
+        &_right {
+            --opacity-off: 0.25;
+
+            &_formula li,
+            &_adjustments li,
+            &_options li label {
+                opacity: var(--opacity-off);
+            }
+
+            &_formula,
+            &_adjustments,
+            &_options {
+                &:not(:last-of-type) {
+                    margin-bottom: var(--gap-margin);
+                }
+
+                &_list {
+                    font-size: 1.25rem;
+
+                    @include cleanList;
+                    @include flex(center, flex-start, 1rem, column nowrap);
+
+                    & {
+                        --adjustment-color: #{$color-orange-dark}; //#{$color-purple-mid};
+
+                    }
+
+
+                    li {
+                        position: relative;
+
+                        width: auto;
+
+                        line-height: 1.1;
+                        text-align: center;
+
+                        .adjustment-text {
+                            position: absolute;
+                            left: calc(100% + 0.75rem);
+
+                            opacity: 0;
+
+                            &,
+                            &-static {
+                                color: var(--adjustment-color);
+                                font-weight: 700;
+                                white-space: nowrap;
+                            }
+                        }
+
+                        &[data-is-active="true"],
+                        &[data-is-always-active] {
+                            &,
+                            .adjustment-text,
+                            label {
+                                opacity: 1;
+                            }
+                        }
+
+                        &#frm-formula {
+                            #frm-pcs {
+                                display: inline-block;
+
+                                min-width: 0.8rem;
+
+                                color: var(--adjustment-color);
+                                font-weight: 600;
+                            }
+                        }
+
+                        &:not(#frm-formula) {
+                            @include flex(center, flex-start);
+                        }
+
+                        &#adj-difficulty {
+                            opacity: 1;
+
+                            &[data-current-difficulty="#{$DEFAULT}"] {
+
+                                opacity: var(--opacity-off);
+                            }
+
+                            &[data-current-difficulty="#{$EASY}"] .adjustment-text.adj-easy,
+
+                            &[data-current-difficulty="#{$HARD}"] .adjustment-text.adj-hard {
+
+                                opacity: 1;
+                            }
+                        }
+
+                        :is(label, input.option-checkbox) {
+                            cursor: pointer;
+                        }
+
+                        .option-checkbox {
+                            -webkit-appearance: none;
+                                    appearance: none;
+
+                            position: absolute;
+                            right: calc(100% + 1.25rem);
+
+                            margin: 0;
+                            // outline: none;
+
+                            background-color: #fff;
+
+                            --check-color: #{$color-yellow-mid};
+
+                            --checkbox-color: #{$color-yellow-mid};
+
+                            @include flex;
+
+                            &::before,
+                            &::after {
+                                position: absolute;
+
+                                display: block;
+
+                                @include squareSize(1rem);
+                            }
+
+                            &::before {
+                                content: "";
+
+                                border: 2px solid var(--checkbox-color);
+
+                                background: #fff;
+                            }
+
+                            &::after {
+                                transform: scale(0.7);
+
+                                background-color: var(--check-color);
+                            }
+
+                            &:checked {
+                                & {
+                                    --check-color: #{$color-orange-mid};
+
+                                    --checkbox-color: #{$color-orange-mid};
+
+                                }
+
+                                &::after {
+                                    content: "";
+                                }
+                            }
+
+                            &:is(:hover, :focus-visible) {
+                                --check-color: #{$color-orange-dark};
+
+                                --checkbox-color: #{$color-orange-dark};
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #Attribution {
+        flex-grow: 1;
+
+        font-weight: 300;
+        font-size: 0.85rem;
+
+        @include flex(flex-start, flex-end, 0, column);
+
+        &,
+        p {
+            width: 100%;
+        }
+
+        p {
+            padding: 3rem 0 0;
+            margin: 0;
+
+            opacity: 0.75;
+
+            a {
+                text-decoration: underline;
+
+                &:is(:hover, :focus) {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
