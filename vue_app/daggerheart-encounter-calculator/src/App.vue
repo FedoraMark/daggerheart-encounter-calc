@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PageHeader from './components/PageHeader.vue'
-import PageCalculator from './components/PageCalculator.vue'
-import PageFooter from './components/PageFooter.vue'
+  import PageHeader from './components/PageHeader.vue'
+  import PageCalculator from './components/PageCalculator.vue'
+  import PageFooter from './components/PageFooter.vue'
 </script>
 
 <template>
@@ -11,39 +11,5 @@ import PageFooter from './components/PageFooter.vue'
 </template>
 
 <style lang="scss">
-  @use "./assets/tools/utilities.scss" as utils;
-
-  @import url("https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap");
-
-  :root {
-    font-size: 20px;
-  }
-
-  html {
-    background-color: utils.$color-bg;
-    background-image: repeating-linear-gradient(45deg, utils.$color-diags 0, utils.$color-diags 0.5px, utils.$color-bg 0, utils.$color-bg 50%);
-    background-size: 16px 16px;
-
-    body {
-      width: 100%;
-      min-height: 100vh;
-      padding: 0;
-      margin: 0;
-
-      #app {
-        width: 100%;
-        min-height: 100vh;
-
-        @include utils.flex(stretch, flex-start, 0, column nowrap);
-      }
-
-      * {
-          font-family: utils.$font-overpass;
-      }
-
-      section *:not(:is(input, select)) {
-          color: utils.$color-purple-dark;
-      }
-    }
-  }
+  @use "./sass/App";
 </style>

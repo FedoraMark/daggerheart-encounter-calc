@@ -1,5 +1,5 @@
 <script setup>
-
+    import AdversariesList from './Options_AdversariesList.vue'
 </script>
 
 <template>
@@ -75,11 +75,7 @@
             </div>
 
             <div class="calc_lower_left">
-                <h3>Adversaries</h3>
-                <ul id="MonsterList" class="calc_lower_left_list">
-                    <!-- filled with JS -->
-                </ul>
-                <button id="ClearAdversaries">Clear</button>
+                <AdversariesList />
             </div>
         </div>
 
@@ -291,128 +287,34 @@
         &_lower {
             --gap-margin: 3rem;
             //
-            @include utils.flex(flex-start, center, var(--gap-margin) 5rem, row-reverse wrap);
+            @include utils.grid(var(--gap-margin), auto / repeat(2, 50%));
             //
             @include utils.respond-to-mobile {
-                @include utils.flex(center, flex-start, var(--gap-margin), column nowrap);
+                grid-template-columns: 100%;
+            }
+
+            &_left {
+                grid-column-start: 1;
+            }
+
+            &_right {
+                grid-column-start: 2;
             }
 
             &_left,
             &_right {
-                h3 {
-                    margin: 0 0 0.75rem;
+                grid-row-start: 1;
 
-                    font-weight: 600;
-                    font-size: 1.75rem;
-                    text-align: center;
+                @include utils.respond-to-mobile {
+
                 }
             }
 
-            &_left {
-                &_list {
-                    @include utils.cleanList;
-
-                    &_adversary {
-                        margin-bottom: 0.5rem;
-
-                        @include utils.flex(center, flex-start, 1rem);
-
-                        label,
-                        input {
-                            font-size: 1.5rem;
-                        }
-
-                        label {
-                            position: relative;
-
-                            width: 11rem;
-                            padding-top: 3px;
-
-                            font-weight: 400;
-                            text-transform: capitalize;
-
-                            @include utils.flex(center, flex-start, 0.5rem);
-
-                            .adv-name {
-                                flex-grow: 1;
-                            }
-
-                            .adv-bp {
-                                width: 2rem;
-
-                                font-weight: 400;
-                                font-size: 0.75rem;
-                                white-space: nowrap;
-
-                                &,
-                                * {
-                                    color: utils.$color-orange-dark;
-                                }
-
-                                strong {
-                                    font-weight: 800;
-                                }
-                            }
-
-                            &::after {
-                                content: "\00D7"; // ×
-
-                                height: 100%;
-                                padding-top: 3px;
-
-                                color: utils.$color-purple-dark;
-                            }
-
-                            &[for="adversary_minions"] {
-                                &::before {
-                                    content: "group up to # of PCs";
-
-                                    position: absolute;
-                                    bottom: -0.55rem;
-                                    left: 1.25rem;
-
-                                    font-size: 0.75rem;
-                                    text-transform: none;
-
-                                    opacity: 0.5;
-                                }
-                            }
-                        }
-
-                        input {
-                            width: 3rem;
-                            padding: 6px 5px 2px;
-                        }
-                    }
-                }
-
-                #ClearAdversaries {
-                    cursor: pointer;
-
-                    display: block;
-
-                    padding: calc(0.25rem + 3px) 1rem 0.25rem;
-                    margin: 1.5rem auto 0;
-
-                    color: utils.$color-purple-dark;
-                    font-weight: 500;
-                    font-size: 0.9rem;
-                    text-transform: uppercase;
-
-                    border: 1px solid utils.$color-purple-dark;
-                    border-radius: 4px;
-
-                    background: #fff;
-
-                    &:is(:hover, :focus-visible) {
-                        border-color: utils.$color-orange-dark;
-
-                        background-color: #eee;
-                    }
-                }
-            }
 
             &_right {
+
+                @extend %calc-lower-common;
+
                 --opacity-off: 0.25;
 
                 &_formula li,
@@ -441,8 +343,6 @@
 
                         li {
                             position: relative;
-
-                            width: auto;
 
                             line-height: 1.1;
                             text-align: center;

@@ -1,0 +1,37 @@
+@use "../assets/tools/utilities.scss" as utils;
+
+#AdversariesList_Wrapper {
+    @extend %calc-lower-common;
+
+    .monster-list {
+        @include utils.cleanList;
+    }
+
+    #ClearAdversaries {
+        cursor: pointer;
+
+        display: block;
+
+        padding: calc(0.25rem + 3px) 1rem 0.25rem;
+        margin: 1.5rem auto 0;
+
+        color: utils.$color-purple-dark;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+
+        border: 1px solid utils.$color-purple-dark;
+        border-radius: 4px;
+
+        background: #fff;
+
+        transition: background-color 0.15s ease;
+        transition-property: color, border-color, background-color;
+
+        &:is(:hover, :focus-visible) {
+            border-color: utils.$color-orange-mid;
+
+            background-color: utils.$color-orange-mid;
+        }
+    }
+}

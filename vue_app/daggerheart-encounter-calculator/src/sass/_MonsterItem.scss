@@ -1,0 +1,96 @@
+@use "../assets/tools/utilities.scss" as utils;
+
+.monster-list_item {
+    padding: 0.25rem 1rem;
+    margin-bottom: 0.5rem;
+
+    border: 1px solid utils.$color-purple-dark;
+    border-radius: 4px;
+
+    background-color: #fff;
+
+    transition: background-color 0.25s ease;
+
+    @include utils.flex(center, center, 1rem);
+
+    &:is(:hover, :focus-within) {
+        background-color: utils.$color-interactive-gray;
+    }
+
+    label,
+    input {
+        font-size: 1.25rem;
+    }
+
+    label {
+        position: relative;
+
+        width: 11rem;
+        padding-top: 3px;
+
+        font-weight: 400;
+        text-transform: capitalize;
+
+        @include utils.flex(center, flex-start, 0.5rem);
+
+        &::after {
+            content: "\00D7"; // ×
+
+            height: 100%;
+            padding-top: 3px;
+
+            color: utils.$color-purple-dark;
+        }
+
+        .adv-name {
+            flex-grow: 1;
+        }
+
+        .adv-bp {
+            width: 2rem;
+
+            font-weight: 400;
+            font-size: 0.75rem;
+            white-space: nowrap;
+
+            &,
+            * {
+                color: utils.$color-orange-dark;
+            }
+
+            strong {
+                margin-right: 3px;
+
+                font-weight: 800;
+            }
+        }
+
+        .adv-minions-message {
+            position: absolute;
+            bottom: -0.2rem;
+            left: 1.5rem;
+
+            font-size: 0.65rem;
+            text-transform: none;
+
+            opacity: 0.5;
+        }
+
+        &[for="adversary_minions"] {
+            padding-top: 0;
+
+            .adv-name {
+                margin-top: -0.1rem;
+            }
+        }
+    }
+
+    input {
+        width: 3rem;
+        padding: 6px 5px 2px;
+
+        border: none;
+
+        background-color: transparent;
+    }
+}
