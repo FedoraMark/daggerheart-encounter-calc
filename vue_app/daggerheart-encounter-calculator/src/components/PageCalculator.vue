@@ -128,7 +128,7 @@
                 }
 
                 input {
-                    padding: 6px 3px 3px;
+                    padding: 3px;
 
                     font-weight: 700;
                     font-size: 1.5rem;

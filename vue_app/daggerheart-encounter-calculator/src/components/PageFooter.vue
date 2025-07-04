@@ -12,6 +12,6 @@
     </footer>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
     @use "../sass/PageFooter";
 </style>

@@ -1,5 +1,8 @@
 // VARS
+$font-helvetica: "Helvetica", "Arial", sans-serif;
 $font-overpass: "Overpass", sans-serif;
+$font-montserrat: "Montserrat", $font-helvetica;
+$font-opensans: "Open Sans", $font-helvetica;
 //
 $color-purple-dark: #261859;
 $color-purple-mid: #674ebf;
@@ -80,8 +83,10 @@ $HARD: "hard";
     h3 {
         margin: 0 0 0.75rem;
 
-        font-weight: 600;
-        font-size: 1.75rem;
+        font-weight: 700;
+        font-size: 1.5rem;
+        font-family: $font-montserrat;
+        text-transform: uppercase;
         text-align: center;
     }
 }

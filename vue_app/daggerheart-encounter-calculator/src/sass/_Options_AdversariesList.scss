@@ -12,12 +12,13 @@
 
         display: block;
 
-        padding: calc(0.25rem + 3px) 1rem 0.25rem;
+        padding: 0.25rem 1rem;
         margin: 1.5rem auto 0;
 
         color: utils.$color-purple-dark;
         font-weight: 500;
         font-size: 0.9rem;
+        font-family: utils.$font-opensans;
         text-transform: uppercase;
 
         border: 1px solid utils.$color-purple-dark;

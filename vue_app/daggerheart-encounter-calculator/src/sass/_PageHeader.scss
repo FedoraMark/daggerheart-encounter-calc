@@ -15,8 +15,10 @@ header {
     h1 {
         margin: 0 0 0.25rem;
 
-        font-weight: 700;
+        font-weight: 00;
         font-size: 2.5rem;
+        font-family: utils.$font-montserrat;
+        text-transform: uppercase;
     }
 
     h2 {
@@ -24,5 +26,6 @@ header {
 
         font-weight: 500;
         font-size: 1.25rem;
+        text-transform: lowercase;
     }
 }
