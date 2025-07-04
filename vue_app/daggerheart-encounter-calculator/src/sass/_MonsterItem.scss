@@ -1,7 +1,11 @@
 @use "sass:color";
 @use "../assets/tools/utilities" as utils;
+
+// VARS
+$local-color-lighter-orange: color.adjust(utils.$color-orange-mid, $lightness: 30%);
 $local-color-bg-box: #fff;
 
+// PLACEHOLDER
 %local-common-box {
     border: 1px solid utils.$color-purple-dark;
 
@@ -11,6 +15,7 @@ $local-color-bg-box: #fff;
     transition-property: background-color, border-right-color;
 }
 
+// STYLES
 .monster-list_item {
     position: relative;
 
@@ -27,12 +32,12 @@ $local-color-bg-box: #fff;
 
     &:is(:hover, :focus-within) {
         &,
-        .adv-multi-edge li {
-            background-color: color.adjust(utils.$color-orange-mid, $lightness: 30%);
+        .adv-multi-edge .edge-item {
+            background-color: $local-color-lighter-orange;
         }
 
-        .adv-multi-edge li {
-            border-right-color: color.adjust(utils.$color-orange-mid, $lightness: 30%);
+        .adv-multi-edge .edge-item {
+            border-right-color: $local-color-lighter-orange;
         }
     }
 
@@ -113,9 +118,9 @@ $local-color-bg-box: #fff;
         height: calc(100% - 1px);
 
         @include utils.cleanList;
-        @include utils.flex(flex-end, stretch, 0);
+        @include utils.flex(flex-end, stretch, 0, row-reverse);
 
-        li {
+        .edge-item {
             z-index: -1;
 
             width: 6px;

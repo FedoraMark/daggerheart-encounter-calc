@@ -20,7 +20,7 @@
         { name: "solo",     cost: 5 },
 	])
 
-	const numberOfPlayers = 4
+	const numberOfPlayers = ref(4)
 </script>
 
 <template>
