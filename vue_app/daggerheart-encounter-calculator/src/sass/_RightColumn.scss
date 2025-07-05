@@ -1,0 +1,135 @@
+@use "../assets/tools/utilities" as utils;
+
+.calc_lower_right {
+  --adjustment-color: #{utils.$color-orange-dark};
+
+  &_adjustments li,
+  &_options li label {
+    @extend %ph-opacity-off;
+  }
+
+  .formula,
+  &_adjustments,
+  &_options {
+    &:not(:last-of-type) {
+      margin-bottom: var(--gap-margin);
+    }
+
+    &_list {
+      font-size: 1.25rem;
+
+      @include utils.cleanList;
+      @include utils.flex(center, flex-start, 1rem, column nowrap);
+
+      &_item {
+        position: relative;
+
+        line-height: 1.1;
+        text-align: center;
+
+        border-radius: utils.$border-radius-box;
+
+        .adjustment-text {
+          position: absolute;
+          left: calc(100% + 0.75rem);
+
+          opacity: 0;
+
+          &,
+          &-static {
+            color: var(--adjustment-color);
+            font-weight: 700;
+            white-space: nowrap;
+          }
+        }
+
+        &[data-is-active="true"],
+        &[data-is-always-active] {
+
+          &,
+          .adjustment-text,
+          label {
+            opacity: 1;
+          }
+        }
+
+        &:not(#frm-formula) {
+          @include utils.flex(center, flex-start);
+        }
+
+        &#adj-difficulty {
+          opacity: 1;
+
+          &[data-current-difficulty="#{utils.$DEFAULT}"] {
+            opacity: utils.$opacity-box-off;
+          }
+
+          &[data-current-difficulty="#{utils.$EASY}"] .adjustment-text.adj-easy,
+          &[data-current-difficulty="#{utils.$HARD}"] .adjustment-text.adj-hard {
+            opacity: 1;
+          }
+        }
+
+        :is(label, input.option-checkbox) {
+          cursor: pointer;
+        }
+
+        .option-checkbox {
+          -webkit-appearance: none;
+          appearance: none;
+
+          position: absolute;
+          right: calc(100% + 1.25rem);
+
+          margin: 0;
+
+          background-color: #fff;
+
+          --check-color: #{utils.$color-yellow-mid};
+          --checkbox-color: #{utils.$color-yellow-mid};
+
+          @include utils.flex;
+
+          &::before,
+          &::after {
+            position: absolute;
+
+            display: block;
+
+            @include utils.squareSize(1rem);
+          }
+
+          &::before {
+            content: "";
+
+            border: 2px solid var(--checkbox-color);
+
+            background: #fff;
+          }
+
+          &::after {
+            transform: scale(0.7);
+
+            background-color: var(--check-color);
+          }
+
+          &:checked {
+            & {
+              --check-color: #{utils.$color-orange-mid};
+              --checkbox-color: #{utils.$color-orange-mid};
+            }
+
+            &::after {
+              content: "";
+            }
+          }
+
+          &:is(:hover, :focus-visible) {
+            --check-color: #{utils.$color-orange-dark};
+            --checkbox-color: #{utils.$color-orange-dark};
+          }
+        }
+      }
+    }
+  }
+}

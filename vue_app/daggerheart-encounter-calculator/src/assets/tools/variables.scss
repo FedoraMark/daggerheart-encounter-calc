@@ -1,0 +1,31 @@
+$font-helvetica: "Helvetica", "Arial", sans-serif;
+$font-overpass: "Overpass", sans-serif;
+$font-montserrat: "Montserrat", $font-helvetica;
+$font-opensans: "Open Sans", $font-helvetica;
+//
+$color-purple-dark: #261859;
+$color-purple-mid: #674ebf;
+$color-yellow-mid: #f2bf5e;
+$color-orange-mid: #f29d52;
+$color-orange-dark: #f26d3d;
+//
+$color-green-easy-line: #6ab04c;
+$color-green-easy-fill: #badc58;
+$color-red-hard-line: #ea2027;
+$color-red-hard-fill: #ff5e57;
+$color-overage-black-fill: #2f3542;
+//
+$color-bg: #fff;
+$color-bg-box: #fff;
+$color-interactive-gray: #eee;
+$color-diags: rgba($color-yellow-mid, 0.5);
+//
+$theme-color-primary: $color-purple-dark;
+$theme-color-secondary: $color-orange-mid;
+//
+$border-radius-box: 4px;
+$opacity-box-off: 0.25;
+//
+$EASY: "easy";
+$DEFAULT: "default";
+$HARD: "hard";

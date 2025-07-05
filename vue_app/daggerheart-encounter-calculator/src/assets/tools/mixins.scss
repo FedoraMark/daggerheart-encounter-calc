@@ -1,0 +1,31 @@
+@mixin flex($align: center, $justify: center, $gap: normal, $flow: row nowrap, $display: flex) {
+    display: $display;
+    align-items: $align;
+    justify-content: $justify;
+    flex-flow: $flow;
+    gap: $gap;
+}
+
+@mixin grid($gap: 0, $grid: auto / auto, $display: grid) {
+    display: $display;
+    grid: $grid;
+    gap: $gap;
+}
+
+@mixin cleanList($padding: 0, $margin: 0, $listStyle: none) {
+    padding: $padding;
+    margin: $margin;
+    list-style: $listStyle;
+}
+
+@mixin squareSize($length: auto) {
+    width: $length;
+    height: $length;
+}
+
+// RESPONSIVE
+@mixin respond-to-mobile {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}

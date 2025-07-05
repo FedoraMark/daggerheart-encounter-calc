@@ -1,7 +1,7 @@
-@use "../assets/tools/utilities.scss" as utils;
+@use "../assets/tools/utilities" as utils;
 
 #AdversariesList_Wrapper {
-    @extend %calc-lower-common;
+    @extend %ph-calc-lower-common;
 
     .monster-list {
         @include utils.cleanList;

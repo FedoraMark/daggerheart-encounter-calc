@@ -1,0 +1,46 @@
+@use "../assets/tools/utilities" as utils;
+
+.bp-tick {
+    height: 1.25rem;
+    min-width: var(--tick-width);
+
+    color: utils.$color-purple-mid;
+
+    border: 3px solid currentColor;
+    border-radius: 4px;
+
+    background-color: #fff;
+
+    transition: 0.25s ease;
+    transition-property: border-color, background-color, color, background, opacity;
+
+    &[data-is-ticked="true"] {
+        border-color: transparent;
+
+        background-color: currentColor;
+    }
+
+    // -- equal
+    &[data-position="0"] {
+        color: utils.$color-orange-dark;
+    }
+
+    // -- over
+    &[data-position="-1"] {
+        position: relative;
+
+        color: transparent;
+
+        background-color: transparent;
+
+        @include utils.flex;
+
+        &[data-is-ticked="true"] {
+            border-color: utils.$color-red-hard-line;
+
+            opacity: 0.8;
+            background: repeating-linear-gradient(-45deg, utils.$color-red-hard-fill, utils.$color-red-hard-fill 5px, utils.$color-red-hard-line 5px, utils.$color-red-hard-line 15px);
+            background-color: utils.$color-red-hard-line;
+        }
+    }
+}

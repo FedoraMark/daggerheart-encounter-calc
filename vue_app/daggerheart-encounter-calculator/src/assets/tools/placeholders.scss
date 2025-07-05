@@ -1,0 +1,43 @@
+%ph-header-footer-common {
+    border: $theme-color-secondary solid;
+
+    background-color: $theme-color-primary;
+
+    & > * {
+        color: #fff;
+    }
+}
+
+%label-common {
+    margin-top: 5px;
+
+    font-weight: 600;
+    font-size: 1.25rem;
+    white-space: nowrap;
+}
+
+%ph-calc-lower-common {
+    h3 {
+        margin: 0 0 0.75rem;
+
+        font-weight: 700;
+        font-size: 1.5rem;
+        font-family: $font-montserrat;
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+
+%ph-wrapper-box-common {
+    width: 100%;
+    box-sizing: border-box;
+
+    border: 1px solid $color-purple-dark;
+
+    background-color: $color-bg-box;
+}
+
+
+%ph-opacity-off {
+    opacity: $opacity-box-off;
+}

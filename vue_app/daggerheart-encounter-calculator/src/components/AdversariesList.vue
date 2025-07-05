@@ -1,7 +1,9 @@
 <script setup>
 	import { ref } from 'vue'
 
-	import MonsterItem from './MonsterItem.vue'
+  import MonsterItem from './MonsterItem.vue'
+
+  const props = defineProps(['numPCs'])
 
 	const adversariesArray = ref([
 		    { name: "minions",	cost: 1 }, // multiple up to number of PCs
@@ -20,7 +22,6 @@
         { name: "solo",     cost: 5 },
 	])
 
-	const numberOfPlayers = ref(4)
 </script>
 
 <template>
@@ -32,7 +33,7 @@
       	v-for="adversaryItem in adversariesArray"
       	:name="adversaryItem.name"
       	:cost="adversaryItem.cost"
-      	:numberOfPlayers="numberOfPlayers"
+      	:numPCs="props.numPCs"
       />
     </ul>
 
@@ -42,5 +43,5 @@
 
 
 <style lang="scss" scoped>
-	@use "../sass/Options_AdversariesList";
+	@use "../sass/AdversariesList";
 </style>

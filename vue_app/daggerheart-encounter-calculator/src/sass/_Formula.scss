@@ -1,0 +1,23 @@
+@use "../assets/tools/utilities" as utils;
+
+#Formula_Wrapper {
+    #FormulaList {
+        #frm-formula {
+            padding: 0.55rem 1rem 0.35rem;
+
+            font-family: utils.$font-overpass;
+            line-height: initial;
+
+            @extend %ph-wrapper-box-common;
+
+            #frm-pcs {
+                display: inline-block;
+
+                min-width: 0.8rem;
+
+                color: var(--adjustment-color);
+                font-weight: 600;
+            }
+        }
+    }
+}

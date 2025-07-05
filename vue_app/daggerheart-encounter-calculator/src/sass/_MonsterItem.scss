@@ -7,12 +7,10 @@ $local-color-bg-box: #fff;
 
 // PLACEHOLDER
 %local-common-box {
-    border: 1px solid utils.$color-purple-dark;
-
-    background-color: $local-color-bg-box;
-
     transition: 0.25s ease;
     transition-property: background-color, border-right-color;
+
+    @extend %ph-wrapper-box-common;
 }
 
 // STYLES
@@ -22,10 +20,8 @@ $local-color-bg-box: #fff;
     padding: 0.25rem 1rem;
     margin-bottom: 0.5rem;
 
-    border-radius: var(--box-radius);
+    border-radius: utils.$border-radius-box;
 
-    --box-radius: 4px;
-    //
     @extend %local-common-box;
     //
     @include utils.flex(center, center, 1rem);
@@ -112,8 +108,9 @@ $local-color-bg-box: #fff;
 
     .adv-multi-edge {
         position: absolute;
-        top: 1px;
+        top: 0;
         right: calc(100% + 1px);
+        z-index: -1;
 
         height: calc(100% - 1px);
 
@@ -121,13 +118,11 @@ $local-color-bg-box: #fff;
         @include utils.flex(flex-end, stretch, 0, row-reverse);
 
         .edge-item {
-            z-index: -1;
-
-            width: 6px;
+            width: 8px;
             height: inherit;
 
             border-right: 3px solid $local-color-bg-box;
-            border-radius: var(--box-radius) 0 0 var(--box-radius);
+            border-radius: utils.$border-radius-box 0 0 utils.$border-radius-box;
 
             @extend %local-common-box;
         }

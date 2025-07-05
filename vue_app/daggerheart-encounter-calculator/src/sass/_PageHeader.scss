@@ -1,11 +1,11 @@
-@use "../assets/tools/utilities.scss" as utils;
+@use "../assets/tools/utilities" as utils;
 
 header {
     padding: 2rem;
 
     border-width: 0 0 0.5rem;
 
-    @extend %header-footer-common;
+    @extend %ph-header-footer-common;
 
     h1,
     h2 {

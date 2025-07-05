@@ -1,4 +1,4 @@
-@use "../assets/tools/utilities.scss" as utils;
+@use "../assets/tools/utilities" as utils;
 
 footer {
     padding: 1rem 3rem;
@@ -11,7 +11,7 @@ footer {
     --footer-underline-offset: 2px;
     --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));
     //
-    @extend %header-footer-common;
+    @extend %ph-header-footer-common;
     //
     @include utils.respond-to-mobile {
         padding-top: calc(1rem + var(--footer-padding-offset));
