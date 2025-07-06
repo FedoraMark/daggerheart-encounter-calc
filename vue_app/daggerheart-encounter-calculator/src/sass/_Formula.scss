@@ -3,20 +3,27 @@
 #Formula_Wrapper {
     #FormulaList {
         #frm-formula {
-            padding: 0.55rem 1rem 0.35rem;
+            padding: 0.3rem 1rem;
 
             font-family: utils.$font-overpass;
             line-height: initial;
 
-            @extend %ph-wrapper-box-common;
+            @extend %ph-box-common-transition;
+            @extend %ph-box-wrapper-common;
+            //
+            @include utils.flex;
 
-            #frm-pcs {
-                display: inline-block;
+            .formula_list_item_wrapper {
+                margin-top: 3px; // font-style adjustment
 
-                min-width: 0.8rem;
+                #frm-pcs {
+                    display: inline-block;
 
-                color: var(--adjustment-color);
-                font-weight: 600;
+                    min-width: 0.8rem;
+
+                    color: var(--adjustment-color);
+                    font-weight: 600;
+                }
             }
         }
     }

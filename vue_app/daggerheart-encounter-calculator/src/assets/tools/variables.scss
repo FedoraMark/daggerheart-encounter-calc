@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $font-helvetica: "Helvetica", "Arial", sans-serif;
 $font-overpass: "Overpass", sans-serif;
 $font-montserrat: "Montserrat", $font-helvetica;
@@ -8,6 +10,8 @@ $color-purple-mid: #674ebf;
 $color-yellow-mid: #f2bf5e;
 $color-orange-mid: #f29d52;
 $color-orange-dark: #f26d3d;
+//
+$color-orange-mid-lighter: color.adjust($color-orange-mid, $lightness: 30%);
 //
 $color-green-easy-line: #6ab04c;
 $color-green-easy-fill: #badc58;

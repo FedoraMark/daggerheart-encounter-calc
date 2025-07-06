@@ -1,16 +1,10 @@
 @use "sass:color";
 @use "../assets/tools/utilities" as utils;
 
-// VARS
-$local-color-lighter-orange: color.adjust(utils.$color-orange-mid, $lightness: 30%);
-$local-color-bg-box: #fff;
-
 // PLACEHOLDER
 %local-common-box {
-    transition: 0.25s ease;
-    transition-property: background-color, border-right-color;
-
-    @extend %ph-wrapper-box-common;
+    @extend %ph-box-common-transition;
+    @extend %ph-box-wrapper-common;
 }
 
 // STYLES
@@ -29,11 +23,11 @@ $local-color-bg-box: #fff;
     &:is(:hover, :focus-within) {
         &,
         .adv-multi-edge .edge-item {
-            background-color: $local-color-lighter-orange;
+            background-color: utils.$color-orange-mid-lighter;
         }
 
         .adv-multi-edge .edge-item {
-            border-right-color: $local-color-lighter-orange;
+            border-right-color: utils.$color-orange-mid-lighter;
         }
     }
 
@@ -112,16 +106,17 @@ $local-color-bg-box: #fff;
         right: calc(100% + 1px);
         z-index: -1;
 
-        height: calc(100% - 1px);
+        height: 100%;
 
         @include utils.cleanList;
         @include utils.flex(flex-end, stretch, 0, row-reverse);
 
         .edge-item {
-            width: 8px;
+            width: 9px;
             height: inherit;
+            min-height: unset;
 
-            border-right: 3px solid $local-color-bg-box;
+            border-right: 3px solid utils.$color-bg-box;
             border-radius: utils.$border-radius-box 0 0 utils.$border-radius-box;
 
             @extend %local-common-box;
