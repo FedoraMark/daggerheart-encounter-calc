@@ -2,11 +2,15 @@
 
 #BattlePointSDisplay_Wrapper {
   .calc_bp-info {
-    &_list {
-      --tick-width: 4rem;
-      //
-      @include utils.cleanList;
-      @include utils.grid(0.7rem, auto-flow 1fr / repeat(auto-fit, minmax(var(--tick-width), 1fr)));
+    &_wrapper {
+      min-height: 3rem;
+
+      &_list {
+        width: 100%;
+
+        @include utils.cleanList;
+        @include utils.grid(0.5rem 0.65rem, auto-flow var(--tick-height) / repeat(auto-fit, minmax(var(--tick-minwidth), 1fr)));
+      }
     }
 
     &_total {
@@ -47,27 +51,27 @@
         }
 
         #spentBPs {
-          color: var(--current-difficulty-color);
+          color: var(--local-current-difficulty-color);
 
           & {
-            --current-difficulty-color: #{utils.$color-purple-mid};
+            --local-current-difficulty-color: #{utils.$color-purple-mid};
           }
 
           &[data-spent-total-compare="-1"] {
-            --current-difficulty-color: #{utils.$color-red-hard-line};
+            --local-current-difficulty-color: #{utils.$color-red-hard-line};
           }
 
           &[data-spent-total-compare="0"] {
             &[data-current-difficulty="#{utils.$EASY}"] {
-              --current-difficulty-color: #{utils.$color-orange-dark};
+              --local-current-difficulty-color: #{utils.$color-orange-dark};
             }
 
             &[data-current-difficulty="#{utils.$DEFAULT}"] {
-              --current-difficulty-color: #{utils.$color-orange-dark};
+              --local-current-difficulty-color: #{utils.$color-orange-dark};
             }
 
             &[data-current-difficulty="#{utils.$HARD}"] {
-              --current-difficulty-color: #{utils.$color-orange-dark};
+              --local-current-difficulty-color: #{utils.$color-orange-dark};
             }
           }
         }

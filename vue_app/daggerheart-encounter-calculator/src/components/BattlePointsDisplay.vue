@@ -12,9 +12,16 @@
 
 <template>
   <div id="BattlePointSDisplay_Wrapper" class="calc_bp-info">
-    <ul id="BattlePointsTicks" class="calc_bp-info_list" data-difficulty="default">
-      <BPTick v-for="(bpItem, bpIndex) in higherTickNumber" :position="comparedToTotal(bpIndex+1)" :isTicked="bpItem <= props.spentBPs" />
-    </ul>
+    <div class="calc_bp-info_wrapper">
+      <TransitionGroup tag="ul" name="ticks" id="BattlePointsTicks" class="calc_bp-info_wrapper_list" data-difficulty="default">
+        <BPTick
+          v-for="(bpItem, bpIndex) in higherTickNumber"
+          :key="bpIndex"
+          :position="comparedToTotal(bpIndex+1)"
+          :isTicked="bpItem <= props.spentBPs"
+        />
+      </TransitionGroup>
+    </div>
 
     <div class="calc_bp-info_total">
       <span class="span-label">Total Battle Points:</span>
@@ -31,4 +38,14 @@
 
 <style lang="scss">
 	@use "../sass/BattlePointsDisplay";
+
+  .ticks-enter-active,
+  .ticks-leave-active {
+    transition: all 0.25s ease-out;
+  }
+  .ticks-enter-from,
+  .ticks-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
 </style>

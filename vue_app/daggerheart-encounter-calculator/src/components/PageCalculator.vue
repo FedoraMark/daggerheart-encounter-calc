@@ -1,45 +1,30 @@
 <script setup>
     import { ref, computed } from 'vue'
 
+    import NumberOfPlayersInput from './NumberOfPlayersInput.vue'
     import BattlePointsDisplay from './BattlePointsDisplay.vue'
     import AdversariesList from './AdversariesList.vue'
     import Formula from './Formula.vue'
 
-    const numberOfPlayers = ref(4);
-    const spentTotal = ref (0);
+    const currentNumberOfPlayers = ref(4);
+    const currentSpentTotal = ref(0);
 
-    const formulaTotal = computed(() => { return ((3 * numberOfPlayers.value) + 2) })
+    const formulaTotal = computed(() => { return ((3 * currentNumberOfPlayers.value) + 2) })
     const adjustmentsTotal = computed(() => { return 0 })
     const finalTotal = computed(() => { return (formulaTotal.value + adjustmentsTotal.value) })
 </script>
 
 <template>
      <section id="CalculatorSection" class="calc">
-        <div class="calc_upper">
-            <div class="calc_upper_player-info">
-                <label for="number-of-players">Number of PCs:</label>
-                <input :value="numberOfPlayers" type="number" name="number-of-players" id="number-of-players" min="1" max="9">
-            </div>
+        <NumberOfPlayersInput v-model="currentNumberOfPlayers" />
 
-            <div class="calc_upper_difficulty">
-                <label for="difficulty-adjustment">Difficulty:</label>
-                <select name="difficulty-adjustment" id="difficulty-adjustment">
-                    <option value="easy">Easy/Short (-1)</option>
-                    <option value="default" selected>Normal</option>
-                    <option value="hard">Hard/Long (+2)</option>
-                </select>
-            </div>
-        </div>
-
-        <hr />
-
-        <BattlePointsDisplay :totalBPs="finalTotal" :spentBPs="spentTotal" />
+        <BattlePointsDisplay :totalBPs="finalTotal" :spentBPs="currentSpentTotal" />
 
         <hr />
 
         <div class="calc_lower">
             <div class="calc_lower_right">
-                <Formula :numPCs="numberOfPlayers" :formulaBPs="formulaTotal" />
+                <Formula :numPCs="currentNumberOfPlayers" :formulaBPs="formulaTotal" />
 
                 <div class="calc_lower_right_adjustments">
                     <h3>Adjustments</h3>
@@ -64,7 +49,7 @@
             </div>
 
             <div class="calc_lower_left">
-                <AdversariesList :numPCs="numberOfPlayers" />
+                <AdversariesList :numPCs="currentNumberOfPlayers" :spentBPs="currentSpentTotal" @update-spent-bps="(bps) => { currentSpentTotal = bps}" />
             </div>
         </div>
 
@@ -107,39 +92,8 @@
             visibility: hidden;
         }
 
-        &_upper {
-            @include utils.flex(center, center, 1rem 2rem, row wrap);
-
-            &_player-info,
-            &_difficulty {
-                @include utils.flex(center, flex-start, 0.75rem);
-
-                label {
-                    @extend %label-common;
-                }
-
-                input {
-                    padding: 3px;
-
-                    font-weight: 700;
-                    font-size: 1.5rem;
-                    text-align: center;
-                }
-
-                select {
-                    padding: 6px 3px 3px;
-
-                    font-weight: 600;
-                    font-size: 1.5rem;
-                }
-            }
-        }
-
-
         &_lower {
-            --gap-margin: 3rem;
-            //
-            @include utils.grid(var(--gap-margin), auto / repeat(2, 50%));
+            @include utils.grid(var(--gap-margin), auto / repeat(2, 1fr));
             //
             @include utils.respond-to-mobile {
                 grid-template-columns: 100%;

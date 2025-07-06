@@ -1,8 +1,16 @@
+@use "sass:color";
+
 @use "../assets/tools/utilities" as utils;
 
+// VARS
+$local-red-hard-fill-opacity: color.adjust(utils.$color-red-hard-fill, $lightness: 4%);
+$local-red-hard-line-opacity: color.adjust(utils.$color-red-hard-line, $lightness: 8%);
+
+// STYLES
 .bp-tick {
-    height: 1.25rem;
-    min-width: var(--tick-width);
+    height: var(--tick-height);
+    min-width: var(--tick-minwidth);
+    box-sizing: border-box;
 
     color: utils.$color-purple-mid;
 
@@ -12,7 +20,7 @@
     background-color: #fff;
 
     transition: 0.25s ease;
-    transition-property: border-color, background-color, color, background, opacity;
+    transition-property: color, background-color, border-color, opacity;
 
     &[data-is-ticked="true"] {
         border-color: transparent;
@@ -36,11 +44,10 @@
         @include utils.flex;
 
         &[data-is-ticked="true"] {
-            border-color: utils.$color-red-hard-line;
+            border-color: $local-red-hard-line-opacity;
 
-            opacity: 0.8;
-            background: repeating-linear-gradient(-45deg, utils.$color-red-hard-fill, utils.$color-red-hard-fill 5px, utils.$color-red-hard-line 5px, utils.$color-red-hard-line 15px);
-            background-color: utils.$color-red-hard-line;
+            background: repeating-linear-gradient(-45deg, $local-red-hard-fill-opacity, $local-red-hard-fill-opacity 5px, $local-red-hard-line-opacity 5px, $local-red-hard-line-opacity 15px);
+            background-color: $local-red-hard-line-opacity;
         }
     }
 }

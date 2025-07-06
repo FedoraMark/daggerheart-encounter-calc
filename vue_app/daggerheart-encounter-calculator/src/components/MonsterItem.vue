@@ -1,16 +1,27 @@
 <script setup>
-	const props = defineProps(['name', 'cost', 'numPCs'])
+	import { ref } from 'vue'
+
+	const props = defineProps(['name', 'cost', 'amount', 'numPCs'])
+	const emits = defineEmits(['update-adversaries'])
+
+	const numberOfAdversaries = defineModel({ default: 0 })
 
 	const bp_display_text = props.cost === 1 ? "BP" : "BPs"
 	const adversary_id = "adversary_" + props.name
 	const isMinions = props.name == "minions"
+
+	const getObject = () => { return {
+			"name": props.name,
+			"amount": numberOfAdversaries
+		}
+	}
 </script>
 
 <template>
   <li class="monster-list_item">
     <label :for="adversary_id">
-      <span class="adv-name">{{ name }}</span>
-      <span class="adv-bp"><strong>{{ cost }}</strong>{{ bp_display_text }}</span>
+      <span class="adv-name">{{ props.name }}</span>
+      <span class="adv-bp"><strong>{{ props.cost }}</strong>{{ bp_display_text }}</span>
       <span v-if="isMinions" class="adv-minions-message">group of up to {{ props.numPCs }}</span>
     </label>
 
@@ -18,7 +29,7 @@
 	  	<li v-for="player in props.numPCs - 1" :key="player" class="edge-item" :style="{ 'z-index': '-' + player }"><!-- empty --></li>
 	  </TransitionGroup>
 
-    <input value="0" type="number" :name="adversary_id" :id="adversary_id" :data-adversary-name="name" min="0">
+    <input v-model="numberOfAdversaries" @change="$emit('update-adversaries', getObject())" type="number" :name="adversary_id" :id="adversary_id" :data-adversary-name="name" min="0">
 
   </li>
 </template>
@@ -28,7 +39,7 @@
 
 	.v-enter-active,
 	.v-leave-active {
-	  transition: transform 0.25s ease !important;
+	  transition: transform 0.15s ease-out !important;
 	}
 	.v-enter-from,
 	.v-leave-to {

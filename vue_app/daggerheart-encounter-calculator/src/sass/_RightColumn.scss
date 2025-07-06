@@ -1,7 +1,7 @@
 @use "../assets/tools/utilities" as utils;
 
 .calc_lower_right {
-  --adjustment-color: #{utils.$color-orange-dark};
+  --local-adjustment-color: #{utils.$color-orange-dark};
 
   &_adjustments li,
   &_options li label {
@@ -37,7 +37,7 @@
 
           &,
           &-static {
-            color: var(--adjustment-color);
+            color: var(--local-adjustment-color);
             font-weight: 700;
             white-space: nowrap;
           }
