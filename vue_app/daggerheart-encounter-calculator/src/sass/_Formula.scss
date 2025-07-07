@@ -16,13 +16,20 @@
             .formula_list_item_wrapper {
                 margin-top: 3px; // font-style adjustment
 
-                #frm-pcs {
+                & > span {
                     display: inline-block;
+                }
 
-                    min-width: 0.8rem;
+                #frm-pcs {
+                    min-width: 17px;
 
                     color: var(--adjustment-color);
                     font-weight: 600;
+                    text-align: center;
+                }
+
+                #frm-total {
+                    min-width: 32px;
                 }
             }
         }
