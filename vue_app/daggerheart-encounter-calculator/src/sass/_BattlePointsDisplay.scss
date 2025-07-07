@@ -8,8 +8,15 @@
       &_list {
         width: 100%;
 
+        --local-list-cols: 9;
+        --local-list-gap: 0.5rem 0.65rem;
+
         @include utils.cleanList;
-        @include utils.grid(0.5rem 0.65rem, auto-flow var(--tick-height) / repeat(auto-fit, minmax(var(--tick-minwidth), 1fr)));
+        @include utils.grid(var(--local-list-gap), auto-flow var(--tick-height) / repeat(var(--local-list-cols), 1fr));
+
+        // &--fullWidth {
+        //     --local-list-cols: auto-fit, minmax(var(--tick-minwidth));
+        // }
       }
     }
 

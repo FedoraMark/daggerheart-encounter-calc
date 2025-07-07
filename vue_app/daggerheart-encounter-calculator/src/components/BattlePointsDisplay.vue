@@ -41,11 +41,53 @@
 
   .ticks-enter-active,
   .ticks-leave-active {
-    transition: all 0.25s ease-out;
+    transition: all var(--tick-transition-duration) ease;
   }
+
   .ticks-enter-from,
   .ticks-leave-to {
+    transform: scale(0);
     opacity: 0;
-    transform: translateY(30px);
+    // transform: translateY(30px);
   }
+
+  // -- stagger
+  // @mixin transition-delay($step) {
+  //   transition-delay: ($step * 0.05s);
+  // }
+  // %local-ph-transition-common {
+  //   transition: all 0.2s;
+  // }
+  //
+  // .ticks-enter-active {
+  //   transition-timing-function: ease-out;
+  //   @extend %local-ph-transition-common;
+  // }
+  // .ticks-leave-active {
+  //   transition-timing-function: ease-in;
+  //   @extend %local-ph-transition-common;
+  // }
+  //
+  // @for $i from 0 through 4 {
+  //   .ticks-leave-active:nth-last-of-type(#{$i}) {
+  //      @include transition-delay($i);
+  //   }
+  // }
+  //
+  // .ticks-enter-active {
+  //   @include transition-delay(0);
+  //
+  //   & + .ticks-enter-active {
+  //     @include transition-delay(1);
+  //
+  //     & + .ticks-enter-active {
+  //       @include transition-delay(2);
+  //
+  //       & + .ticks-enter-active {
+  //         @include transition-delay(3);
+  //
+  //       }
+  //     }
+  //   }
+  // }
 </style>

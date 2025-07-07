@@ -8,6 +8,8 @@ $local-red-hard-line-opacity: color.adjust(utils.$color-red-hard-line, $lightnes
 
 // STYLES
 .bp-tick {
+    position: relative;
+
     height: var(--tick-height);
     min-width: var(--tick-minwidth);
     box-sizing: border-box;
@@ -19,8 +21,29 @@ $local-red-hard-line-opacity: color.adjust(utils.$color-red-hard-line, $lightnes
 
     background-color: #fff;
 
-    transition: 0.25s ease;
-    transition-property: color, background-color, border-color, opacity;
+    &,
+    &::before {
+        transition: var(--tick-transition-duration) ease;
+    }
+
+    & {
+        transition-property: color, background-color, border-color, opacity;
+    }
+    &::before {
+        content: "";
+
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        opacity: 0;
+        background: repeating-linear-gradient(-45deg, $local-red-hard-fill-opacity, $local-red-hard-fill-opacity 5px, $local-red-hard-line-opacity 5px, $local-red-hard-line-opacity 15px);
+
+        transition-property: opacity;
+    }
 
     &[data-is-ticked="true"] {
         border-color: transparent;
@@ -35,8 +58,6 @@ $local-red-hard-line-opacity: color.adjust(utils.$color-red-hard-line, $lightnes
 
     // -- over
     &[data-position="-1"] {
-        position: relative;
-
         color: transparent;
 
         background-color: transparent;
@@ -44,10 +65,15 @@ $local-red-hard-line-opacity: color.adjust(utils.$color-red-hard-line, $lightnes
         @include utils.flex;
 
         &[data-is-ticked="true"] {
+            position: relative;
+
             border-color: $local-red-hard-line-opacity;
 
-            background: repeating-linear-gradient(-45deg, $local-red-hard-fill-opacity, $local-red-hard-fill-opacity 5px, $local-red-hard-line-opacity 5px, $local-red-hard-line-opacity 15px);
             background-color: $local-red-hard-line-opacity;
+
+            &::before {
+                opacity: 1;
+            }
         }
     }
 }
