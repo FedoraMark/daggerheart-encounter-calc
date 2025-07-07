@@ -11,8 +11,6 @@ $color-yellow-mid: #f2bf5e;
 $color-orange-mid: #f29d52;
 $color-orange-dark: #f26d3d;
 //
-$color-orange-mid-lighter: color.adjust($color-orange-mid, $lightness: 30%);
-//
 $color-green-easy-line: #6ab04c;
 $color-green-easy-fill: #badc58;
 $color-red-hard-line: #ea2027;
@@ -23,6 +21,9 @@ $color-bg: #fff;
 $color-bg-box: #fff;
 $color-interactive-gray: #eee;
 $color-diags: rgba($color-yellow-mid, 0.5);
+//
+$color-orange-mid-lighter: color.adjust($color-orange-mid, $lightness: 30%);
+$color-red-line-ligher: color.adjust($color-red-hard-line, $lightness: 42%);
 //
 $theme-color-primary: $color-purple-dark;
 $theme-color-secondary: $color-orange-mid;

@@ -21,17 +21,6 @@
     //
     @include utils.flex(center, center, 1rem);
 
-    &:is(:hover, :focus-within) {
-        &,
-        .adv-multi-edge .edge-item {
-            background-color: utils.$color-orange-mid-lighter;
-        }
-
-        .adv-multi-edge .edge-item {
-            border-right-color: utils.$color-orange-mid-lighter;
-        }
-    }
-
     label,
     input {
         font-size: 1.25rem;
@@ -46,6 +35,10 @@
         font-weight: 400;
         text-transform: capitalize;
 
+        transition: padding-top var(--local-label-transition-common);
+
+        --local-label-transition-common: 0.1s ease;
+        //
         @include utils.flex(center, flex-start, 0.5rem);
 
         &::after {
@@ -59,6 +52,8 @@
 
         .adv-name {
             flex-grow: 1;
+
+            transition: margin-top var(--local-label-transition-common);
         }
 
         .adv-bp {
@@ -92,13 +87,14 @@
             opacity: 0.55;
         }
 
-        &[for="adversary_minions"] {
-            padding-top: 0;
-
-            .adv-name {
-                margin-top: -0.1rem;
-            }
-        }
+        // //&.is-mulitple-minions {
+        // &[for="adversary_minions"] {
+        //     padding-top: 0;
+        //
+        //     .adv-name {
+        //         margin-top: -0.1rem;
+        //     }
+        // }
     }
 
     .adv-multi-edge {
@@ -131,5 +127,27 @@
         border: none;
 
         background-color: transparent;
+    }
+
+    &--expensive {
+        &,
+        .adv-multi-edge .edge-item {
+            background-color: utils.$color-red-line-ligher;
+        }
+
+        .adv-multi-edge .edge-item {
+            border-right-color: utils.$color-red-line-ligher;
+        }
+    }
+
+    &:is(:hover, :focus-within) {
+        &,
+        .adv-multi-edge .edge-item {
+            background-color: utils.$color-orange-mid-lighter;
+        }
+
+        .adv-multi-edge .edge-item {
+            border-right-color: utils.$color-orange-mid-lighter;
+        }
     }
 }

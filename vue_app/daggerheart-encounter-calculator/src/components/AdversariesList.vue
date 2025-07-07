@@ -7,7 +7,7 @@
   const emits = defineEmits(['update-spent-bps'])
 
 	const adversariesArray = ref([
-		    { name: "minions",  cost: 1,  amount: 0 }, // multiple up to number of PCs
+		    { name: "minion",   cost: 1,  amount: 0 }, // multiple up to number of PCs
         { name: "social",   cost: 1,  amount: 0 },
         { name: "support",  cost: 1,  amount: 0 },
         // --
@@ -60,9 +60,11 @@
         :cost="adversaryObject.cost"
         :amount="adversaryObject.amount"
       	:numPCs="props.numPCs"
+        :isTooExpensive="false"
         @update-adversaries="updateAdversaries"
         @change="$emit('update-spent-bps', totalSpent)"
       />
+      <!-- TODO: tint red if too expensive -->
     </ul>
 
     <button id="ClearAdversaries" @click="clearAdversaries(); $emit('update-spent-bps', totalSpent);">Clear</button>
