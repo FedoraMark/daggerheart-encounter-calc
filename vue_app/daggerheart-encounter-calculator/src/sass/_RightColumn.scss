@@ -12,7 +12,7 @@
   &_adjustments,
   &_options {
     &:not(:last-of-type) {
-      margin-bottom: var(--gap-margin);
+      margin-bottom: var(--gap-margin-row);
     }
 
     &_list {

@@ -1,9 +1,13 @@
 :root {
   // grid spacing
-  --gap-margin: 3rem;
+  --gap-margin-col: 3rem;
+  --gap-margin-row: 2.25rem;
 
   // BP ticks
   --tick-height: 1.25rem;
   --tick-minwidth: 2.75rem;
   --tick-transition-duration: .2s;
+
+  // transition
+  --short-time: 0.15s;
 }

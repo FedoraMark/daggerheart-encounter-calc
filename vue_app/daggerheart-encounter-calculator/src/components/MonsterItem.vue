@@ -48,7 +48,7 @@
 	// stacked edges
 	.edge-enter-active,
 	.edge-leave-active {
-	  transition: transform 0.15s ease-out !important;
+	  transition: transform var(--short-time) ease-out !important;
 	}
 	.edge-enter-from,
 	.edge-leave-to {
@@ -58,7 +58,7 @@
 	// note
 	.note-enter-active,
 	.note-leave-active {
-	  transition: opacity 0.15s ease;
+	  transition: opacity var(--short-time) ease;
 	}
 	.note-enter-from,
 	.note-leave-to {

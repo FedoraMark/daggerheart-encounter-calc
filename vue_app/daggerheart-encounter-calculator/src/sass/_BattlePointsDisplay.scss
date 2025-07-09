@@ -60,6 +60,8 @@
         #spentBPs {
           color: var(--local-current-difficulty-color);
 
+          transition: color var(--short-time) ease;
+
           & {
             --local-current-difficulty-color: #{utils.$color-purple-mid};
           }
@@ -84,7 +86,7 @@
         }
 
         #totalBPs {
-          color: utils.$color-orange-dark;
+            color: utils.$color-orange-dark;
         }
       }
     }

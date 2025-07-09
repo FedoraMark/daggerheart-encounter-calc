@@ -27,11 +27,9 @@
                 <Formula :numPCs="currentNumberOfPlayers" :formulaBPs="formulaTotal" />
 
                 <div class="calc_lower_right_adjustments">
-                    <h3>Adjustments</h3>
+                    <h3>Difficulty</h3>
                     <ul id="AdjustmentList" class="calc_lower_right_adjustments_list">
-                        <li id="adj-difficulty">Difficulty change</li>
-                        <li id="adj-multiSolo">Multiple Solo adversaries</li>
-                        <li id="adj-lackingBHLS">No Bruisers, Hordes,<br />Leaders, or Solos</li>
+                        <li id="dif-difficulty">Difficulty change</li>
                     </ul>
                 </div>
 
@@ -44,6 +42,14 @@
                         <li id="opt-lowerTier" tabindex="-1">
                             <label for="toggle-lowerTier">Choose at least one adversary<br />from a lower tier</label>
                         </li>
+                    </ul>
+                </div>
+
+                <div class="calc_lower_right_adjustments">
+                    <h3>Adjustments</h3>
+                    <ul id="AdjustmentList" class="calc_lower_right_adjustments_list">
+                        <li id="adj-multiSolo">Multiple Solo adversaries</li>
+                        <li id="adj-lackingBHLS">No Bruisers, Hordes,<br />Leaders, or Solos</li>
                     </ul>
                 </div>
             </div>
@@ -93,7 +99,7 @@
         }
 
         &_lower {
-            @include utils.grid(var(--gap-margin), auto / repeat(2, 1fr));
+            @include utils.grid(var(--gap-margin-col), auto / repeat(2, 1fr));
             //
             @include utils.respond-to-mobile {
                 grid-template-columns: 100%;

@@ -26,7 +26,7 @@
 
         background: #fff;
 
-        transition: background-color 0.15s ease;
+        transition: var(--short-time) ease;
         transition-property: color, border-color, background-color;
 
         &:is(:hover, :focus-visible) {
