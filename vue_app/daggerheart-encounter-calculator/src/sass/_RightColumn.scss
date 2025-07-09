@@ -9,6 +9,7 @@
   }
 
   .formula,
+  .difficulty,
   &_adjustments,
   &_options {
     &:not(:last-of-type) {
@@ -53,9 +54,9 @@
           }
         }
 
-        &:not(#frm-formula) {
-          @include utils.flex(center, flex-start);
-        }
+        // &:not(#frm-formula) {
+        //   @include utils.flex(center, flex-start);
+        // }
 
         &#adj-difficulty {
           opacity: 1;

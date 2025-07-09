@@ -33,16 +33,20 @@
     transition-property: background-color, border-right-color;
 }
 
-%ph-box-wrapper-common {
+%ph-box-wrapper-common-borderless {
     width: 100%;
     min-height: 52px;
     box-sizing: border-box;
 
     white-space: nowrap;
+}
 
+%ph-box-wrapper-common {
     border: 1px solid $color-purple-dark;
 
     background-color: $color-bg-box;
+
+    @extend %ph-box-wrapper-common-borderless;
 
     &:is(:hover, :focus-within) {
         background-color: $color-orange-mid-lighter;

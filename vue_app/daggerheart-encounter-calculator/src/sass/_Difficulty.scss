@@ -1,0 +1,83 @@
+@use "../assets/tools/utilities" as utils;
+
+#Difficulty_Wrapper {
+    .difficulty {
+        &_list {
+            &_item {
+                position: relative;
+
+                font-family: utils.$font-overpass;
+                line-height: initial;
+
+                @extend %ph-box-wrapper-common-borderless;
+                //
+                @include utils.flex(stretch, space-between, 0.35rem);
+
+                button {
+                    cursor: pointer;
+
+                    position: relative;
+
+                    display: block;
+                    flex: 1 0;
+
+                    padding: 0.5rem;
+                    box-sizing: content-box;
+
+                    font-weight: 500;
+                    font-size: 0.95rem;
+                    font-family: utils.$font-opensans;
+                    white-space: nowrap;
+
+                    border: 1px solid utils.$color-purple-dark;
+
+                    background-color: utils.$color-bg-box;
+
+                    @extend %ph-box-common-transition;
+
+                    &:is(:hover, :focus-within) {
+                        background-color: utils.$color-purple-mid-lighter;
+                    }
+
+                    &#Diff {
+                        &-Easier {
+                            border-radius: utils.$border-radius-box 0 0 utils.$border-radius-box;
+                        }
+                        &-Average {
+                            border-radius: 0;
+                        }
+                        &-Harder {
+                            border-radius: 0 utils.$border-radius-box utils.$border-radius-box 0;
+                        }
+                    }
+
+                    span {
+                        padding-left: 0.5rem;
+
+                        color: utils.$color-purple-dark;
+                        font-weight: 600;
+                        white-space: nowrap;
+
+                        transition-timing-function: ease;
+                        transition-duration: inherit;
+                        transition-property: color, opacity;
+
+                        @extend %ph-box-opacity-off;
+                    }
+
+                    &[data-active="true"] {
+                        cursor: default;
+
+                        background-color: utils.$color-orange-mid-lighter;
+
+                        span {
+                            color: utils.$color-orange-dark;
+
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

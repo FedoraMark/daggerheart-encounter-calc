@@ -5,12 +5,14 @@
     import BattlePointsDisplay from './BattlePointsDisplay.vue'
     import AdversariesList from './AdversariesList.vue'
     import Formula from './Formula.vue'
+    import Difficulty from './Difficulty.vue'
 
-    const currentNumberOfPlayers = ref(4);
-    const currentSpentTotal = ref(0);
+    const currentNumberOfPlayers = ref(4)
+    const currentSpentTotal = ref(0)
+    const currentDifficulty = ref(0)
 
     const formulaTotal = computed(() => { return ((3 * currentNumberOfPlayers.value) + 2) })
-    const adjustmentsTotal = computed(() => { return 0 })
+    const adjustmentsTotal = computed(() => { return currentDifficulty.value })
     const finalTotal = computed(() => { return (formulaTotal.value + adjustmentsTotal.value) })
 </script>
 
@@ -24,14 +26,15 @@
 
         <div class="calc_lower">
             <div class="calc_lower_right">
-                <Formula :numPCs="currentNumberOfPlayers" :formulaBPs="formulaTotal" />
+                <Formula
+                    :numPCs="currentNumberOfPlayers"
+                    :formulaBPs="formulaTotal"
+                />
 
-                <div class="calc_lower_right_adjustments">
-                    <h3>Difficulty</h3>
-                    <ul id="AdjustmentList" class="calc_lower_right_adjustments_list">
-                        <li id="dif-difficulty">Difficulty change</li>
-                    </ul>
-                </div>
+                <Difficulty
+                    :currentDifficulty="currentDifficulty"
+                    @set-difficulty="(diff) => { currentDifficulty = diff }"
+                />
 
                 <div class="calc_lower_right_options">
                     <h3>Options</h3>
@@ -55,7 +58,11 @@
             </div>
 
             <div class="calc_lower_left">
-                <AdversariesList :numPCs="currentNumberOfPlayers" :spentBPs="currentSpentTotal" @update-spent-bps="(bps) => { currentSpentTotal = bps}" />
+                <AdversariesList
+                    :numPCs="currentNumberOfPlayers"
+                    :spentBPs="currentSpentTotal"
+                    @update-spent-bps="(bps) => { currentSpentTotal = bps}"
+                />
             </div>
         </div>
 

@@ -23,6 +23,7 @@ $color-interactive-gray: #eee;
 $color-diags: rgba($color-yellow-mid, 0.5);
 //
 $color-orange-mid-lighter: color.adjust($color-orange-mid, $lightness: 30%);
+$color-purple-mid-lighter: color.adjust($color-purple-mid, $lightness: 40%);
 $color-red-line-ligher: color.adjust($color-red-hard-line, $lightness: 42%);
 //
 $theme-color-primary: $color-purple-dark;
