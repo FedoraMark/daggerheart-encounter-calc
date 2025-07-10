@@ -8,7 +8,7 @@
       &_list {
         width: 100%;
 
-        --local-list-cols: 9;
+        --local-list-cols: 10;
         --local-list-gap: 0.5rem 0.65rem;
 
         @include utils.cleanList;

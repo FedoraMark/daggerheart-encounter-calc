@@ -48,7 +48,7 @@
 	// stacked edges
 	.edge-enter-active,
 	.edge-leave-active {
-	  transition: transform var(--short-time) ease-out !important;
+	  transition: transform var(--short-time) ease-in-out !important;
 	}
 	.edge-enter-from,
 	.edge-leave-to {

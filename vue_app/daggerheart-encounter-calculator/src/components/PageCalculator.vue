@@ -1,19 +1,67 @@
 <script setup>
     import { ref, computed } from 'vue'
 
+    // components
     import NumberOfPlayersInput from './NumberOfPlayersInput.vue'
     import BattlePointsDisplay from './BattlePointsDisplay.vue'
     import AdversariesList from './AdversariesList.vue'
     import Formula from './Formula.vue'
     import Difficulty from './Difficulty.vue'
 
-    const currentNumberOfPlayers = ref(4)
-    const currentSpentTotal = ref(0)
-    const currentDifficulty = ref(0)
+    // consts
+    const OPTION = "option"
+    const ADJUSTMENT = "adjustment"
+    const DEFAULT_NUMBER_OF_PLAYERS = 4
+    const DEFAULT_DIFFICULTY = 0
 
-    const formulaTotal = computed(() => { return ((3 * currentNumberOfPlayers.value) + 2) })
-    const adjustmentsTotal = computed(() => { return currentDifficulty.value })
+    // refs
+    const currentNumberOfPlayers = ref(DEFAULT_NUMBER_OF_PLAYERS)
+    const currentDifficulty = ref(DEFAULT_DIFFICULTY)
+    const currentSpentTotal = ref(0)
+
+    // -- flags
+    const modifiersObject = ref({
+        // options
+        "added_damage": {
+            "type": OPTION,
+            "modifier": -2,
+            "active": false
+        },
+        "lower_tier": {
+            "type": OPTION,
+            "modifier": 1,
+            "active": false
+        },
+        // adjustments
+        "multiple_solos": {
+            "type": ADJUSTMENT,
+            "modifier": -2,
+            "active": false
+        },
+        "no_bhls": {
+            "type": ADJUSTMENT,
+            "modifier": 1,
+            "active": true // default true
+        }
+    })
+
+    // computeds
+    const formulaTotal = computed(() => { return ((3 * currentNumberOfPlayers.value) + 2) }) // 3n+2
+    const adjustmentsTotal = computed(() => { return currentDifficulty.value + getModifiersTotal() })
     const finalTotal = computed(() => { return (formulaTotal.value + adjustmentsTotal.value) })
+
+    // functions
+    function getModifiersTotal() {
+        let modifiersTotalBPs = 0
+
+        for (const [adjKey, adjObj] of Object.entries(modifiersObject.value)) {
+            if (adjObj.active) {
+                modifiersTotalBPs += adjObj.modifier
+            }
+        }
+
+        return modifiersTotalBPs
+    }
 </script>
 
 <template>
@@ -39,20 +87,16 @@
                 <div class="calc_lower_right_options">
                     <h3>Options</h3>
                     <ul id="OptionsList" class="calc_lower_right_options_list">
-                        <li id="opt-addedDmg" tabindex="-1">
-                            <label for="toggle-addedDmg">Add +1d4 (or static +2) to all<br />adversaries' damage rolls</label>
-                        </li>
-                        <li id="opt-lowerTier" tabindex="-1">
-                            <label for="toggle-lowerTier">Choose at least one adversary<br />from a lower tier</label>
-                        </li>
+                        <li id="opt-addedDmg" data-mod-name="added_damage" :data-is-active="modifiersObject['added_damage'].active">Add +1d4 (or static +2) to all<br />adversaries' damage rolls</li>
+                        <li id="opt-lowerTier" data-mod-name="lower_tier" :data-is-active="modifiersObject['lower_tier'].active">Choose at least one adversary<br />from a lower tier</li>
                     </ul>
                 </div>
 
                 <div class="calc_lower_right_adjustments">
                     <h3>Adjustments</h3>
                     <ul id="AdjustmentList" class="calc_lower_right_adjustments_list">
-                        <li id="adj-multiSolo">Multiple Solo adversaries</li>
-                        <li id="adj-lackingBHLS">No Bruisers, Hordes,<br />Leaders, or Solos</li>
+                        <li id="adj-multiSolo" data-mod-name="multiple_solos" :data-is-active="modifiersObject['multiple_solos'].active">Multiple Solo adversaries</li>
+                        <li id="adj-lackingBHLS" data-mod-name="no_bhls" :data-is-active="modifiersObject['no_bhls'].active">No Bruisers, Hordes,<br />Leaders, or Solos</li>
                     </ul>
                 </div>
             </div>

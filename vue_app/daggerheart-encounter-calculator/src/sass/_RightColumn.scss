@@ -1,136 +1,54 @@
-@use "../assets/tools/utilities" as utils;
+@use "../assets/tools/utilities"as utils;
 
 .calc_lower_right {
-  --local-adjustment-color: #{utils.$color-orange-dark};
+    &_adjustments,
+    &_options {
+        li {
+            @extend %ph-box-opacity-off;
 
-  &_adjustments li,
-  &_options li label {
-    @extend %ph-box-opacity-off;
-  }
-
-  .formula,
-  .difficulty,
-  &_adjustments,
-  &_options {
-    &:not(:last-of-type) {
-      margin-bottom: var(--gap-margin-row);
+            &[data-is-active="true"],
+            &[data-is-always-active] {
+                opacity: 1;
+            }
+        }
     }
 
-    &_list {
-      font-size: 1.25rem;
-
-      @include utils.cleanList;
-      @include utils.flex(center, flex-start, 1rem, column nowrap);
-
-      &_item {
-        position: relative;
-
-        line-height: 1.1;
-        text-align: center;
-
-        border-radius: utils.$border-radius-box;
-
-        .adjustment-text {
-          position: absolute;
-          left: calc(100% + 0.75rem);
-
-          opacity: 0;
-
-          &,
-          &-static {
-            color: var(--local-adjustment-color);
-            font-weight: 700;
-            white-space: nowrap;
-          }
+    .formula,
+    .difficulty,
+    &_adjustments,
+    &_options {
+        &:not(:last-of-type) {
+            margin-bottom: var(--gap-margin-row);
         }
 
-        &[data-is-active="true"],
-        &[data-is-always-active] {
+        &_list {
+            font-size: 1.25rem;
 
-          &,
-          .adjustment-text,
-          label {
-            opacity: 1;
-          }
-        }
+            @include utils.cleanList;
+            @include utils.flex(center, flex-start, 1rem, column nowrap);
 
-        // &:not(#frm-formula) {
-        //   @include utils.flex(center, flex-start);
-        // }
+            li {
+                position: relative;
 
-        &#adj-difficulty {
-          opacity: 1;
+                line-height: 1.1;
+                text-align: center;
 
-          &[data-current-difficulty="#{utils.$DEFAULT}"] {
-            opacity: utils.$opacity-box-off;
-          }
+                border-radius: utils.$border-radius-box;
 
-          &[data-current-difficulty="#{utils.$EASY}"] .adjustment-text.adj-easy,
-          &[data-current-difficulty="#{utils.$HARD}"] .adjustment-text.adj-hard {
-            opacity: 1;
-          }
-        }
+                .adjustment-text {
+                    position: absolute;
+                    left: calc(100% + 0.75rem);
 
-        :is(label, input.option-checkbox) {
-          cursor: pointer;
-        }
+                    opacity: 0;
 
-        .option-checkbox {
-          -webkit-appearance: none;
-          appearance: none;
-
-          position: absolute;
-          right: calc(100% + 1.25rem);
-
-          margin: 0;
-
-          background-color: #fff;
-
-          --check-color: #{utils.$color-yellow-mid};
-          --checkbox-color: #{utils.$color-yellow-mid};
-
-          @include utils.flex;
-
-          &::before,
-          &::after {
-            position: absolute;
-
-            display: block;
-
-            @include utils.squareSize(1rem);
-          }
-
-          &::before {
-            content: "";
-
-            border: 2px solid var(--checkbox-color);
-
-            background: #fff;
-          }
-
-          &::after {
-            transform: scale(0.7);
-
-            background-color: var(--check-color);
-          }
-
-          &:checked {
-            & {
-              --check-color: #{utils.$color-orange-mid};
-              --checkbox-color: #{utils.$color-orange-mid};
+                    &,
+                    &-static {
+                        color: utils.$color-orange-dark;
+                        font-weight: 700;
+                        white-space: nowrap;
+                    }
+                }
             }
-
-            &::after {
-              content: "";
-            }
-          }
-
-          &:is(:hover, :focus-visible) {
-            --check-color: #{utils.$color-orange-dark};
-            --checkbox-color: #{utils.$color-orange-dark};
-          }
         }
-      }
     }
-  }
 }
