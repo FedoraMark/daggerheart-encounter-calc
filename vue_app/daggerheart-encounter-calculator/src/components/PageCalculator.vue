@@ -71,17 +71,6 @@
 
         return modifiersTotalBPs
     }
-
-    function updateModifierToggle(modifierKey, newValue) {
-        modifierObject.value[modifierKey] = newValue
-    }
-
-    function updateAdjustmentFlags(chosenAdvsersariesObject) {
-        // multiple solos
-        chosenAdvsersariesObject.filter(adversary)
-
-        // no BHLS
-    }
 </script>
 
 <template>
