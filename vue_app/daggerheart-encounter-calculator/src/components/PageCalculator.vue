@@ -7,6 +7,8 @@
     import AdversariesList from './AdversariesList.vue'
     import Formula from './Formula.vue'
     import Difficulty from './Difficulty.vue'
+    import Option from './Option.vue'
+    import Adjustment from './Adjustment.vue'
 
     // consts
     const OPTION = "option"
@@ -20,28 +22,33 @@
     const currentSpentTotal = ref(0)
 
     // -- flags
-    const modifiersObject = ref({
+    const optionsObject = ref({
         // options
         "added_damage": {
             "type": OPTION,
             "modifier": -2,
-            "active": false
+            "active": false,
+            "text": "Add +1d4 (or static +2) to all adversaries' damage rolls"
         },
         "lower_tier": {
             "type": OPTION,
             "modifier": 1,
-            "active": false
-        },
-        // adjustments
+            "active": false,
+            "text": "Choose at least one adversary from a lower tier"
+        }
+    })
+    const adjustmentsObject = ref({
         "multiple_solos": {
             "type": ADJUSTMENT,
             "modifier": -2,
-            "active": false
+            "active": false,
+            "text": "Multiple Solo adversaries"
         },
         "no_bhls": {
             "type": ADJUSTMENT,
             "modifier": 1,
-            "active": true // default true
+            "active": true, // default TRUE
+            "text": "No Bruisers, Hordes, Leaders, or Solos"
         }
     })
 
@@ -54,13 +61,26 @@
     function getModifiersTotal() {
         let modifiersTotalBPs = 0
 
-        for (const [adjKey, adjObj] of Object.entries(modifiersObject.value)) {
-            if (adjObj.active) {
-                modifiersTotalBPs += adjObj.modifier
+        for(const modifierObject of [optionsObject.value, adjustmentsObject.value]) {
+            for (const [adjKey, adjObj] of Object.entries(modifierObject)) {
+                if (adjObj.active) {
+                    modifiersTotalBPs += adjObj.modifier
+                }
             }
         }
 
         return modifiersTotalBPs
+    }
+
+    function updateModifierToggle(modifierKey, newValue) {
+        modifierObject.value[modifierKey] = newValue
+    }
+
+    function updateAdjustmentFlags(chosenAdvsersariesObject) {
+        // multiple solos
+        chosenAdvsersariesObject.filter(adversary)
+
+        // no BHLS
     }
 </script>
 
@@ -84,19 +104,21 @@
                     @set-difficulty="(diff) => { currentDifficulty = diff }"
                 />
 
-                <div class="calc_lower_right_options">
+                <div class="options">
                     <h3>Options</h3>
-                    <ul id="OptionsList" class="calc_lower_right_options_list">
-                        <li id="opt-addedDmg" data-mod-name="added_damage" :data-is-active="modifiersObject['added_damage'].active">Add +1d4 (or static +2) to all<br />adversaries' damage rolls</li>
-                        <li id="opt-lowerTier" data-mod-name="lower_tier" :data-is-active="modifiersObject['lower_tier'].active">Choose at least one adversary<br />from a lower tier</li>
+                    <ul id="OptionsList" class="options_list">
+                        <template v-for="(optionObject, optionKey) in optionsObject" :key="optionKey">
+                            <Option v-if="optionObject.type === OPTION" :id="modifierKey" :text="optionObject.text" :modifier="optionObject.modifier" :isActive="optionObject.active" />
+                        </template>
                     </ul>
                 </div>
 
-                <div class="calc_lower_right_adjustments">
+                <div class="adjustments">
                     <h3>Adjustments</h3>
-                    <ul id="AdjustmentList" class="calc_lower_right_adjustments_list">
-                        <li id="adj-multiSolo" data-mod-name="multiple_solos" :data-is-active="modifiersObject['multiple_solos'].active">Multiple Solo adversaries</li>
-                        <li id="adj-lackingBHLS" data-mod-name="no_bhls" :data-is-active="modifiersObject['no_bhls'].active">No Bruisers, Hordes,<br />Leaders, or Solos</li>
+                    <ul id="AdjustmentsList" class="adjustments_list">
+                        <template v-for="(adjustmentObject, adjustmentKey) in adjustmentsObject" :key="adjustmentKey">
+                            <Adjustment v-if="adjustmentObject.type === ADJUSTMENT" :id="modifierKey" :text="adjustmentObject.text" :modifier="adjustmentObject.modifier" :isActive="adjustmentObject.active" />
+                        </template>
                     </ul>
                 </div>
             </div>
@@ -105,7 +127,11 @@
                 <AdversariesList
                     :numPCs="currentNumberOfPlayers"
                     :spentBPs="currentSpentTotal"
-                    @update-spent-bps="(bps) => { currentSpentTotal = bps}"
+                    @update-adjustments="(bps, activateSoloAdj, activateBhlsAdj) => {
+                        currentSpentTotal = bps;
+                        adjustmentsObject.multiple_solos.active = activateSoloAdj;
+                        adjustmentsObject.no_bhls.active = activateBhlsAdj;
+                    }"
                 />
             </div>
         </div>

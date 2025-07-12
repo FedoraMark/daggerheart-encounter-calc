@@ -1,0 +1,51 @@
+@use "../assets/tools/utilities" as utils;
+
+.option {
+    padding: var(--right-col-item-padding);
+
+    font-family: utils.$font-opensans;
+    line-height: initial;
+    white-space: normal;
+
+    @extend %ph-box-wrapper-common;
+    //
+    @include utils.grid(0.75rem, auto / auto 20px);
+
+    &,
+    & > * {
+        @extend %ph-box-common-transition;
+    }
+
+    &_text,
+    &_modifier {
+        padding-top: 3px; // offset fix
+
+        @include utils.flex;
+    }
+
+    &_text {
+        justify-self: flex-start;
+
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    &_modifier {
+        justify-self: flex-end;
+
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    &:not([data-is-active="true"]) {
+        &:is(:hover, :focus) {
+            background-color: utils.$color-bg-box;
+        }
+    }
+
+    &[data-is-active="true"] {
+        .adjustment_modifier {
+            color: utils.$color-orange-dark;
+        }
+    }
+}

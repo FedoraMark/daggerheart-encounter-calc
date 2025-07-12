@@ -4,7 +4,7 @@
   import MonsterItem from './MonsterItem.vue'
 
   const props = defineProps(['numPCs'])
-  const emits = defineEmits(['update-spent-bps'])
+  const emits = defineEmits(['update-adjustments'])
 
 	const adversariesArray = ref([
 		    { name: "minion",   cost: 1,  amount: 0 }, // multiple up to number of PCs
@@ -34,9 +34,10 @@
     totalSpent.value = updatedSpent;
   }
 
+  const getMonsterIndexByName = monsterName => { return adversariesArray.value.findIndex((e) => monsterName == e.name) }
+
   function updateAdversaries(monsterObject) {
-    const monsterIndex = adversariesArray.value.findIndex((e) => monsterObject.name == e.name)
-    adversariesArray.value[monsterIndex].amount = monsterObject.amount
+    adversariesArray.value[getMonsterIndexByName(monsterObject.name)].amount = monsterObject.amount
     calculateSpentBPs()
   }
 
@@ -45,6 +46,17 @@
       adversariesArray.value[monsterIndex].amount = 0
     }
     calculateSpentBPs()
+  }
+
+  const isUsingMultipleSolos = () => { return adversariesArray.value[getMonsterIndexByName("solo")].amount > 1 }
+
+  const isLackingBHLS = () => {
+    return (
+      adversariesArray.value[getMonsterIndexByName("bruiser")].amount < 1 &&
+      adversariesArray.value[getMonsterIndexByName("horde")].amount < 1 &&
+      adversariesArray.value[getMonsterIndexByName("leader")].amount < 1 &&
+      adversariesArray.value[getMonsterIndexByName("solo")].amount < 1
+    )
   }
 </script>
 
@@ -62,12 +74,12 @@
       	:numPCs="props.numPCs"
         :isTooExpensive="false"
         @update-adversaries="updateAdversaries"
-        @change="$emit('update-spent-bps', totalSpent)"
+        @change="$emit('update-adjustments', totalSpent, isUsingMultipleSolos(), isLackingBHLS())"
       />
       <!-- TODO: tint red if too expensive -->
     </ul>
 
-    <button id="ClearAdversaries" @click="clearAdversaries(); $emit('update-spent-bps', totalSpent);">Clear</button>
+    <button id="ClearAdversaries" @click="clearAdversaries(); $emit('update-adjustments', totalSpent, isUsingMultipleSolos(), isLackingBHLS())">Clear</button>
   </div>
 </template>
 

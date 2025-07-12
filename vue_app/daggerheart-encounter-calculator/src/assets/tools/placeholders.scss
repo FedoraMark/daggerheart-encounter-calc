@@ -30,7 +30,7 @@
 
 %ph-box-common-transition {
     transition: 0.25s ease;
-    transition-property: background-color, border-right-color;
+    transition-property: background-color, border-color, opacity, color;
 }
 
 %ph-box-wrapper-common-borderless {
@@ -53,6 +53,19 @@
     }
 }
 
-%ph-box-opacity-off {
-    opacity: $opacity-box-off;
+%ph-box-modifier-change {
+    border-color: $color-border-on; // $color-border-off;
+
+    & > * {
+        opacity: $opacity-box-off;
+    }
+
+    &[data-is-active="true"],
+    &[data-is-always-active] {
+        border-color: $color-border-on;
+
+        & > * {
+            opacity: 1;
+        }
+    }
 }

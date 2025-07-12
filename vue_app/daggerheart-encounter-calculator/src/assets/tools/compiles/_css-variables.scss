@@ -1,7 +1,7 @@
 :root {
   // grid spacing
   --gap-margin-col: 3rem;
-  --gap-margin-row: 2.25rem;
+  --gap-margin-row: 1.5rem;
 
   // BP ticks
   --tick-height: 1.25rem;
@@ -10,4 +10,7 @@
 
   // transition
   --short-time: 0.15s;
+
+  // sizing
+  --right-col-item-padding: 0.345rem 1rem;
 }

@@ -6,12 +6,14 @@
             &_item {
                 position: relative;
 
+                width: 100%;
+
                 font-family: utils.$font-overpass;
                 line-height: initial;
 
                 @extend %ph-box-wrapper-common-borderless;
                 //
-                @include utils.flex(stretch, space-between, 0.35rem);
+                @include utils.grid(0.4rem, auto / repeat(3, minmax(0, 1fr)));
 
                 button {
                     cursor: pointer;
@@ -19,13 +21,12 @@
                     position: relative;
 
                     display: block;
-                    flex: 1 0;
 
                     padding: 0.5rem;
                     box-sizing: content-box;
 
                     font-weight: 500;
-                    font-size: 0.95rem;
+                    font-size: 0.9rem;
                     font-family: utils.$font-opensans;
                     white-space: nowrap;
 
@@ -34,6 +35,7 @@
                     background-color: utils.$color-bg-box;
 
                     @extend %ph-box-common-transition;
+                    @extend %ph-box-modifier-change;
 
                     &:is(:hover, :focus-within) {
                         background-color: utils.$color-purple-mid-lighter;
@@ -52,7 +54,7 @@
                     }
 
                     span {
-                        padding-left: 0.5rem;
+                        padding-left: 0.3rem;
 
                         color: utils.$color-purple-dark;
                         font-weight: 600;
@@ -61,12 +63,12 @@
                         transition-timing-function: ease;
                         transition-duration: inherit;
                         transition-property: color, opacity;
-
-                        @extend %ph-box-opacity-off;
                     }
 
-                    &[data-active="true"] {
+                    &[data-is-active="true"] {
                         cursor: default;
+
+                        font-weight: 700;
 
                         background-color: utils.$color-orange-mid-lighter;
 

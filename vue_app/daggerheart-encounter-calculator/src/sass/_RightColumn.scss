@@ -1,22 +1,17 @@
 @use "../assets/tools/utilities"as utils;
 
 .calc_lower_right {
-    &_adjustments,
-    &_options {
+    .adjustments,
+    .options {
         li {
-            @extend %ph-box-opacity-off;
-
-            &[data-is-active="true"],
-            &[data-is-always-active] {
-                opacity: 1;
-            }
+            @extend %ph-box-modifier-change;
         }
     }
 
     .formula,
     .difficulty,
-    &_adjustments,
-    &_options {
+    .options,
+    .adjustments {
         &:not(:last-of-type) {
             margin-bottom: var(--gap-margin-row);
         }
@@ -25,7 +20,7 @@
             font-size: 1.25rem;
 
             @include utils.cleanList;
-            @include utils.flex(center, flex-start, 1rem, column nowrap);
+            @include utils.flex(center, flex-start, 0.5rem, column nowrap);
 
             li {
                 position: relative;

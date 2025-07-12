@@ -31,6 +31,8 @@ $theme-color-secondary: $color-orange-mid;
 //
 $border-radius-box: 4px;
 $opacity-box-off: 0.25;
+$color-border-on: $color-purple-dark;
+$color-border-off: rgba($color-border-on, $opacity-box-off);
 //
 $EASY: "easy";
 $DEFAULT: "default";

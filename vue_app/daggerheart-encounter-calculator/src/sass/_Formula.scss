@@ -3,7 +3,7 @@
 #Formula_Wrapper {
     #FormulaList {
         #frm-formula {
-            padding: 0.3rem 1rem;
+            padding: var(--right-col-item-padding);
 
             font-family: utils.$font-overpass;
             line-height: initial;
