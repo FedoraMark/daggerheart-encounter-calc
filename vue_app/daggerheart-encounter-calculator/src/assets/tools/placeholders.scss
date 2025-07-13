@@ -48,9 +48,9 @@
 
     @extend %ph-box-wrapper-common-borderless;
 
-    &:is(:hover, :focus-within) {
-        background-color: $color-orange-mid-lighter;
-    }
+    // &:is(:hover, :focus-within) {
+    //     background-color: $color-orange-mid-lighter;
+    // }
 }
 
 %ph-box-modifier-change {

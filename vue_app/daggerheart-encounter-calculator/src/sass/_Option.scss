@@ -9,7 +9,7 @@
 
     @extend %ph-box-wrapper-common;
     //
-    @include utils.grid(0.75rem, auto / auto 20px);
+    @include utils.grid(0.75rem, auto / auto 1fr);
 
     &,
     & > * {
@@ -30,22 +30,51 @@
         text-align: left;
     }
 
-    &_modifier {
+    &_toggle {
+        cursor: pointer;
+
         justify-self: flex-end;
+
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        padding: calc(var(--button-padding) + 3px) var(--button-padding) var(--button-padding);
+        margin-right: -0.5rem;
 
         font-weight: 600;
         font-size: 1rem;
+
+        border: 1px solid utils.$color-purple-dark;
+        border-radius: utils.$border-radius-box;
+
+        opacity: 1 !important;
+        background: utils.$color-bg-box;
+
+        --button-padding: 5px;
+        //
+        @extend %ph-box-common-transition;
+
+        &:is(:hover, :focus-visible) {
+            background-color: utils.$color-purple-mid-lighter;
+        }
+
+        &_text {
+            opacity: 0.25;
+
+            @extend %ph-box-common-transition;
+        }
     }
 
     &:not([data-is-active="true"]) {
-        &:is(:hover, :focus) {
-            background-color: utils.$color-bg-box;
+        &:is(:hover, :focus, :focus-within) {
+            background-color: utils.$color-bg-box !important;
         }
     }
 
     &[data-is-active="true"] {
-        .adjustment_modifier {
+        .option_toggle_text {
             color: utils.$color-orange-dark;
+
+            opacity: 1;
         }
     }
 }

@@ -97,7 +97,14 @@
                     <h3>Options</h3>
                     <ul id="OptionsList" class="options_list">
                         <template v-for="(optionObject, optionKey) in optionsObject" :key="optionKey">
-                            <Option v-if="optionObject.type === OPTION" :id="modifierKey" :text="optionObject.text" :modifier="optionObject.modifier" :isActive="optionObject.active" />
+                            <Option
+                                v-if="optionObject.type === OPTION"
+                                :id="optionKey"
+                                :text="optionObject.text"
+                                :modifier="optionObject.modifier"
+                                :isActive="optionObject.active"
+                                @toggle-option-by-id="(id) => { optionsObject[id].active = !optionsObject[id].active }"
+                            />
                         </template>
                     </ul>
                 </div>
@@ -106,7 +113,13 @@
                     <h3>Adjustments</h3>
                     <ul id="AdjustmentsList" class="adjustments_list">
                         <template v-for="(adjustmentObject, adjustmentKey) in adjustmentsObject" :key="adjustmentKey">
-                            <Adjustment v-if="adjustmentObject.type === ADJUSTMENT" :id="modifierKey" :text="adjustmentObject.text" :modifier="adjustmentObject.modifier" :isActive="adjustmentObject.active" />
+                            <Adjustment
+                                v-if="adjustmentObject.type === ADJUSTMENT"
+                                :id="adjustmentKey"
+                                :text="adjustmentObject.text"
+                                :modifier="adjustmentObject.modifier"
+                                :isActive="adjustmentObject.active"
+                            />
                         </template>
                     </ul>
                 </div>
