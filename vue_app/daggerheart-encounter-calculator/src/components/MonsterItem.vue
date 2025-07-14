@@ -34,10 +34,18 @@
     </label>
 
 	 	<TransitionGroup tag="ul" name="edge" v-if="isMinions && props.numPCs > 0" class="adv-multi-edge">
-	  	<li v-for="player in props.numPCs - 1" :key="player" class="edge-item" :style="{ 'z-index': '-' + player }"><!-- empty --></li>
+	  	<li v-for="player in props.numPCs - 1" :key="player" class="edge-item" :style="{ 'z-index': '-' + player }" />
 	  </TransitionGroup>
 
-    <input v-model="numberOfAdversaries" @change="$emit('update-adversaries', getObject())" type="number" :name="adversary_id" :id="adversary_id" :data-adversary-name="name" min="0">
+    <input
+    	v-model="numberOfAdversaries"
+    	type="number"
+    	:name="adversary_id"
+    	:id="adversary_id"
+    	:data-adversary-name="name"
+    	min="0"
+    	@change="$emit('update-adversaries', getObject())"
+    >
 
   </li>
 </template>

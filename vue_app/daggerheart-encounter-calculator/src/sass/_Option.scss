@@ -3,8 +3,6 @@
 .option {
     padding: var(--right-col-item-padding);
 
-    font-family: utils.$font-opensans;
-    line-height: initial;
     white-space: normal;
 
     @extend %ph-box-wrapper-common;
@@ -17,17 +15,14 @@
     }
 
     &_text,
-    &_modifier {
-        padding-top: 3px; // offset fix
-
+    &_toggle {
         @include utils.flex;
     }
 
     &_text {
         justify-self: flex-start;
 
-        font-size: 1rem;
-        text-align: left;
+        @extend %ph-box-open-sans;
     }
 
     &_toggle {
@@ -58,6 +53,8 @@
         }
 
         &_text {
+            padding-top: 3px; // offset fix
+
             opacity: 0.25;
 
             @extend %ph-box-common-transition;

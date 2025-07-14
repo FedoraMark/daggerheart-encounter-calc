@@ -38,17 +38,17 @@
         }
     })
     const adjustmentsObject = ref({
-        "multiple_solos": {
-            "type": ADJUSTMENT,
-            "modifier": -2,
-            "active": false,
-            "text": "Multiple Solo adversaries"
-        },
         "no_bhls": {
             "type": ADJUSTMENT,
             "modifier": 1,
             "active": true, // default TRUE
             "text": "No Bruisers, Hordes, Leaders, or Solos"
+        },
+        "multiple_solos": {
+            "type": ADJUSTMENT,
+            "modifier": -2,
+            "active": false,
+            "text": "Multiple Solo adversaries"
         }
     })
 
