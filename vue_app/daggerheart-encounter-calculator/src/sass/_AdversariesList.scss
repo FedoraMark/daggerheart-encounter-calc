@@ -5,6 +5,7 @@
 
     .monster-list {
         @include utils.cleanList;
+        @include utils.flex(stretch, flex-start, 0.585rem, column nowrap);
     }
 
     #ClearAdversaries {
