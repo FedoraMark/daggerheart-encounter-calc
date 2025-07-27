@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
   import PageHeader from './components/PageHeader.vue'
   import PageCalculator from './components/PageCalculator.vue'
   import PageFooter from './components/PageFooter.vue'
