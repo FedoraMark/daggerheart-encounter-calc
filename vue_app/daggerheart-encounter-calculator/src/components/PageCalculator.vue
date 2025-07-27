@@ -152,7 +152,7 @@
     #CalculatorSection {
         flex-grow: 1;
 
-        max-width: 39rem;
+        max-width: utils.$size-page-width;
         padding: 2rem;
         margin: 0 auto;
 

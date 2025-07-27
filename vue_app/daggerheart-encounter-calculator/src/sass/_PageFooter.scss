@@ -12,16 +12,20 @@ footer {
     --footer-underline-offset-adjust: calc(var(--footer-underline-offset) + var(--footer-fmtext-offset));
     //
     @extend %ph-header-footer-common;
+
     //
     @include utils.respond-to-mobile {
         padding-top: calc(1rem + var(--footer-padding-offset));
     }
 
     .footer-list {
+        max-width: utils.$size-page-width;
+
         font-size: 0.9rem;
 
-        @include utils.cleanList;
+        @include utils.cleanList($margin: 0 auto);
         @include utils.flex($gap: var(--footer-gap));
+
         //
         @include utils.respond-to-mobile {
             align-items: center;
@@ -36,6 +40,7 @@ footer {
             white-space: nowrap;
 
             @include utils.flex;
+
             //
             @include utils.respond-to-mobile {
                 &:nth-of-type(2) {
@@ -43,7 +48,7 @@ footer {
                 }
             }
 
-            & + li {
+            &+li {
                 &::before {
                     content: "\2022"; // •
 
@@ -75,6 +80,7 @@ footer {
                     }
 
                     &:is(:hover, :focus) {
+
                         &,
                         span {
                             text-decoration: none;

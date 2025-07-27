@@ -9,11 +9,13 @@ header {
 
     h1,
     h2 {
+        max-width: utils.$size-page-width;
+
         text-align: center;
     }
 
     h1 {
-        margin: 0 0 0.25rem;
+        margin: 0 auto 0.25rem;
 
         font-weight: 00;
         font-size: 2.5rem;
@@ -22,7 +24,7 @@ header {
     }
 
     h2 {
-        margin: 0;
+        margin: 0 auto;
 
         font-weight: 500;
         font-size: 1.25rem;
