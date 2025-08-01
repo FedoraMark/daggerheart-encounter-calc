@@ -6,11 +6,12 @@
     white-space: normal;
 
     @extend %ph-box-wrapper-common;
+    @extend %ph-box-option-adjustment-common;
     //
     @include utils.grid(0.75rem, auto / auto 20px);
 
     &,
-    & > * {
+    &>* {
         @extend %ph-box-common-transition;
     }
 

@@ -34,7 +34,7 @@
             "type": OPTION,
             "modifier": 1,
             "active": false,
-            "text": "Chose (at least) one" + "\n" + "adversary from a lower tier"
+            "text": "Chose at least one adversary" + "\n" + "from a lower tier"
         }
     })
     const adjustmentsObject = ref({

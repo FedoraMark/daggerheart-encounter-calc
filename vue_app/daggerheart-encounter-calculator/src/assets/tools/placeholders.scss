@@ -18,7 +18,7 @@
 
 %ph-calc-lower-common {
     h3 {
-        margin: 0 0 0.75rem;
+        margin: 0 0 0.49rem;
 
         font-weight: 700;
         font-size: 1.5rem;
@@ -55,6 +55,10 @@
     // &:is(:hover, :focus-within) {
     //     background-color: $color-orange-mid-lighter;
     // }
+}
+
+%ph-box-option-adjustment-common {
+    height: 68px;
 }
 
 %ph-box-modifier-change {
