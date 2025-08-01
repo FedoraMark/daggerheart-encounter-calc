@@ -14,6 +14,8 @@
         @include utils.cleanList;
         @include utils.grid(var(--local-list-gap), auto-flow var(--tick-height) / repeat(var(--local-list-cols), 1fr));
 
+        // @include utils.flex(flex-start, flex-start, 5px);
+
         // &--fullWidth {
         //     --local-list-cols: auto-fit, minmax(var(--tick-minwidth));
         // }
@@ -86,7 +88,7 @@
         }
 
         #totalBPs {
-            color: utils.$color-orange-dark;
+          color: utils.$color-orange-dark;
         }
       }
     }

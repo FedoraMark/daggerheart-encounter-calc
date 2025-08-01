@@ -29,6 +29,7 @@ $local-red-hard-line-opacity: color.adjust(utils.$color-red-hard-line, $lightnes
     & {
         transition-property: color, background-color, border-color, opacity;
     }
+
     &::before {
         content: "";
 

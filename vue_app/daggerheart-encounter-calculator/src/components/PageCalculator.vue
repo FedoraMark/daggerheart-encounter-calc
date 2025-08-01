@@ -28,13 +28,13 @@
             "type": OPTION,
             "modifier": -2,
             "active": false,
-            "text": "Add +1d4 (or static +2) to all adversaries' damage rolls"
+            "text": "Add +1d4 (or static +2) to all" + "\n" + "adversaries' damage rolls"
         },
         "lower_tier": {
             "type": OPTION,
             "modifier": 1,
             "active": false,
-            "text": "Choose at least one adversary from a lower tier"
+            "text": "Chose (at least) one" + "\n" + "adversary from a lower tier"
         }
     })
     const adjustmentsObject = ref({
@@ -42,7 +42,7 @@
             "type": ADJUSTMENT,
             "modifier": 1,
             "active": true, // default TRUE
-            "text": "No Bruisers, Hordes, Leaders, or Solos"
+            "text": "No Bruisers, Hordes," + "\n" + "Leaders, or Solos"
         },
         "multiple_solos": {
             "type": ADJUSTMENT,
@@ -152,7 +152,7 @@
     #CalculatorSection {
         flex-grow: 1;
 
-        max-width: utils.$size-page-width;
+        width: utils.$size-page-width;
         padding: 2rem;
         margin: 0 auto;
 

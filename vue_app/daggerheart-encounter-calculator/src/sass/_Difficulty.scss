@@ -11,7 +11,7 @@
                 font-family: utils.$font-overpass;
                 line-height: initial;
 
-                @extend %ph-box-wrapper-common-borderless;
+                @extend %ph-box-difficulty;
                 //
                 @include utils.grid(0.4rem, auto / repeat(3, minmax(0, 1fr)));
 
@@ -45,9 +45,11 @@
                         &-Easier {
                             border-radius: utils.$border-radius-box 0 0 utils.$border-radius-box;
                         }
+
                         &-Average {
                             border-radius: 0;
                         }
+
                         &-Harder {
                             border-radius: 0 utils.$border-radius-box utils.$border-radius-box 0;
                         }

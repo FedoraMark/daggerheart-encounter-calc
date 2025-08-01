@@ -3,7 +3,7 @@
 
     background-color: $theme-color-primary;
 
-    & > * {
+    &>* {
         color: #fff;
     }
 }
@@ -33,7 +33,7 @@
     transition-property: background-color, border-color, opacity, color;
 }
 
-%ph-box-wrapper-common-borderless {
+%ph-box-difficulty {
     width: 100%;
     min-height: 52px;
     box-sizing: border-box;
@@ -46,7 +46,11 @@
 
     background-color: $color-bg-box;
 
-    @extend %ph-box-wrapper-common-borderless;
+    @extend %ph-box-difficulty;
+
+    .force-wrap {
+        white-space: pre-wrap;
+    }
 
     // &:is(:hover, :focus-within) {
     //     background-color: $color-orange-mid-lighter;
@@ -56,7 +60,7 @@
 %ph-box-modifier-change {
     border-color: $color-border-on; // $color-border-off;
 
-    & > * {
+    &>* {
         opacity: $opacity-box-off;
     }
 
@@ -64,7 +68,7 @@
     &[data-is-always-active] {
         border-color: $color-border-on;
 
-        & > * {
+        &>* {
             opacity: 1;
         }
     }
